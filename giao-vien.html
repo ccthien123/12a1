@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giáo Viên - THPT Lê Quý Đôn</title>
+    <title>Đội Ngũ Giáo Viên - THPT Lê Quý Đôn</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- ĐỒNG BỘ THANH TRƯỢT MENU --- */
+        /* --- ĐỒNG BỘ THANH TRƯỢT MENU THEO SCRIPT GỐC --- */
         nav { 
             position: relative; 
             display: flex; 
@@ -42,102 +42,179 @@
             border-radius: 50px;
         }
 
-        /* --- CSS CƠ BẢN --- */
+        /* --- 1. CSS CÁC THẺ GIÁO VIÊN BÊN NGOÀI --- */
         .section-title { text-align: center; color: #004d4d; font-size: 2.5rem; font-weight: 900; margin-bottom: 40px; text-transform: uppercase; margin-top: 40px;}
+        .bgh-card { text-align: center; background: white; padding: 25px 15px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 20px; border-top: 5px solid #d35400; transition: transform 0.3s; }
+        .bgh-card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+        .bgh-avatar { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; object-position: top; border: 5px solid #f5f7fa; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin: 0 auto 15px; display: block; }
         
         .gv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px; }
         .gv-card { background: white; border-radius: 20px; padding: 30px 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #f0f0f0; transition: 0.3s; position: relative; overflow: hidden; cursor: pointer; }
         .gv-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(13, 148, 136, 0.15); border-color: #ccfbf1; }
-        
         .gv-img-wrapper { width: 120px; height: 120px; margin: 0 auto 20px; border-radius: 50%; padding: 5px; background: linear-gradient(135deg, #0d9488, #0f766e); position: relative; z-index: 2; }
         .gv-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid white; }
         
-        /* Hiệu ứng nền khi hover */
         .gv-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100px; background: #f0fdfa; border-radius: 20px 20px 0 0; transition: 0.3s; z-index: 1; }
         .gv-card:hover::before { background: #ccfbf1; }
         
         .gv-info { position: relative; z-index: 2; }
         .gv-name { font-size: 1.4rem; color: #004d4d; margin: 0 0 5px 0; font-weight: 800; }
         .gv-subject { font-size: 1rem; color: #e84393; font-weight: bold; margin: 0 0 15px 0; display: inline-block; padding: 5px 15px; background: #fff5f8; border-radius: 50px; }
-        .gv-quote { font-style: italic; color: #666; font-size: 0.95rem; line-height: 1.5; margin: 0; }
-
-        /* Nổi bật GVCN */
+        
         .gv-card.gvcn { border: 2px solid #FF416C; }
         .gv-card.gvcn .gv-img-wrapper { background: linear-gradient(135deg, #FF416C, #ff7eb3); }
         .gv-card.gvcn::before { background: #fff0f3; }
         .gv-card.gvcn:hover::before { background: #ffe3ea; }
         
-        /* Nhóm bộ môn */
         .subject-group { margin-bottom: 60px; }
         .subject-group-title { font-size: 1.5rem; color: #0d9488; border-bottom: 2px dashed #eee; padding-bottom: 10px; margin-bottom: 25px; display: inline-block; }
 
-        /* --- 1. GIỮ NGUYÊN CSS THẺ NGOÀI (BGH) NHƯ CŨ --- */
-        .bgh-card { text-align: center; background: white; padding: 25px 15px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 20px; border-top: 5px solid #d35400; transition: transform 0.3s; }
-        .bgh-card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+        @media (min-width: 901px) { .image-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1000px; margin: 0 auto;} }
+        @media (max-width: 900px) { .image-grid { display: flex; flex-direction: column; gap: 20px;} }
 
-        .bgh-avatar { 
-            width: 200px; 
-            height: 200px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            object-position: top; 
-            border: 5px solid #f5f7fa; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
-            margin: 0 auto 15px; 
-            display: block; 
+        /* =========================================================
+           2. CSS MODAL (POPUP) THIẾT KẾ MỚI HIỆN ĐẠI
+           ========================================================= */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1000; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(15, 23, 42, 0.85); /* Nền xanh đen mờ sang trọng */
+            backdrop-filter: blur(8px); 
+            padding: 20px;
+            box-sizing: border-box;
         }
-
-        /* --- TĂNG KÍCH THƯỚC POPUP (MODAL) TO HƠN --- */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); }
         
         .modal-content { 
             background: white; 
-            margin: 5% auto; /* Đẩy sát lên trên một chút */
-            border-radius: 20px; 
-            width: 95%; 
-            max-width: 1000px; /* Tăng từ 700px lên 1000px (Rất to) */
+            margin: 4vh auto; 
+            border-radius: 24px; 
+            width: 100%; 
+            max-width: 900px; 
             display: flex; 
             position: relative; 
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            animation: zoomIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         }
 
-        /* Tăng kích thước phần ảnh bên trái */
+        /* Khối ảnh bên trái có hiệu ứng Fade mờ dần sang phải */
         .modal-left { 
-            width: 400px; /* Tăng chiều rộng ảnh */
-            flex-shrink: 0; 
-            background: #f0f0f0; 
+            width: 45%; 
+            position: relative;
+            flex-shrink: 0;
+            background: #f8f9fa;
         }
-        .modal-left img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .modal-left img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            object-position: center top; 
+            display: block; 
+        }
+        /* Lớp phủ mờ dần (Gradient) chìm vào nền trắng */
+        .modal-left::after {
+            content: '';
+            position: absolute;
+            top: 0; right: -1px; bottom: 0; width: 30%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+        }
 
-        /* Tăng không gian phần nội dung bên phải */
+        /* Khối nội dung bên phải */
         .modal-right { 
-            padding: 60px; /* Tăng khoảng cách lề cho thoáng */
-            text-align: left; 
-            flex-grow: 1; 
+            width: 55%;
+            padding: 50px 50px 50px 20px; 
             display: flex; 
             flex-direction: column; 
             justify-content: center; 
-            background: linear-gradient(to right, #ffffff, #f9f9f9);
         }
-        .modal-right h3 { color: #008080; font-size: 2.5rem; margin: 0 0 15px 0; } /* Chữ tên to hơn */
-        .modal-right .modal-subject { font-weight: bold; color: #d35400; font-size: 1.4rem; margin-bottom: 25px; border-bottom: 2px solid #eee; padding-bottom: 10px; display: inline-block; }
-        .modal-right .modal-bio { color: #444; font-size: 1.15rem; line-height: 1.8; font-style: italic; }
 
-        .close-btn { position: absolute; right: 25px; top: 15px; font-size: 40px; cursor: pointer; color: #333; z-index: 10; transition: 0.3s; }
-        .close-btn:hover { color: #ff0000; transform: rotate(90deg); }
+        .modal-name { 
+            color: #004d4d; 
+            font-size: 2.4rem; 
+            margin: 0 0 10px 0; 
+            font-weight: 900;
+            line-height: 1.2;
+        } 
+        
+        .modal-subject { 
+            display: inline-block;
+            background: linear-gradient(135deg, #FF416C, #ff7eb3);
+            color: white;
+            font-size: 1.1rem; 
+            font-weight: bold;
+            padding: 8px 20px; 
+            border-radius: 50px;
+            margin-bottom: 30px; 
+            align-self: flex-start;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
+        }
+        
+        /* Hộp trích dẫn (Quote Box) chứa phần giới thiệu */
+        .modal-bio-box {
+            position: relative;
+            background: #f8faff;
+            padding: 30px 25px;
+            border-radius: 16px;
+            border-left: 5px solid #0d9488;
+        }
+        .modal-bio-box i.fa-quote-left {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-size: 1.8rem;
+            color: #0d9488;
+            background: white;
+            padding: 0 10px;
+        }
+        .modal-bio { 
+            color: #444; 
+            font-size: 1.1rem; 
+            line-height: 1.8; 
+            margin: 0;
+            text-align: justify;
+        }
+
+        /* Nút đóng tròn, hiện đại */
+        .close-btn { 
+            position: absolute; 
+            right: 20px; 
+            top: 20px; 
+            width: 40px;
+            height: 40px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px; 
+            cursor: pointer; 
+            color: #64748b; 
+            z-index: 10; 
+            transition: all 0.3s ease; 
+        }
+        .close-btn:hover { 
+            background: #ffe4e6;
+            color: #e11d48; 
+            transform: rotate(90deg); 
+        }
 
         @keyframes zoomIn { from {transform: scale(0.9); opacity: 0;} to {transform: scale(1); opacity: 1;} }
 
-        @media (max-width: 900px) {
-            .modal-content { flex-direction: column; margin: 2% auto; height: 90vh; overflow-y: auto; }
-            .modal-left { width: 100%; height: 400px; }
-            .modal-right { padding: 30px; }
-            .image-grid { display: flex; flex-direction: column; gap: 20px;}
-        }
-        @media (min-width: 901px) {
-            .image-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 1000px; margin: 0 auto;}
+        /* Reponsive Modal cho Điện thoại */
+        @media (max-width: 768px) {
+            .modal { padding: 10px; display: flex; align-items: center; }
+            .modal-content { flex-direction: column; margin: 0 auto; max-height: 90vh; overflow-y: auto; }
+            .modal-left { width: 100%; height: 300px; }
+            /* Đổi gradient mờ dần từ dưới lên trên thiết bị di động */
+            .modal-left::after { width: 100%; height: 40%; top: auto; left: 0; bottom: -1px; background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); }
+            .modal-right { width: 100%; padding: 20px 25px 40px 25px; }
+            .modal-name { font-size: 2rem; }
+            .close-btn { background: rgba(255,255,255,0.8); backdrop-filter: blur(5px); }
         }
     </style>
 </head>
@@ -262,7 +339,7 @@
                 </div>
             </div>
 
-            <div class="gv-card" onclick="openModal('Cô Lê Thị Trang', 'Hoạt động TNHN', 'https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/54.Le-Thi-Trang-py9qjjbltqwy5jbtkuazj95a0o60qiv7e43mj1ou40.jpg', 'Đây là không gian quý báu để mỗi thành viên 12A1 được khám phá bản thân và định hướng con đường sự nghiệp tương lai. Cô Trang luôn đóng vai trò là người cố vấn tận tâm, lắng nghe những băn khoăn và đưa ra những lời khuyên chân thành nhất. Những buổi trải nghiệm hướng nghiệp cùng cô đã giúp chúng em tự tự tin hơn, sẵn sàng tâm thế để bước vào ngưỡng cửa đại học và vào đời.')">
+            <div class="gv-card" onclick="openModal('Cô Lê Thị Trang', 'Hoạt động TNHN', 'https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/54.Le-Thi-Trang-py9qjjbltqwy5jbtkuazj95a0o60qiv7e43mj1ou40.jpg', 'Đây là không gian quý báu để mỗi thành viên 12A1 được khám phá bản thân và định hướng con đường sự nghiệp tương lai. Cô Trang luôn đóng vai trò là người cố vấn tận tâm, lắng nghe những băn khoăn và đưa ra những lời khuyên chân thành nhất. Những buổi trải nghiệm hướng nghiệp cùng cô đã giúp chúng em tự tin hơn, sẵn sàng tâm thế để bước vào ngưỡng cửa đại học và vào đời.')">
                 <div class="gv-img-wrapper"><img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/54.Le-Thi-Trang-py9qjjbltqwy5jbtkuazj95a0o60qiv7e43mj1ou40.jpg" class="gv-img"></div>
                 <div class="gv-info">
                     <h3 class="gv-name">Cô Lê Thị Trang</h3>
@@ -290,14 +367,17 @@
 
     <div id="teacherModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <span class="close-btn" onclick="closeModal()"><i class="fas fa-times"></i></span>
             <div class="modal-left">
                 <img id="modalImg" src="" alt="Ảnh giáo viên">
             </div>
             <div class="modal-right">
-                <h3 id="modalName"></h3>
-                <p id="modalSubject" class="modal-subject"></p>
-                <p id="modalBio" class="modal-bio"></p>
+                <h3 id="modalName" class="modal-name"></h3>
+                <div id="modalSubject" class="modal-subject"></div>
+                <div class="modal-bio-box">
+                    <i class="fas fa-quote-left"></i>
+                    <p id="modalBio" class="modal-bio"></p>
+                </div>
             </div>
         </div>
     </div>
@@ -338,13 +418,15 @@
             <p style="margin: 0;">Phát triển và thiết kế bởi <strong style="color: #FF416C;">Chung Chí Thiện</strong> & <strong style="color: #FF416C;">Kiều Tuấn Kiệt Anh</strong></p>
         </div>
     </footer>
+
     <script>
+        // --- SCRIPT ĐÓNG MỞ MODAL ---
         function openModal(name, subject, img, bio) {
             document.getElementById('modalName').innerText = name;
             document.getElementById('modalSubject').innerText = subject;
             document.getElementById('modalImg').src = img;
             document.getElementById('modalBio').innerText = bio;
-            document.getElementById('teacherModal').style.display = "block";
+            document.getElementById('teacherModal').style.display = "flex"; // Đổi thành flex để căn giữa chuẩn
         }
         function closeModal() { document.getElementById('teacherModal').style.display = "none"; }
         window.onclick = function(event) {
@@ -353,6 +435,7 @@
         }
     </script>
     <script>
+        // --- SCRIPT THANH MENU TRƯỢT ---
         document.addEventListener("DOMContentLoaded", function() {
             const nav = document.querySelector('nav');
             if (!nav) return;
@@ -380,7 +463,6 @@
                 activeLink.style.setProperty('color', '#ffffff', 'important');
                 
                 void indicator.offsetWidth;
-                
                 indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
             }
 
