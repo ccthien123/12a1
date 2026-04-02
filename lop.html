@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
+    <title>Lớp 12A1 - THPT Lê Quý Đôn</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- MENU TRƯỢT TỐI ƯU CHO SCRIPT GỐC --- */
+        nav { 
+            position: relative; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 5px; 
+            padding: 15px 20px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .nav-indicator {
+            position: absolute;
+            height: 42px; 
+            background: var(--primary, #0d9488);
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 0;
+            top: 50%;
+            margin-top: -21px; 
+            left: 0;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+        nav a { 
+            position: relative; 
+            z-index: 1; 
+            text-decoration: none; 
+            padding: 10px 25px; /* Đẩy padding trực tiếp vào thẻ A để lấy offsetWidth chuẩn */
+            display: inline-block; 
+            color: #64748b; 
+            font-weight: 600; 
+            transition: 0.3s;
+            border-radius: 50px;
+        }
+
+        /* --- CSS CƠ BẢN --- */
+        .table-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        table { min-width: 700px; border-collapse: collapse; width: 100%; background: white; }
+        table th, table td { padding: 15px; border: 1px solid #eee; text-align: center; }
+        table thead tr { background: linear-gradient(135deg, #e0f2f1, #b2dfdb); color: #004d4d; }
+        table tbody tr:hover { background-color: #f1fafa; }
+        
+        .info-grid { display: flex; gap: 25px; margin-bottom: 30px; flex-wrap: wrap; }
+        .info-card { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); flex: 1; min-width: 280px; display: flex; align-items: center; gap: 20px; border-left: 6px solid var(--primary-color); transition: 0.3s; }
+        .info-card:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0,0,0,0.08); }
+        .gv-img-small { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-color); padding: 2px; }
+        
+        .slogan-container { text-align: center; padding: 40px 20px; margin: 30px 0; background: linear-gradient(135deg, #ffffff 0%, #f4f9f9 100%); border-radius: 25px; border: 2px dashed rgba(0,128,128,0.3); position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        .main-header-box { text-align: center; padding: 30px 0 10px; }
+        .class-name-title { font-size: 4.5rem; font-weight: 900; margin: 0; letter-spacing: 4px; color: var(--primary-dark); text-shadow: 3px 3px 0px #e0f2f1; }
+        .slogan-badge { display: inline-block; background: var(--primary-light); color: var(--primary-dark); padding: 8px 30px; border-radius: 50px; font-weight: 800; letter-spacing: 3px; margin-top: -15px; margin-bottom: 30px; box-shadow: 0 5px 15px rgba(13, 148, 136, 0.2); text-transform: uppercase; }
+        .main-slogan-text { font-size: 2.4rem; font-weight: 800; background: linear-gradient(to right, #008080, #e84393, #0984e3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 0 0 15px 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.05); }
+        .sub-slogan-text { color: #666; font-size: 1.2rem; font-style: italic; letter-spacing: 2px; margin: 0; }
+
+        /* --- BẢN ĐỒ KỶ NIỆM (TIMELINE ROADMAP) --- */
+        .timeline { position: relative; max-width: 1000px; margin: 40px auto; padding: 20px 0; }
+        .timeline::after { content: ''; position: absolute; width: 6px; background-color: var(--primary-light, #5eead4); top: 0; bottom: 0; left: 50%; margin-left: -3px; border-radius: 5px; }
+        .timeline-container { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+        .timeline-container.left { left: 0; }
+        .timeline-container.right { left: 50%; }
+        .timeline-container::after { content: '📍'; position: absolute; width: 40px; height: 40px; right: -20px; background-color: white; border: 4px solid var(--primary-dark, #0f766e); top: 30px; border-radius: 50%; z-index: 1; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .timeline-container.right::after { left: -20px; }
+        .timeline-content { padding: 20px; background-color: white; position: relative; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: 0.3s; }
+        .timeline-content:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(13,148,136,0.15); }
+        .timeline-content img { width: 100%; border-radius: 10px; margin-bottom: 15px; cursor: pointer; transition: transform 0.3s;}
+        .timeline-date { display: inline-block; padding: 5px 15px; background: #fff5f8; color: #d81b60; border-radius: 50px; font-weight: bold; font-size: 0.85rem; margin-bottom: 10px; }
+        .timeline-content h4 { color: var(--primary-dark); margin: 0 0 10px 0; font-size: 1.3rem; }
+        .timeline-content p.memory-desc { color: #555; line-height: 1.6; margin: 0; font-size: 0.95rem; }
+
+        /* --- LƯỚI ẢNH MASONRY CHUNG --- */
+        .masonry-gallery { column-count: 3; column-gap: 15px; padding: 10px 0; margin-top: 15px;}
+        .masonry-item { break-inside: avoid; margin-bottom: 15px; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 20px rgba(0,0,0,0.08); position: relative; background: #f8f9fa;}
+        .masonry-item img { width: 100%; height: auto; display: block; transition: transform 0.4s ease; cursor: pointer;}
+        .masonry-item:hover img { transform: scale(1.04); }
+
+        /* --- LIGHTBOX --- */
+        .lightbox-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); align-items: center; justify-content: center; flex-direction: column; }
+        .lightbox-content { max-width: 90%; max-height: 85vh; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); animation: zoomIn 0.3s ease; }
+        @keyframes zoomIn { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+        .lightbox-close { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 45px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .lightbox-close:hover { color: #FF416C; }
+
+        @media screen and (max-width: 800px) {
+            .timeline::after { left: 31px; }
+            .timeline-container { width: 100%; padding-left: 80px; padding-right: 15px; }
+            .timeline-container.right { left: 0; }
+            .timeline-container.left::after, .timeline-container.right::after { left: 11px; }
+            .masonry-gallery { column-count: 2; }
+            .class-name-title { font-size: 2.8rem; }
+        }
+        @media screen and (max-width: 500px) { .masonry-gallery { column-count: 1; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Trường THPT Lê Quý Đôn</h1>
+        <p>Chọn hạnh phúc - Chọn yêu thương</p>
+    </header>
+
+    <nav id="mainNav">
+        <a href="index.html">Trang Chủ</a>
+        <a href="lop.html" class="active">Lớp</a> 
+        <a href="giao-vien.html">Giáo Viên</a>
+        <a href="hoc-sinh.html">Học Sinh</a>
+        <a href="dinh-huong.html">Định Hướng</a> 
+    </nav>
+
+    <div class="container">
+        <div class="main-header-box">
+            <h2 class="class-name-title">TẬP THỂ LỚP 12A1</h2>
+            <div class="slogan-badge">THPT LÊ QUÝ ĐÔN</div>
+            <div class="slogan-container">
+                <h3 class="main-slogan-text">"ĐOÀN KẾT LÀ SỨC MẠNH - TỰ TIN TỎA SÁNG!"</h3>
+                <p class="sub-slogan-text">Nơi lưu giữ những thanh xuân rực rỡ nhất của khối 12</p>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 10px; margin-bottom: 35px; border-radius: 20px;">
+            <img src="https://i.postimg.cc/cC5LRFCL/TIS00584.jpg" alt="Ảnh tập thể lớp 12A1" class="gallery-img" style="width: 100%; max-height: 550px; object-fit: cover; border-radius: 15px; cursor: pointer;">
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <div style="font-size: 2.5rem; background: #e0f2f1; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; border-radius: 15px;">📊</div>
+                <div>
+                    <h4 style="margin: 0; color: var(--primary-color); font-size: 1.3rem;">Sĩ số: 43</h4>
+                    <p style="margin: 5px 0 0; color: #666; font-size: 0.95rem;">👦 23 Nam | 👧 20 Nữ</p>
+                </div>
+            </div>
+            <div class="info-card" style="border-left-color: #e84393;">
+                <img src="https://i.postimg.cc/yxr8mLxz/56435.png" class="gv-img-small" alt="GVCN" style="border-color: #e84393;">
+                <div>
+                    <h4 style="margin: 0; color: #333; font-size: 1.3rem;">Cô Lê Thị Hồng Hạnh</h4>
+                    <p style="margin: 5px 0 0; color: #e84393; font-weight: bold; font-size: 0.95rem;">Giáo Viên Chủ Nhiệm</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="padding: 40px 30px; margin-bottom: 35px; border-radius: 20px; background: linear-gradient(to right bottom, #ffffff, #fff5f8); border-left: 8px solid #FF416C; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -20px; right: -20px; font-size: 10rem; opacity: 0.04; transform: rotate(15deg);">🎓</div>
+            <h3 style="color: #d81b60; margin-top: 0; font-size: 1.8rem; margin-bottom: 20px;">✨ Câu Chuyện Của Chúng Mình</h3>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #444; text-align: justify; margin-bottom: 15px;">
+                Chào mừng bạn đến với ngôi nhà chung <strong>12A1 - THPT Lê Quý Đôn (Niên khóa 2023 - 2026)</strong>! Từ 43 con người xa lạ, chúng mình đã gắn kết lại thành một gia đình dưới sự dìu dắt tận tâm của cô giáo chủ nhiệm Lê Thị Hồng Hạnh. Ba năm cấp 3 trôi qua như một cái chớp mắt, mang theo những mùa thi căng thẳng, những đêm thức trắng chạy deadline và cả những tờ giấy nháp chia đôi vội vã trong giờ kiểm tra.
+            </p>
+            <p style="font-size: 1.2rem; line-height: 1.8; color: #FF416C; text-align: center; font-weight: bold; font-style: italic; margin-top: 30px; padding: 20px; background: rgba(255, 65, 108, 0.05); border-radius: 12px; position: relative; z-index: 2;">
+                "Thanh xuân của 12A1 là một cuốn sách tuyệt đẹp. Dù ngày mai mỗi đứa một phương trời, nơi đây vẫn mãi là gia đình, là bến đỗ bình yên để trở về!" 💖
+            </p>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--primary-color); border-bottom: 2px dashed #eee; padding-bottom: 15px; margin-top: 0; font-size: 1.5rem;">📅 Thời Khóa Biểu Lớp</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr><th>Buổi</th><th>Tiết</th><th>Thứ 2</th><th>Thứ 3</th><th>Thứ 4</th><th>Thứ 5</th><th>Thứ 6</th><th>Thứ 7</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td rowspan="5" style="font-weight:bold; color:#d35400;">SÁNG</td><td>1</td><td>TNHNDC</td><td>Sinh học</td><td>Vật lí</td><td>Hóa học</td><td>Vật lí</td><td>-</td></tr>
+                        <tr><td>2</td><td>HĐ TNHN(CN)</td><td>Lịch sử</td><td>Toán</td><td>Hóa học</td><td>Văn học</td><td>-</td></tr>
+                        <tr><td>3</td><td>Sinh học</td><td>Văn học</td><td>Văn học</td><td>Toán</td><td>Toán</td><td>-</td></tr>
+                        <tr><td>4</td><td>Vật lí</td><td>Ngoại ngữ</td><td>Ngoại ngữ</td><td>Toán</td><td>Ngoại ngữ</td><td>-</td></tr>
+                        <tr><td>5</td><td>Tin học</td><td>Ngoại ngữ</td><td>Hóa học</td><td>Tin học</td><td>-</td><td>-</td></tr>
+                        <tr class="spacer-row"><td colspan="8"></td></tr>
+                        <tr><td rowspan="3" style="font-weight:bold; color:#2980b9;">CHIỀU</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                        <tr><td>2</td><td>GDTC</td><td>GDTC</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                        <tr><td>3</td><td>HĐ TNHN</td><td>GDQPAN</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <section class="container" style="margin-top: 50px; margin-bottom: 50px;">
+        <div style="text-align: center; margin-bottom: 10px;">
+            <h2 class="class-name-title" style="font-size: 2.8rem; color: #006666; text-transform: uppercase;">Hành Trình Kỷ Niệm</h2>
+        </div>
+        <div class="timeline">
+            <div class="timeline-container left">
+                <div class="timeline-content">
+                    <span class="timeline-date">🗓️ Tháng 09/2023</span>
+                    <h4>Khai giảng Lớp 10</h4>
+                    <img src="https://i.postimg.cc/PfKZpxGC/z4669177420959-63d77725387ba6ea3f80b470979312d8.jpg" class="gallery-img">
+                    <p class="memory-desc">Khởi đầu rực rỡ dưới mái trường Lê Quý Đôn.</p>
+                </div>
+            </div>
+            <div class="timeline-container right">
+                <div class="timeline-content">
+                    <span class="timeline-date">🗓️ Năm học 2023 - 2024</span>
+                    <h4>Giai điệu Tuổi hồng</h4>
+                    <img src="https://i.postimg.cc/m20vQTMn/z7507937150753_c71e09ec99a9abf85911a4d5a2ae849e.jpg" class="gallery-img">
+                    <p class="memory-desc">Sân khấu đầu tiên của cả tập thể.</p>
+                </div>
+            </div>
+            <div class="timeline-container left">
+                <div class="timeline-content">
+                    <span class="timeline-date">🗓️ Tháng 05/2024</span>
+                    <h4>Tổng kết Lớp 10</h4>
+                    <img src="https://i.postimg.cc/sDtkp3S9/z7507937102529_cacfc2f6c8ee3e025a98380ef580b9f5.jpg" class="gallery-img">
+                    <p class="memory-desc">Khép lại năm học đầu tiên nhiều cảm xúc.</p>
+                </div>
+            </div>
+            <div class="timeline-container right">
+                <div class="timeline-content">
+                    <span class="timeline-date">🗓️ Năm học 2024 - 2025</span>
+                    <h4>Got Talent Lớp 11</h4>
+                    <img src="https://i.postimg.cc/YqJ51tg6/z7507937095960_346560964c75d929ed7cab3726d7b924.jpg" class="gallery-img">
+                    <p class="memory-desc">Sức trẻ bùng nổ trên sân khấu tài năng.</p>
+                </div>
+            </div>
+            <div class="timeline-container left">
+                <div class="timeline-content">
+                    <span class="timeline-date">🗓️ Năm học 2024 - 2025</span>
+                    <h4>Kỷ niệm cùng Cô Vy thực tập</h4>
+                    <img src="https://i.postimg.cc/CLW3jwDX/z7507944566911_1825b4a69785ba595a51b6b3a14b062d.jpg" class="gallery-img">
+                    <p class="memory-desc">Những giờ học thú vị cùng cô giáo thực tập.</p>
+                </div>
+            </div>
+            <div class="timeline-container right">
+                <div class="timeline-content">
+                    <span class="timeline-date">🗓️ Tháng 09/2025</span>
+                    <h4>Khai giảng Lớp 12</h4>
+                    <img src="https://i.postimg.cc/t4qMd7J5/z6978913540032_858866762957280eed7b3b35e1d6dea2.jpg" class="gallery-img">
+                    <p class="memory-desc">Lễ khai giảng cuối cùng của thời học sinh.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding: 30px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border-left: 5px solid #FF416C;">
+            <h3 style="color: #FF416C; font-size: 1.6rem; margin-bottom: 20px;">🎤 Giai Điệu Thanh Xuân & Hoạt Động Lớp</h3>
+            <div class="masonry-gallery">
+                <div class="masonry-item"><img src="https://i.postimg.cc/Gh8084BQ/1c9efd79_6458_4a4f_8cd8_75eba6aeda76.jpg" class="gallery-img"></div>
+                <div class="masonry-item"><img src="https://i.postimg.cc/L6rczmLF/z7640146277030_aa07a9c8c7bdb8fd3df3061a84e3c2bf.jpg" class="gallery-img"></div>
+                <div class="masonry-item"><img src="https://i.postimg.cc/15Lkpywh/z7640078540084_f1f1ea7dae856e1ddd0bf98e6442c05d.jpg" class="gallery-img"></div>
+                <div class="masonry-item"><img src="https://i.postimg.cc/XJf8nD4v/BMT_7496.jpg" class="gallery-img"></div>
+                <div class="masonry-item"><img src="https://i.postimg.cc/85RHTnN5/BMT_7514.jpg" class="gallery-img"></div>
+                <div class="masonry-item"><img src="https://i.postimg.cc/cHRmd50C/BMT_7532.jpg" class="gallery-img"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="margin-top: 60px; margin-bottom: 50px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 class="class-name-title" style="font-size: 3.2rem; color: #d81b60;">Kỷ Yếu Thanh Xuân</h2>
+            <p style="color: #c2185b; font-style: italic;">"Thanh xuân là những bức hình không cần lời tựa..."</p>
+        </div>
+
+        <div class="masonry-gallery">
+            <div class="masonry-item"><img src="https://i.postimg.cc/hGmJsLCn/z7614330804891_871f4f9877cac097e5056c364a78fe4c.jpg" class="gallery-img"></div>
+            <div class="masonry-item"><img src="https://i.postimg.cc/Sx32cTfG/TIS01588.jpg" class="gallery-img"></div>
+            <div class="masonry-item"><img src="https://i.postimg.cc/sxmGS3Ty/TIS01565.jpg" class="gallery-img"></div>
+            <div class="masonry-item"><img src="https://i.postimg.cc/9f94bdLL/z7571292247711_2b2f601bc8e3c0395e503ce37aeed53c.jpg" class="gallery-img"></div>
+            <div class="masonry-item"><img src="https://i.postimg.cc/Y9wvsvVq/z7614330824315_4523ca74920f1812708b347bccf7a487.jpg" class="gallery-img"></div>
+            <div class="masonry-item"><img src="https://i.postimg.cc/3NT2mSYK/TIS01410.jpg" class="gallery-img"></div>
+            <div class="masonry-item"><img src="https://i.postimg.cc/9QrwR5Zh/TIS01661.jpg" class="gallery-img"></div>
+            <div class="masonry-item"><img src="https://i.postimg.cc/c4D8L4Kj/TIS01668.jpg" class="gallery-img"></div>
+            <div class="masonry-item"><img src="https://i.postimg.cc/Wpwkx7sR/RON4284.jpg" class="gallery-img"></div>
+            <div class="masonry-item"><img src="https://i.postimg.cc/nhC9jbBZ/TIS01750.jpg" class="gallery-img"></div>
+            <div class="masonry-item"><img src="https://i.postimg.cc/bwJXB1pd/RON4947.jpg" class="gallery-img"></div>
+        </div>
+    </section>
+
+    <footer style="background-color: #042f2e; color: #ffffff; padding: 40px 20px 20px; margin-top: 40px; border-top: 4px solid var(--primary, #0d9488);">
+        <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 25px; margin-bottom: 20px;">
+            <div style="flex: 1; min-width: 300px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <div style="width: 60px; height: 60px; background: white; border-radius: 12px; display: flex; justify-content: center; align-items: center; padding: 5px;">
+                        <img src="https://i.postimg.cc/FFV3PLTW/image.png" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div>
+                        <p style="margin: 0; font-size: 0.75rem; text-transform: uppercase; color: #a1a1aa; font-weight: 600;">SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐẮK LẮK</p>
+                        <h3 style="margin: 3px 0 0; font-size: 1.2rem; color: #ffffff; font-weight: 800;">Trường THPT Lê Quý Đôn</h3>
+                    </div>
+                </div>
+                <div style="color: #d4d4d8; font-size: 0.9rem;">
+                    <p>📍 27 Trần Nhật Duật, Phường Tân Lợi, TP. Buôn Ma Thuột</p>
+                    <p>📞 0262 3953 354</p>
+                </div>
+            </div>
+            <div style="flex: 1; text-align: center;">
+                <h3 style="font-size: 1.8rem; color: #ffffff; font-weight: 800;">TẬP THỂ 12A1</h3>
+                <p style="color: #a1a1aa; font-style: italic;">"Nơi lưu giữ những thanh xuân rực rỡ nhất..." ✨</p>
+            </div>
+        </div>
+        <div style="text-align: center; color: #71717a; font-size: 0.8rem;">
+            <p>© 2026 - Bản quyền thuộc Tập thể 12A1 - THPT Lê Quý Đôn.</p>
+            <p>Phát triển bởi <strong style="color: #FF416C;">Chung Chí Thiện</strong> & <strong style="color: #FF416C;">Kiều Tuấn Kiệt Anh</strong></p>
+        </div>
+    </footer>
+
+    <div id="myLightbox" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxImg">
+    </div>
+
+    <script>
+        // --- 1. SCRIPT MENU TRƯỢT GỐC (Chính xác 100%) ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const nav = document.querySelector('nav');
+            if (!nav) return;
+
+            let oldIndicator = nav.querySelector('.nav-indicator');
+            if (oldIndicator) oldIndicator.remove();
+
+            const indicator = document.createElement('div');
+            indicator.className = 'nav-indicator';
+            nav.appendChild(indicator);
+
+            const links = nav.querySelectorAll('a');
+            
+            let activeLink = null;
+            links.forEach(link => {
+                if (link.classList.contains('active') || link.getAttribute('style')) {
+                    activeLink = link;
+                }
+            });
+
+            if (activeLink) {
+                indicator.style.transition = 'none';
+                indicator.style.width = `${activeLink.offsetWidth}px`;
+                indicator.style.transform = `translateX(${activeLink.offsetLeft}px)`;
+                activeLink.style.setProperty('color', '#ffffff', 'important');
+                void indicator.offsetWidth;
+                indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+            }
+
+            function slideTo(element) {
+                if (!element) return;
+                indicator.style.width = `${element.offsetWidth}px`;
+                indicator.style.transform = `translateX(${element.offsetLeft}px)`;
+                links.forEach(link => {
+                    link.style.setProperty('color', '#64748b', 'important');
+                    link.style.setProperty('background', 'transparent', 'important');
+                });
+                element.style.setProperty('color', '#ffffff', 'important');
+            }
+
+            links.forEach(link => {
+                link.addEventListener('mouseenter', (e) => {
+                    slideTo(e.target);
+                });
+            });
+
+            nav.addEventListener('mouseleave', () => {
+                if (activeLink) slideTo(activeLink);
+            });
+
+            window.addEventListener('resize', () => {
+                if (activeLink) {
+                    indicator.style.transition = 'none';
+                    slideTo(activeLink);
+                    void indicator.offsetWidth;
+                    indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+                }
+            });
+        });
+
+        // --- 2. SCRIPT LIGHTBOX ẢNH ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const lightbox = document.getElementById("myLightbox");
+            const lightboxImg = document.getElementById("lightboxImg");
+            const closeBtn = document.querySelector(".lightbox-close");
+
+            if(lightbox && lightboxImg) {
+                const imagesToClick = document.querySelectorAll('.gallery-img');
+                imagesToClick.forEach(img => {
+                    img.addEventListener('click', function() {
+                        lightbox.style.display = "flex"; 
+                        lightboxImg.src = this.src;
+                    });
+                });
+
+                if(closeBtn) {
+                    closeBtn.addEventListener('click', () => lightbox.style.display = "none");
+                }
+                lightbox.addEventListener('click', (e) => { 
+                    if (e.target !== lightboxImg) lightbox.style.display = "none"; 
+                });
+            }
+        });
+    </script>
+</body>
+</html>

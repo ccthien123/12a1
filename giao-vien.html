@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đội Ngũ Giáo Viên - THPT Lê Quý Đôn</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- 1. GIỮ NGUYÊN CSS THẺ NGOÀI NHƯ CŨ --- */
+          .bgh-card { text-align: center; background: white; padding: 25px 15px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); margin-bottom: 20px; border-top: 5px solid #d35400; transition: transform 0.3s; }
+        .bgh-card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+
+        .bgh-avatar { 
+            width: 200px; 
+            height: 200px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            object-position: top; 
+            border: 5px solid #f5f7fa; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            margin: 0 auto 15px; 
+            display: block; 
+        }
+        
+        .gv-card { text-align: center; background: white; padding: 20px 15px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.05); transition: transform 0.3s; border-bottom: 4px solid var(--primary-color); cursor: pointer; }
+        .gv-card:hover { transform: translateY(-5px); background-color: #f0fdfa; }
+        .gv-avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary-color); margin: 0 auto 15px; display: block; }
+        .gv-subject { display: inline-block; background-color: #e0f2f1; color: var(--primary-color); padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; margin-bottom: 10px; }
+
+       /* --- TĂNG KÍCH THƯỚC POPUP (MODAL) TO HƠN --- */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); }
+        
+        .modal-content { 
+            background: white; 
+            margin: 5% auto; /* Đẩy sát lên trên một chút */
+            border-radius: 20px; 
+            width: 95%; 
+            max-width: 1000px; /* Tăng từ 700px lên 1000px (Rất to) */
+            display: flex; 
+            position: relative; 
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: zoomIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); 
+        }
+
+        /* Tăng kích thước phần ảnh bên trái */
+        .modal-left { 
+            width: 400px; /* Tăng chiều rộng ảnh */
+            flex-shrink: 0; 
+            background: #f0f0f0; 
+        }
+        .modal-left img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+        /* Tăng không gian phần nội dung bên phải */
+        .modal-right { 
+            padding: 60px; /* Tăng khoảng cách lề cho thoáng */
+            text-align: left; 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            background: linear-gradient(to right, #ffffff, #f9f9f9);
+        }
+        .modal-right h3 { color: #008080; font-size: 2.5rem; margin: 0 0 15px 0; } /* Chữ tên to hơn */
+        .modal-right .modal-subject { font-weight: bold; color: #d35400; font-size: 1.4rem; margin-bottom: 25px; border-bottom: 2px solid #eee; padding-bottom: 10px; display: inline-block; }
+        .modal-right .modal-bio { color: #444; font-size: 1.15rem; line-height: 1.8; font-style: italic; }
+
+        .close-btn { position: absolute; right: 25px; top: 15px; font-size: 40px; cursor: pointer; color: #333; z-index: 10; transition: 0.3s; }
+        .close-btn:hover { color: #ff0000; transform: rotate(90deg); }
+
+        @media (max-width: 900px) {
+            .modal-content { flex-direction: column; margin: 2% auto; height: 90vh; overflow-y: auto; }
+            .modal-left { width: 100%; height: 400px; }
+            .modal-right { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Trường THPT Lê Quý Đôn</h1>
+        <p>Chọn hạnh phúc - Chọn yêu thương</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Trang Chủ</a>
+        <a href="lop.html">Lớp</a> 
+        <a href="giao-vien.html">Giáo Viên</a>
+        <a href="hoc-sinh.html">Học Sinh</a>
+        <a href="dinh-huong.html">Định Hướng</a>
+	</nav>
+
+    <div class="container">
+        <h2 style="text-align: center; border: none; font-size: 2.2rem; margin-bottom: 10px;">Ban Giám Hiệu Nhà Trường</h2>
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div class="bgh-card" style="border-top-color: #c0392b;">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/dfd46a880830876ede21-1-rhwvqvwjzactt31cwozu0okbfv7key1um30ps2w3g0.jpg" 
+                     alt="Thầy Lê Văn Trị" class="bgh-avatar" style="width: 250px; height: 250px;">
+                <h3 style="color: #c0392b; margin: 10px 0; font-size: 1.6rem;">Thầy Lê Văn Trị</h3>
+                <p style="font-weight: bold; margin: 5px 0;">Bí thư Đảng Ủy - Hiệu trưởng</p>
+                <p style="font-style: italic; color: #555; font-size: 1rem; padding: 0 20px; margin-top: 15px; line-height: 1.5;">
+                    "Chính thức nhận công tác từ tháng 11/2025, thầy mang đến tầm nhìn đổi mới và ngọn lửa nhiệt huyết. Dưới sự dẫn dắt của thầy, trường THPT Lê Quý Đôn không ngừng vươn mình, khẳng định vị thế của một ngôi trường hạnh phúc, chất lượng và hiện đại."
+                </p>
+            </div>
+        </div>
+
+        <div class="image-grid" style="margin-top: 0;">
+            <div class="bgh-card">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/2.Tran-An-Nhan-pybpalhj53nci9kxjbm1k0fyvg15k5iokw2t2n4zg0.jpg" 
+                     alt="Thầy Trần An Nhàn" class="bgh-avatar" style="width: 250px; height: 250px;">
+                <h3 style="color: #d35400; margin: 10px 0; font-size: 1.4rem;">Thầy Trần An Nhàn</h3>
+                <p style="font-weight: bold; margin: 5px 0;">PBT Đảng Ủy - Phó Hiệu trưởng</p>
+                <p style="font-style: italic; color: #555; font-size: 0.95rem; margin-top: 15px; line-height: 1.5;">
+                    "Với kinh nghiệm quản lý dày dặn và sự tận tâm, thầy luôn sát sao trong công tác chuyên môn, đồng hành cùng giáo viên và học sinh tạo nên một môi trường học tập nề nếp, kỷ cương nhưng cũng đầy tình yêu thương."
+                </p>
+            </div>
+
+            <div class="bgh-card">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/3.Vo-Tan-Hhoa-pybj17qof748o8yllwefovx35ewrwuro9crii5bbe8.jpg" 
+                     alt="Thầy Võ Tấn Hòa" class="bgh-avatar" style="width: 250px; height: 250px;">
+                <h3 style="color: #d35400; margin: 10px 0; font-size: 1.4rem;">Thầy Võ Tấn Hòa</h3>
+                <p style="font-weight: bold; margin: 5px 0;">BTV Đảng Ủy - Phó Hiệu trưởng</p>
+                <p style="font-style: italic; color: #555; font-size: 0.95rem; margin-top: 15px; line-height: 1.5;">
+                "Luôn gần gũi và thấu hiểu học sinh, thầy là người truyền lửa cho các phong trào Đoàn - Hội và hoạt động ngoại khóa, giúp học sinh trường Lê Quý Đôn phát triển toàn diện cả về tri thức lẫn kỹ năng sống."
+                </p>
+            </div>
+        </div>
+
+        <hr style="border: 0; height: 1px; background: #ddd; margin: 40px 0;">
+
+        <h2 style="text-align: center; border: none; font-size: 2rem; margin-bottom: 10px;">Đội Ngũ Giáo Viên Lớp 12A1</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+            
+            <div class="gv-card" onclick="openModal('Cô Lê Thị Hồng Hạnh', 'GVCN - Môn Vật Lý', 'https://i.postimg.cc/yxr8mLxz/56435.png', 'Không chỉ là người truyền dạy những kiến thức Vật lý đầy thú vị, cô Lê Thị Hồng Hạnh còn là người mẹ thứ hai, người lái đò tâm huyết dẫn dắt tập thể 12A1 đi qua những năm tháng học trò rực rỡ. Với sự bao dung, thấu hiểu và tình yêu thương vô bờ bến, cô luôn sát cánh cùng chúng em trong mọi khó khăn, thử thách. Những lời khuyên chân thành và sự nghiêm khắc đúng lúc của cô đã giúp mỗi thành viên 12A1 trưởng thành hơn từng ngày. Đối với chúng em, cô chính là ngọn lửa ấm áp, thắp sáng niềm tin và định hướng cho tương lai của cả lớp.')">
+                <img src="https://i.postimg.cc/yxr8mLxz/56435.png" class="gv-avatar" style="border-color: #e84393;">
+                <span class="gv-subject" style="background-color: #ffeaa7; color: #d35400;">GVCN - Vật Lý</span>
+                <h4>Cô Lê Thị Hồng Hạnh</h4>
+            </div>
+
+            <div class="gv-card" onclick="openModal('Thầy Nguyễn Văn Danh', 'Môn Toán', 'https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/29.Nguyen-Van-Danh-py6g63argjbgcfbcfb43t44wq6acum83tx31766df4.jpg', 'Với những con số và hình khối đầy logic, thầy Danh đã dẫn dắt tập thể 12A1 chinh phục những đỉnh cao kiến thức toán học. Những giờ học của thầy không chỉ là giải bài tập, mà còn là hành trình rèn luyện tư duy sắc bén, giúp chúng em xây dựng nền tảng vững chắc cho những ước mơ nghề nghiệp trong tương lai. Sự kiên nhẫn và tận tâm của thầy chính là động lực lớn nhất để mỗi thành viên 12A1 không ngừng cố gắng vượt qua những bài toán khó.')">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/29.Nguyen-Van-Danh-py6g63argjbgcfbcfb43t44wq6acum83tx31766df4.jpg" class="gv-avatar">
+                <span class="gv-subject">Môn Toán</span>
+                <h4>Thầy Nguyễn Văn Danh</h4>
+            </div>
+
+            <div class="gv-card" onclick="openModal('Thầy Trần Quốc Chấn', 'Môn Hóa Học', 'https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/66.Tran-Quoc-Chan-py9r4kxiu7q238rcoxsacxyst8fv2keuy9wzc2hisw.jpg', 'Với những thí nghiệm đầy màu sắc và những phương trình phản ứng kỳ diệu, thầy Chấn đã biến môn Hóa học trở thành một thế giới đầy mê hoặc. Thầy đã giúp tập thể 12A1 thấu hiểu bản chất của vật chất, từ những nguyên tử nhỏ bé đến những phản ứng hóa học ứng dụng trong đời sống. Những giờ học không còn là những công thức khô khan, mà là những giây phút chúng em được thỏa sức quan sát và tư duy khoa học.')">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/66.Tran-Quoc-Chan-py9r4kxiu7q238rcoxsacxyst8fv2keuy9wzc2hisw.jpg" class="gv-avatar">
+                <span class="gv-subject">Môn Hóa Học</span>
+                <h4>Thầy Trần Quốc Chấn</h4>
+            </div>
+
+            <div class="gv-card" onclick="openModal('Thầy Nguyễn Trung Tín', 'Môn Sinh Học', 'https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/55.-Nguyen-Trung-Tin-py9qjl7a7ezisr939v48o8o77fwr5x2o2delhlm1rk.jpg', 'Thầy Tín đã đưa chúng em vào hành trình khám phá sự sống kỳ diệu, từ cấu trúc DNA siêu vi đến hệ sinh thái rộng lớn. Những bài giảng về di truyền, tiến hóa và bảo vệ môi trường luôn được thầy truyền tải một cách chân thực, khơi gợi lòng yêu thiên nhiên và ý thức bảo vệ sự sống. Nhờ có thầy, tập thể 12A1 hiểu rõ hơn về giá trị của bản thân và trách nhiệm đối với hành tinh xanh mà chúng ta đang sống.')">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/55.-Nguyen-Trung-Tin-py9qjl7a7ezisr939v48o8o77fwr5x2o2delhlm1rk.jpg" class="gv-avatar">
+                <span class="gv-subject">Môn Sinh Học</span>
+                <h4>Thầy Nguyễn Trung Tín</h4>
+            </div>
+
+            <div class="gv-card" onclick="openModal('Thầy Võ Phước Thọ', 'Môn Ngữ Văn', 'https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/22-Vo-Phuoc-Tho-pzino72iyh4t08dr6b9ydhdp0dntrkyxftqnyz9nqo.jpg', 'Bằng những lời giảng truyền cảm và đầy tâm huyết, thầy Thọ đã thổi hồn vào từng trang văn học, giúp chúng em hiểu thêm về vẻ đẹp của ngôn từ và những giá trị nhân văn sâu sắc. Những tiết Văn luôn là khoảng thời gian để tâm hồn 12A1 được lắng đọng, học cách yêu thương và thấu hiểu cuộc sống. Thầy không chỉ dạy kiến thức, mà còn bồi đắp cho chúng em một trái tim biết rung cảm trước những điều tốt đẹp trong cuộc đời.')">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/22-Vo-Phuoc-Tho-pzino72iyh4t08dr6b9ydhdp0dntrkyxftqnyz9nqo.jpg" class="gv-avatar">
+                <span class="gv-subject">Môn Ngữ Văn</span>
+                <h4>Thầy Võ Phước Thọ</h4>
+            </div>
+
+            <div class="gv-card" onclick="openModal('Thầy Phạm Thanh Hoàng', 'Môn Ngoại Ngữ', 'https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/77.Pham-Thanh-Hoang-py9rqa1eljfc378qztf9eyuugfhvr1jsxo1h50bcrs.jpg', 'Thầy Hoàng là người mở ra cánh cửa kết nối thế giới, giúp chúng em tự tin hơn trong giao tiếp và hội nhập quốc tế. Qua từng bài học Tiếng Anh sinh động, 12A1 không chỉ được rèn luyện các kỹ năng ngôn ngữ mà còn được tiếp cận với những nền văn hóa mới mẻ, hiện đại. Sự nhiệt tình và phương pháp giảng dạy đổi mới của thầy luôn khơi gợi niềm đam mê khám phá tri thức nhân loại trong mỗi chúng em.')">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/77.Pham-Thanh-Hoang-py9rqa1eljfc378qztf9eyuugfhvr1jsxo1h50bcrs.jpg" class="gv-avatar">
+                <span class="gv-subject">Môn Ngoại Ngữ</span>
+                <h4>Thầy Phạm Thanh Hoàng</h4>
+            </div>
+
+            <div class="gv-card" onclick="openModal('Cô Huỳnh Thị Thanh Hương', 'Môn Tin Học', 'https://i.postimg.cc/28M4mwwH/594329743-10223930726454445-7922403914191836307-n.jpg', 'Trong kỷ nguyên số bùng nổ, cô Hương đã trang bị cho chúng em những kỹ năng công nghệ cốt lõi và tư duy lập trình sáng tạo. Từ những dòng mã code đến những ứng dụng thực tế, cô luôn tận tình hướng dẫn để 12A1 không bị tụt hậu. Những tiết học tại phòng máy luôn tràn đầy sự hào hứng, giúp chúng em làm chủ công nghệ và sẵn sàng thích ứng với tương lai.')">
+                <img src="https://i.postimg.cc/DynzGbzy/486629680-10221780759146606-49151602561948373-n.jpg" class="gv-avatar">
+                <span class="gv-subject">Môn Tin Học</span>
+                <h4>Cô Huỳnh Thị Thanh Hương</h4>
+            </div>
+
+            <div class="gv-card" onclick="openModal('Cô Trần Thị Tâm', 'Môn Lịch Sử', 'https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/Tran-Thi-Tam-pxb5hk6hjv0bivqzfsnmxf913jzdhtq7xxgnexoi9c.jpg', 'Ngược dòng thời gian về những trang sử hào hùng, cô Tâm đã giúp chúng em thấu hiểu những bài học quý giá từ quá khứ. Cô không chỉ dạy về sự kiện, mà còn khơi dậy lòng tự hào dân tộc và ý thức trách nhiệm của thế hệ trẻ. Những câu chuyện kể qua lời giảng của cô luôn khiến 12A1 xúc động, giúp chúng em thêm trân trọng hòa bình và độc lập ngày hôm nay.')">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/Tran-Thi-Tam-pxb5hk6hjv0bivqzfsnmxf913jzdhtq7xxgnexoi9c.jpg" class="gv-avatar">
+                <span class="gv-subject">Môn Lịch Sử</span>
+                <h4>Cô Trần Thị Tâm</h4>
+            </div>
+
+            <div class="gv-card" onclick="openModal('Cô Lê Thị Trang', 'Hoạt động TNHN', 'https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/54.Le-Thi-Trang-py9qjjbltqwy5jbtkuazj95a0o60qiv7e43mj1ou40.jpg', 'Đây là không gian quý báu để mỗi thành viên 12A1 được khám phá bản thân và định hướng con đường sự nghiệp tương lai. Cô Trang luôn đóng vai trò là người cố vấn tận tâm, lắng nghe những băn khoăn và đưa ra những lời khuyên chân thành nhất. Những buổi trải nghiệm hướng nghiệp cùng cô đã giúp chúng em tự tin hơn, sẵn sàng tâm thế để bước vào ngưỡng cửa đại học và vào đời.')">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/54.Le-Thi-Trang-py9qjjbltqwy5jbtkuazj95a0o60qiv7e43mj1ou40.jpg" class="gv-avatar">
+                <span class="gv-subject">Hoạt động TNHN</span>
+                <h4>Cô Lê Thị Trang</h4>
+            </div>
+
+            <div class="gv-card" onclick="openModal('Cô Phan Thị Minh', 'Môn GDTC', 'https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/87.-Phan-Thi-Minh-py9siy471mo671lll7jmgqeypi6wipd2vkcm2tt3e8.jpg', 'Không chỉ rèn luyện sức khỏe, cô Minh còn truyền cho chúng em tinh thần thể thao cao thượng và ý chí bền bỉ. Những giờ học ngoài sân bãi tràn đầy năng lượng luôn là liều thuốc tinh thần tuyệt vời giúp 12A1 giải tỏa căng thẳng sau những tiết học văn hóa. Cô dạy chúng em rằng một trí tuệ minh mẫn chỉ có thể tồn tại trong một cơ thể khỏe mạnh.')">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/87.-Phan-Thi-Minh-py9siy471mo671lll7jmgqeypi6wipd2vkcm2tt3e8.jpg" class="gv-avatar">
+                <span class="gv-subject">Môn GDTC</span>
+                <h4>Cô Phan Thị Minh</h4>
+            </div>
+
+            <div class="gv-card" onclick="openModal('Thầy Lê Văn Tuấn', 'Môn GDQP', 'https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/80.Le-Van-Tuan-py9sizzvfaqqu9iva8cvlpxvw9xmy3kjjtnl1dqb1s.jpg', 'Những giờ học quân sự đã rèn luyện cho tập thể 12A1 tác phong kỷ luật thép và tình yêu quê hương đất nước sâu sắc thông qua sự hướng dẫn nghiêm khắc nhưng đầy tâm huyết của thầy Tuấn. Thầy bồi dưỡng cho chúng em tinh thần sẵn sàng bảo vệ Tổ quốc và ý thức kỷ luật tự giác, giúp chúng em trưởng thành hơn và có trách nhiệm với quốc gia.')">
+                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/Thumbcache/80.Le-Van-Tuan-py9sizzvfaqqu9iva8cvlpxvw9xmy3kjjtnl1dqb1s.jpg" class="gv-avatar">
+                <span class="gv-subject">Môn GDQP</span>
+                <h4>Thầy Lê Văn Tuấn</h4>
+            </div>
+
+        </div>
+
+    <div id="teacherModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div class="modal-left">
+                <img id="modalImg" src="" alt="Ảnh giáo viên">
+            </div>
+            <div class="modal-right">
+                <h3 id="modalName"></h3>
+                <p id="modalSubject" class="modal-subject"></p>
+                <p id="modalBio" class="modal-bio"></p>
+            </div>
+        </div>
+    </div>
+	<footer style="background-color: #042f2e; color: #ffffff; padding: 40px 20px 20px; margin-top: 50px; border-top: 4px solid var(--primary, #0d9488); font-family: 'Quicksand', sans-serif;">
+        <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 25px; margin-bottom: 20px;">
+            
+            <div style="flex: 1; min-width: 300px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <div style="width: 60px; height: 60px; background: white; border-radius: 12px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); overflow: hidden; padding: 5px;">
+                        <img src="https://i.postimg.cc/FFV3PLTW/image.png" alt="Logo Lê Quý Đôn" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div>
+                        <p style="margin: 0; font-size: 0.75rem; text-transform: uppercase; color: #a1a1aa; letter-spacing: 1px; font-weight: 600;">SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐẮK LẮK</p>
+                        <h3 style="margin: 3px 0 0; font-size: 1.2rem; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; font-weight: 800;">Trường THPT Lê Quý Đôn</h3>
+                    </div>
+                </div>
+                <div style="color: #d4d4d8; font-size: 0.9rem; line-height: 1.6;">
+                    <p style="margin: 6px 0; display: flex; gap: 10px; align-items: start;">
+                        <span style="color: #2dd4bf; font-size: 1rem;">📍</span> Cơ sở: 27 Trần Nhật Duật, Phường Tân Lợi, TP. Buôn Ma Thuột
+                    </p>
+                    <p style="margin: 6px 0; display: flex; gap: 10px; align-items: center;">
+                        <span style="color: #2dd4bf; font-size: 1rem;">📞</span> Điện thoại: 0262 3953 354
+                    </p>
+                </div>
+            </div>
+
+            <div style="flex: 1; min-width: 250px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <h3 style="margin: 0 0 5px; font-size: 1.8rem; color: #ffffff; letter-spacing: 2px; font-weight: 800; font-family: 'Quicksand', sans-serif;">TẬP THỂ 12A1</h3>
+                <p style="margin: 0; color: #a1a1aa; font-style: italic; font-size: 0.95rem; max-width: 350px;">"Nơi lưu giữ những thanh xuân rực rỡ nhất..." ✨</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; color: #71717a; font-size: 0.8rem;">
+            <p style="margin: 0 0 5px;">© 2026 - Bản quyền nội dung thuộc Tập thể Lớp 12A1 - THPT Lê Quý Đôn.</p>
+            <p style="margin: 0;">Phát triển và thiết kế bởi <strong style="color: #FF416C;">Chung Chí Thiện</strong> & <strong style="color: #FF416C;">Kiều Tuấn Kiệt Anh</strong></p>
+        </div>
+    </footer>
+    <script>
+        function openModal(name, subject, img, bio) {
+            document.getElementById('modalName').innerText = name;
+            document.getElementById('modalSubject').innerText = subject;
+            document.getElementById('modalImg').src = img;
+            document.getElementById('modalBio').innerText = bio;
+            document.getElementById('teacherModal').style.display = "block";
+        }
+        function closeModal() { document.getElementById('teacherModal').style.display = "none"; }
+        window.onclick = function(event) {
+            var modal = document.getElementById('teacherModal');
+            if (event.target == modal) { modal.style.display = "none"; }
+        }
+    </script>
+	<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const nav = document.querySelector('nav');
+            if (!nav) return;
+
+            // Xóa rác cũ nếu lỡ bị lặp
+            let oldIndicator = nav.querySelector('.nav-indicator');
+            if (oldIndicator) oldIndicator.remove();
+
+            // Tạo cục nền xanh
+            const indicator = document.createElement('div');
+            indicator.className = 'nav-indicator';
+            nav.appendChild(indicator);
+
+            const links = nav.querySelectorAll('a');
+            
+            // Tìm đúng mục trang hiện tại
+            let activeLink = null;
+            links.forEach(link => {
+                if (link.classList.contains('active') || link.getAttribute('style')) {
+                    activeLink = link;
+                }
+            });
+
+            // --- ĐIỂM KHÁC BIỆT CHÍNH Ở ĐÂY ---
+            // Đặt vị trí cục nền xanh ngay lập tức (KHÔNG có hiệu ứng trượt) khi trang vừa load
+            if (activeLink) {
+                indicator.style.transition = 'none'; // Tắt hiệu ứng trượt
+                indicator.style.width = `${activeLink.offsetWidth}px`;
+                indicator.style.transform = `translateX(${activeLink.offsetLeft}px)`;
+                activeLink.style.setProperty('color', '#ffffff', 'important');
+                
+                // Ép trình duyệt cập nhật vị trí ngay lập tức
+                void indicator.offsetWidth;
+                
+                // Bật lại hiệu ứng trượt mượt mà cho lúc rê chuột
+                indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+            }
+
+            // Hàm trượt và đổi màu chữ khi rê chuột
+            function slideTo(element) {
+                if (!element) return;
+                
+                indicator.style.width = `${element.offsetWidth}px`;
+                indicator.style.transform = `translateX(${element.offsetLeft}px)`;
+                
+                links.forEach(link => {
+                    link.style.setProperty('color', '#64748b', 'important');
+                    link.style.setProperty('background', 'transparent', 'important');
+                });
+                
+                element.style.setProperty('color', '#ffffff', 'important');
+            }
+
+            // Khi rê chuột vào mục khác
+            links.forEach(link => {
+                link.addEventListener('mouseenter', (e) => {
+                    slideTo(e.target);
+                });
+            });
+
+            // Khi rút chuột ra khỏi menu -> Về lại vị trí cũ
+            nav.addEventListener('mouseleave', () => {
+                if (activeLink) slideTo(activeLink);
+            });
+
+            // Căn chỉnh khi đổi kích thước cửa sổ
+            window.addEventListener('resize', () => {
+                if (activeLink) {
+                    indicator.style.transition = 'none'; // Tắt trượt khi thu phóng màn hình
+                    slideTo(activeLink);
+                    void indicator.offsetWidth;
+                    indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
