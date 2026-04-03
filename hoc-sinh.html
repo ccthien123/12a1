@@ -6,20 +6,42 @@
     <title>Thành Viên 12A1 - THPT Lê Quý Đôn</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* --- VÁ LỖI MENU TRƯỢT --- */
-        nav { position: relative; }
+        /* --- MENU TRƯỢT ĐỒNG BỘ --- */
+        nav { 
+            position: relative; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 5px; 
+            padding: 15px 20px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
         .nav-indicator {
-            display: block !important; 
             position: absolute;
-            top: 10px;
-            left: 0;
-            height: calc(100% - 20px);
-            background: var(--primary);
+            height: 42px; 
+            background: #0d9488;
             border-radius: 50px;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            z-index: 1;
-            box-shadow: 0 4px 15px rgba(13, 148, 136, 0.3);
-            pointer-events: none;
+            z-index: 0;
+            top: 50%;
+            margin-top: -21px; 
+            left: 0;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+        nav a { 
+            position: relative; 
+            z-index: 1; 
+            text-decoration: none; 
+            padding: 10px 25px; 
+            display: inline-block; 
+            color: #64748b; 
+            font-weight: 700; 
+            transition: 0.3s;
+            border-radius: 50px;
         }
 
         /* --- BỘ LỌC & TÌM KIẾM --- */
@@ -482,38 +504,58 @@
     <script>
         // --- SCRIPT MENU TRƯỢT ---
         document.addEventListener("DOMContentLoaded", function() {
-            const nav = document.getElementById('mainNav');
+            const nav = document.querySelector('nav');
             if (!nav) return;
-            let indicator = nav.querySelector('.nav-indicator');
-            if (!indicator) {
-                indicator = document.createElement('div');
-                indicator.className = 'nav-indicator';
-                nav.appendChild(indicator);
-            }
+
+            let oldIndicator = nav.querySelector('.nav-indicator');
+            if (oldIndicator) oldIndicator.remove();
+
+            const indicator = document.createElement('div');
+            indicator.className = 'nav-indicator';
+            nav.appendChild(indicator);
+
             const links = nav.querySelectorAll('a');
             let activeLink = null;
+            
+            // Tìm mục đang active
             links.forEach(link => {
-                if (link.classList.contains('active')) activeLink = link;
+                if (link.classList.contains('active') || link.getAttribute('style')) activeLink = link;
             });
+
+            // Gắn vị trí ban đầu (không có hiệu ứng trượt)
+            if (activeLink) {
+                indicator.style.transition = 'none';
+                indicator.style.width = `${activeLink.offsetWidth}px`;
+                indicator.style.transform = `translateX(${activeLink.offsetLeft}px)`;
+                activeLink.style.setProperty('color', '#ffffff', 'important');
+                void indicator.offsetWidth;
+                indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+            }
+
+            // Hàm trượt cục nền xanh
             function slideTo(element) {
                 if (!element) return;
                 indicator.style.width = `${element.offsetWidth}px`;
                 indicator.style.transform = `translateX(${element.offsetLeft}px)`;
-                links.forEach(link => link.style.setProperty('color', '#64748b', 'important'));
+                links.forEach(link => {
+                    link.style.setProperty('color', '#64748b', 'important');
+                    link.style.setProperty('background', 'transparent', 'important');
+                });
                 element.style.setProperty('color', '#ffffff', 'important');
             }
-            if (activeLink) {
-                indicator.style.transition = 'none';
-                slideTo(activeLink);
-                setTimeout(() => {
+
+            // Sự kiện rê chuột
+            links.forEach(link => link.addEventListener('mouseenter', (e) => slideTo(e.target)));
+            nav.addEventListener('mouseleave', () => { if (activeLink) slideTo(activeLink); });
+            
+            // Căn chỉnh lại khi xoay/đổi kích thước màn hình
+            window.addEventListener('resize', () => {
+                if (activeLink) {
+                    indicator.style.transition = 'none';
+                    slideTo(activeLink);
+                    void indicator.offsetWidth;
                     indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
-                }, 50);
-            }
-            links.forEach(link => {
-                link.addEventListener('mouseenter', (e) => slideTo(e.target));
-            });
-            nav.addEventListener('mouseleave', () => {
-                if (activeLink) slideTo(activeLink);
+                }
             });
         });
 
