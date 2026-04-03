@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- ĐỒNG BỘ THANH TRƯỢT MENU THEO SCRIPT GỐC --- */
+        /* --- MENU TRƯỢT ĐỒNG BỘ --- */
         nav { 
             position: relative; 
             display: flex; 
@@ -16,12 +16,15 @@
             gap: 5px; 
             padding: 15px 20px;
             background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         .nav-indicator {
             position: absolute;
             height: 42px; 
-            background: var(--primary, #0d9488);
+            background: #0d9488;
             border-radius: 50px;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             z-index: 0;
@@ -37,7 +40,7 @@
             padding: 10px 25px; 
             display: inline-block; 
             color: #64748b; 
-            font-weight: 600; 
+            font-weight: 700; 
             transition: 0.3s;
             border-radius: 50px;
         }
@@ -435,7 +438,7 @@
         }
     </script>
     <script>
-        // --- SCRIPT THANH MENU TRƯỢT ---
+       // --- SCRIPT MENU TRƯỢT ---
         document.addEventListener("DOMContentLoaded", function() {
             const nav = document.querySelector('nav');
             if (!nav) return;
@@ -448,48 +451,40 @@
             nav.appendChild(indicator);
 
             const links = nav.querySelectorAll('a');
-            
             let activeLink = null;
+            
+            // Tìm mục đang active
             links.forEach(link => {
-                if (link.classList.contains('active') || link.getAttribute('style')) {
-                    activeLink = link;
-                }
+                if (link.classList.contains('active') || link.getAttribute('style')) activeLink = link;
             });
 
+            // Gắn vị trí ban đầu (không có hiệu ứng trượt)
             if (activeLink) {
-                indicator.style.transition = 'none'; 
+                indicator.style.transition = 'none';
                 indicator.style.width = `${activeLink.offsetWidth}px`;
                 indicator.style.transform = `translateX(${activeLink.offsetLeft}px)`;
                 activeLink.style.setProperty('color', '#ffffff', 'important');
-                
                 void indicator.offsetWidth;
                 indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
             }
 
+            // Hàm trượt cục nền xanh
             function slideTo(element) {
                 if (!element) return;
-                
                 indicator.style.width = `${element.offsetWidth}px`;
                 indicator.style.transform = `translateX(${element.offsetLeft}px)`;
-                
                 links.forEach(link => {
                     link.style.setProperty('color', '#64748b', 'important');
                     link.style.setProperty('background', 'transparent', 'important');
                 });
-                
                 element.style.setProperty('color', '#ffffff', 'important');
             }
 
-            links.forEach(link => {
-                link.addEventListener('mouseenter', (e) => {
-                    slideTo(e.target);
-                });
-            });
-
-            nav.addEventListener('mouseleave', () => {
-                if (activeLink) slideTo(activeLink);
-            });
-
+            // Sự kiện rê chuột
+            links.forEach(link => link.addEventListener('mouseenter', (e) => slideTo(e.target)));
+            nav.addEventListener('mouseleave', () => { if (activeLink) slideTo(activeLink); });
+            
+            // Căn chỉnh lại khi xoay/đổi kích thước màn hình
             window.addEventListener('resize', () => {
                 if (activeLink) {
                     indicator.style.transition = 'none';
