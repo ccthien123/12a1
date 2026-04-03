@@ -1,475 +1,821 @@
 <!DOCTYPE html>
+
 <html lang="vi">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Trang Chủ - THPT Lê Quý Đôn</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+
+
     <style>
-        /* =========================================
-           1. CSS CƠ BẢN VÀ FONT CHỮ
-           ========================================= */
+
+        /* CSS Cơ bản cho toàn trang */
+
         * { box-sizing: border-box; }
+
         body, html { 
-            font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+
+            font-family: 'Quicksand', sans-serif !important;
+
             background-color: #f4f8f9; 
+
             color: #334155;
+
             margin: 0;
+
             padding: 0;
-            overflow-x: hidden; 
-        }
-        button, input, select, textarea, a, p, h1, h2, h3, h4, h5, h6, span, div { 
-            font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; 
+
         }
 
-        /* =========================================
-           2. HEADER (CÓ HÌNH NỀN LÀM MỜ)
-           ========================================= */
-        header {
-            position: relative;
-            text-align: center;
-            padding: 80px 20px;
-            color: white;
-            background-image: url('https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707263644_a8daf5a35c7de0bb8a97532170283399.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 47, 46, 0.75); /* Lớp phủ xanh đen mờ */
-            z-index: 1;
-        }
-        header h1, header p {
-            position: relative;
-            z-index: 2; 
-        }
-        header h1 { margin: 0 0 10px 0; font-weight: 900; letter-spacing: 1px; font-size: 2.5rem; }
-        header p { margin: 0; color: #ccfbf1; font-size: 1.2rem; font-style: italic; font-weight: 600; }
 
-        /* =========================================
-           3. THANH MENU TRƯỢT BO GÓC
-           ========================================= */
+
+        /* --- CSS CHO THANH MENU TRƯỢT --- */
+
         nav { 
+
             position: relative; 
+
             display: flex; 
+
             justify-content: center; 
+
             align-items: center; 
+
             gap: 5px; 
+
             padding: 15px 20px;
+
             background: white;
+
             box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+
             position: sticky;
+
             top: 0;
+
             z-index: 100;
+
         }
+
         .nav-indicator {
+
             position: absolute;
+
             height: 42px; 
-            background: #0d9488; 
+
+            background: #0d9488; /* Màu xanh ngọc chủ đạo */
+
             border-radius: 50px;
+
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
             z-index: 0;
+
             top: 50%;
+
             margin-top: -21px; 
+
             left: 0;
+
             box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+
         }
+
         nav a { 
+
             position: relative; 
+
             z-index: 1; 
+
             text-decoration: none; 
+
             padding: 10px 25px; 
+
             display: inline-block; 
+
             color: #64748b; 
+
             font-weight: 700; 
+
             transition: 0.3s;
+
             border-radius: 50px;
+
         }
+
         nav a.active {
+
             color: #ffffff !important;
+
         }
 
-        /* =========================================
-           4. BỐ CỤC CHUNG & HỘP (CARD)
-           ========================================= */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        .main-layout { 
-            display: flex; 
-            gap: 30px; 
-            align-items: flex-start; 
-        }
-        
-        .content { 
-            flex: 1; 
-            min-width: 0; 
-        }
-        
-        .sidebar { 
-            width: 320px; 
-            flex-shrink: 0; 
-            position: sticky; 
-            top: 90px; 
-            align-self: flex-start; 
-            height: max-content; 
-            z-index: 10;
-        }
 
-        .card { 
-            background: white; 
-            padding: 35px; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
-            border: 1px solid #f1f5f9; 
-            margin-bottom: 40px; 
-        }
-        .card p { 
-            line-height: 1.8; 
-            color: #475569; 
-            font-size: 1.05rem; 
-            text-align: justify; 
-            margin-bottom: 15px; 
-        }
-        
-        h2 { 
-            color: #0f172a; 
-            font-size: 1.8rem; 
-            font-weight: 800; 
-            margin-bottom: 20px; 
-            border-left: 5px solid #0d9488; 
-            padding-left: 15px; 
-            margin-top: 0; 
-        }
 
-        .btn-link { 
-            display: inline-flex; 
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px 30px; 
-            background: linear-gradient(135deg, #0d9488, #0f766e); 
-            color: white !important; 
-            text-decoration: none; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            transition: 0.3s; 
-            box-shadow: 0 5px 15px rgba(13, 148, 136, 0.25); 
-            cursor: pointer;
-            position: relative;
-            z-index: 10;
-        }
-        .btn-link:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 8px 20px rgba(13, 148, 136, 0.35); 
-        }
+        /* VIẾT THÊM CÁC ĐOẠN CSS KHÁC CỦA TRANG INDEX VÀO DƯỚI NÀY... */
 
-        /* =========================================
-           5. LƯỚI ẢNH TĨNH (CHỐNG LỖI CUỘN KHỰNG)
-           ========================================= */
-        .static-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .static-gallery img, .school-image { 
-            width: 100%; 
-            height: 200px;
-            border-radius: 12px; 
-            object-fit: cover; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-            cursor: pointer; 
-        }
-        .school-image { height: auto; max-height: 400px; margin-top: 15px;}
-        
-        .static-gallery img:hover, .school-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
 
-        /* Chỉ hiển thị tối đa 6 ảnh trên lưới cho gọn */
-        .static-gallery img:nth-child(n+7) { display: none; }
 
-        /* =========================================
-           6. TIỆN ÍCH CỘT PHẢI (WIDGETS)
-           ========================================= */
-        .widget { 
-            background: white; 
-            padding: 25px; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
-            margin-bottom: 30px; 
-            border: 1px solid #f1f5f9; 
-            position: relative;
-            z-index: 10;
-        }
-        .widget h3 { 
-            margin-top: 0; 
-            color: #0f172a; 
-            font-size: 1.3rem; 
-            margin-bottom: 15px; 
-            padding-bottom: 15px; 
-            border-bottom: 2px dashed #e2e8f0; 
-            font-weight: 800;
-        }
-        .widget ul { list-style: none; padding: 0; margin: 0; }
-        .widget ul li { padding: 12px 0; border-bottom: 1px dashed #f1f5f9; }
-        .widget ul li:last-child { border-bottom: none; padding-bottom: 0;}
-        .widget ul li a { 
-            transition: 0.2s; 
-            display: block; 
-            text-decoration: none; 
-            font-weight: 700; 
-            line-height: 1.5;
-            position: relative;
-            z-index: 10;
-        }
-        .widget ul li a:hover { transform: translateX(5px); opacity: 0.8;}
-
-        .link-blue { color: #0984e3; }
-        .link-pink { color: #e84393; }
-        .link-red { color: #d81b60; }
-        .link-teal { color: #0d9488; }
-        .link-gray { color: #64748b; font-weight: 500 !important; }
-
-        /* =========================================
-           7. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
-           ========================================= */
-        @media (max-width: 900px) {
-            .main-layout { flex-direction: column; }
-            .sidebar { width: 100%; position: static !important; }
-            .static-gallery { grid-template-columns: repeat(2, 1fr); }
-            .static-gallery img { height: 150px; }
-        }
-        @media (max-width: 480px) {
-            .static-gallery { grid-template-columns: 1fr; }
-            .static-gallery img { height: 200px; }
-            header { padding: 50px 20px; }
-            header h1 { font-size: 1.8rem; }
-        }
     </style>
+
 </head>
+
 <body>
 
+
+
     <header>
+
         <h1>Trường THPT Lê Quý Đôn</h1>
+
         <p>Chọn hạnh phúc - Chọn yêu thương</p>
+
     </header>
 
+
+
     <nav>
+
         <a href="index.html" class="active">Trang Chủ</a>
+
         <a href="lop.html">Lớp</a> 
+
         <a href="giao-vien.html">Giáo Viên</a>
+
         <a href="hoc-sinh.html">Học Sinh</a>
+
         <a href="dinh-huong.html">Định Hướng</a> 
+
     </nav>
 
-    <div class="container" style="padding-top: 40px;">
-        <div style="text-align: center; margin-bottom: 40px;">
+
+
+    <div class="container">
+
+        <div style="text-align: center; margin-bottom: 30px;">
+
             <a href="https://c3lequydon.daklak.edu.vn/" target="_blank" class="btn-link">
-                <i class="fas fa-globe"></i> Truy cập Website chính thức của Trường
+
+                🌐 Truy cập Website chính thức của Trường
+
             </a>
+
         </div>
+
+
 
         <div class="main-layout">
+
             <div class="content">
+
                 
+
                 <section>
-                    <h2>Lịch Sử Hình Thành</h2>
+
+                    <h2 style="margin-top: 0;">Lịch Sử Hình Thành</h2>
+
                     <div class="card">
+
                         <p>Tọa lạc tại phường Buôn Ma Thuột, tỉnh Đắk Lắk, là trường trung học phổ thông công lập được thành lập năm 2000. Trải qua 26 năm xây dựng và phát triển (2000 – 2026), nhà trường đã từng bước khẳng định vị thế là một cơ sở giáo dục ổn định, uy tín, được phụ huynh tin tưởng và học sinh lựa chọn.</p>
+
                         <p>Từ những ngày đầu còn nhiều khó khăn về cơ sở vật chất và quy mô đào tạo, đến nay Trường THPT Lê Quý Đôn đã không ngừng nỗ lực đổi mới, nâng cao chất lượng giáo dục, hướng đến mục tiêu phát triển toàn diện học sinh cả về tri thức, kỹ năng và nhân cách.</p>
+
                         <img src="https://i.postimg.cc/QxTqFwHB/166d3dda-316a-4ff6-8b25-dff9bae28292.jpg" alt="Toàn cảnh trường" class="school-image">
+
                     </div>
+
                 </section>
 
+
+
                 <section>
+
                     <h2>Quy Mô Và Đội Ngũ</h2>
+
                     <div class="card">
+
                         <p>Hiện nay, nhà trường có 40 lớp với 1.738 học sinh, đội ngũ 103 cán bộ, giáo viên, nhân viên có trình độ chuyên môn vững vàng, tâm huyết với nghề, luôn chủ động đổi mới phương pháp giảng dạy, đáp ứng yêu cầu của Chương trình Giáo dục phổ thông 2018.</p>
+
                         <img src="https://i.postimg.cc/J4k9RT8n/c8d6d417-4dbb-47a9-9c56-a9279ddeaa4c.jpg" alt="Đội ngũ giáo viên" class="school-image">
+
                     </div>
+
                 </section>
 
+
+
                 <section>
+
                     <h2>Cơ Sở Vật Chất</h2>
+
                     <div class="card">
+
                         <p>Cơ sở vật chất của nhà trường ngày càng được đầu tư, hoàn thiện, đáp ứng tốt nhu cầu dạy và học. Trường có 43 phòng học kiên cố được trang bị tivi phục vụ giảng dạy; hệ thống phòng bộ môn Tin học, Vật lý, Hóa học, Sinh học, Ngoại ngữ; khu giáo dục thể chất hiện đại, thư viện từng bước áp dụng học liệu điện tử được khai thác hiệu quả, tạo môi trường học tập an toàn, thân thiện và hiện đại.</p>
+
                         
-                        <div class="static-gallery">
-                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707292828_aeb39043b974418fcc3a4936e6cd69d9.jpg" alt="Cơ sở vật chất">
-                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707251765_ad4e3253b3285c5e73edd8f9a459f465.jpg" alt="Cơ sở vật chất">
-                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707297633_b4deb119cb4437e8d9b5bf1c63dc4852.jpg" alt="Cơ sở vật chất">
-                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Cơ sở vật chất">
-                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707263644_a8daf5a35c7de0bb8a97532170283399.jpg" alt="Cơ sở vật chất">
-                            <img src="https://i.postimg.cc/rFkvF1wP/648474636-10224786469967498-5948464086240339413-n.jpg" alt="Cơ sở vật chất">
+
+                        <div class="carousel-wrapper">
+
+                            <button class="slider-btn left-btn" onclick="slideLeft('slider-csvc')">&#10094;</button>
+
+                            
+
+                            <div class="carousel-container">
+
+                                <div class="carousel-slide" id="slider-csvc">
+
+                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707292828_aeb39043b974418fcc3a4936e6cd69d9.jpg" alt="Phòng học hiện đại">
+
+                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707251765_ad4e3253b3285c5e73edd8f9a459f465.jpg" alt="2">
+
+                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707297633_b4deb119cb4437e8d9b5bf1c63dc4852.jpg" alt="3">
+
+                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Thư viện trường">
+
+                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707263644_a8daf5a35c7de0bb8a97532170283399.jpg" alt="Toàn cảnh">
+
+                                    <img src="https://i.postimg.cc/rFkvF1wP/648474636-10224786469967498-5948464086240339413-n.jpg" alt="1">
+
+                                </div>
+
+                            </div>
+
+
+
+                            <button class="slider-btn right-btn" onclick="slideRight('slider-csvc')">&#10095;</button>
+
                         </div>
+
                     </div>
+
                 </section>
 
+
+
                 <section>
+
                     <h2>Chất Lượng Giáo Dục Và Thành Tích</h2>
+
                     <div class="card">
+
                         <p>Nhà trường chú trọng nâng cao chất lượng giáo dục đại trà gắn với phát triển mũi nhọn. Trong những năm học gần đây, học sinh Trường THPT Lê Quý Đôn đạt nhiều kết quả tích cực trong các kỳ thi học sinh giỏi, khoa học kỹ thuật, các sân chơi trí tuệ, thể thao và phong trào học đường. Riêng học kỳ I năm học 2025 – 2026, nhà trường có 07 học sinh tham gia đội tuyển chọn HSG cấp quốc gia, 01 học sinh tham gia thi HSG cấp quốc gia, 155 học sinh đạt giải học sinh giỏi cấp trường, 23 sản phẩm khoa học kỹ thuật tham gia vòng ý tưởng.</p>
+
                         <p>Công tác dạy học được đổi mới theo hướng phát huy năng lực học sinh, tăng cường ứng dụng công nghệ thông tin và trí tuệ nhân tạo, tổ chức học 2 buổi/ngày với các lớp bồi dưỡng học sinh giỏi, câu lạc bộ học thuật và năng khiếu.</p>
+
                         
-                        <div class="static-gallery">
-                            <img src="https://i.postimg.cc/d0sskMQn/c5709646-0179-49d1-900b-41e33052330c.jpg" alt="Thành tích">
-                            <img src="https://i.postimg.cc/nLSXnVK1/4c5e0449-b645-4fe2-890e-ef22f862fcc4.jpg" alt="Thành tích">
-                            <img src="https://i.postimg.cc/wvJgn9wt/649169267_1779965720082262_7412901498933026871_n.jpg" alt="Thành tích">
-                            <img src="https://i.postimg.cc/NMTBZQdM/649621949_1779965050082329_612656541181257158_n.jpg" alt="Thành tích">
+
+                        <div class="carousel-wrapper">
+
+                            <button class="slider-btn left-btn" onclick="slideLeft('slider-thanh-tich')">&#10094;</button>
+
+                            <div class="carousel-container">
+
+                                <div class="carousel-slide" id="slider-thanh-tich">
+
+                                    <img src="https://i.postimg.cc/d0sskMQn/c5709646-0179-49d1-900b-41e33052330c.jpg" alt="Thành tích 1">
+
+                                    <img src="https://i.postimg.cc/nLSXnVK1/4c5e0449-b645-4fe2-890e-ef22f862fcc4.jpg" alt="Thành tích 2">
+
+                                    <img src="https://i.postimg.cc/wvJgn9wt/649169267_1779965720082262_7412901498933026871_n.jpg" alt="Thành tích 3">
+
+                                    <img src="https://i.postimg.cc/NMTBZQdM/649621949_1779965050082329_612656541181257158_n.jpg" alt="Thành tích 4">
+
+                                </div>
+
+                            </div>
+
+                            <button class="slider-btn right-btn" onclick="slideRight('slider-thanh-tich')">&#10095;</button>
+
                         </div>
+
                     </div>
+
                 </section>
 
+
+
                 <section>
+
                     <h2>Giáo Dục Toàn Diện Và Hoạt Động Trải Nghiệm</h2>
+
                     <div class="card">
+
                         <p>Bên cạnh học tập, nhà trường quan tâm tổ chức nhiều hoạt động giáo dục kỹ năng sống và trải nghiệm sáng tạo như: trải nghiệm – hướng nghiệp dưới cờ, giờ ra chơi thân thiện, các câu lạc bộ âm nhạc, nhảy, truyền thông, thể thao, hoạt động thiện nguyện và phong trào Đoàn – Hội. Những hoạt động này góp phần hình thành lối sống tích cực, tinh thần trách nhiệm và ý thức công dân cho học sinh.</p>
+
                         
-                        <div class="static-gallery">
-                            <img src="https://i.postimg.cc/8PBP1dLy/a1a9ad84_48a5_49c4_829f_1558bcc8e246.jpg" alt="Hoạt động">
-                            <img src="https://i.postimg.cc/QN7dzZCZ/90296a9b_25d7_45df_a631_cd5bc4f70486.jpg" alt="Hoạt động">
-                            <img src="https://i.postimg.cc/3N2r0mVv/35fc3d0e_de30_46ec_94c1_abe281f415d9.jpg" alt="Hoạt động">
-                            <img src="https://i.postimg.cc/D03JNvKc/645216532-1773482660730568-569831196013737485-n.jpg" alt="Hoạt động">
-                            <img src="https://i.postimg.cc/C5bMnkXy/3a097dde_d25f_4a4d_9106_da8df96b39ba.jpg" alt="Hoạt động">
-                            <img src="https://i.postimg.cc/Wz0pqgCP/9eecce90_946b_4078_804c_c4f4691500de.jpg" alt="Hoạt động">
+
+                        <div class="carousel-wrapper">
+
+                            <button class="slider-btn left-btn" onclick="slideLeft('slider-trai-nghiem')">&#10094;</button>
+
+                            <div class="carousel-container">
+
+                                <div class="carousel-slide" id="slider-trai-nghiem">
+
+                                    <img src="https://i.postimg.cc/8PBP1dLy/a1a9ad84_48a5_49c4_829f_1558bcc8e246.jpg" >
+
+                                    <img src="https://i.postimg.cc/QN7dzZCZ/90296a9b_25d7_45df_a631_cd5bc4f70486.jpg" >
+
+                                    <img src="https://i.postimg.cc/3N2r0mVv/35fc3d0e_de30_46ec_94c1_abe281f415d9.jpg" >
+
+                                    <img src="https://i.postimg.cc/D03JNvKc/645216532-1773482660730568-569831196013737485-n.jpg" >
+
+                                    <img src="https://i.postimg.cc/C5bMnkXy/3a097dde_d25f_4a4d_9106_da8df96b39ba.jpg" >
+
+                                    <img src="https://i.postimg.cc/Wz0pqgCP/9eecce90_946b_4078_804c_c4f4691500de.jpg" >
+
+                                    <img src="https://i.postimg.cc/sDRgdHGg/9789058d_a9b0_4a70_a639_5f046e37ff5d.jpg" >
+
+                                    <img src="https://i.postimg.cc/zX1GZ2Hz/25509495_bd0c_470d_8428_6dc69a937c18.jpg" >
+
+                                    <img src="https://i.postimg.cc/B6MB9PMv/97b82381-03ca-4da4-829a-65a8f83c980b.jpg" >
+
+                                    <img src="https://i.postimg.cc/Xv2kty24/644292794-1770695761009258-4695764314334671109-n.jpg" >
+
+                                    <img src="https://i.postimg.cc/8PVzQXfw/627961557_1755180529227448_2280733054855332234_n.jpg" >
+
+                                    <img src="https://i.postimg.cc/8cLkfM9f/51c355e4_2689_4f85_b1f9_28c31f2f9b85.jpg" >
+
+                                    <img src="https://i.postimg.cc/hPqtWZQP/6156687f_5fd8_4e08_a244_64dcd9b2ab9f.jpg" >
+
+                                    <img src="https://i.postimg.cc/HnbW8XRc/9fadb9db_1b16_4207_a979_9bfb15305cab.jpg" >
+
+                                    <img src="https://i.postimg.cc/VLBLY9X4/632480967_1755190432559791_4862574392429148443_n.jpg" >
+
+                                    <img src="https://i.postimg.cc/Bb2ZPHk9/2a868b29_6b6a_455e_b6b9_efd1650eb976.jpg" >
+
+                                    <img src="https://i.postimg.cc/Gtv3TGVn/8bd7aef8_82a7_4a11_b999_0518441116ee.jpg" >
+
+                                    <img src="https://i.postimg.cc/SN7NyLcv/be54c7ad_d294_4ea6_a403_26efc1b96382.jpg" >
+
+<img src="https://i.postimg.cc/nhPCYCPP/659807948_1796211341791033_352258757976839125_n.jpg" >
+
+<img src="https://i.postimg.cc/HkhV4VhN/660913886_1796219698456864_8237463727540544328_n.jpg" >
+
+<img src="https://i.postimg.cc/6pmyLymj/659154079_1796219551790212_5110881103081609275_n.jpg" >
+
+<img src="https://i.postimg.cc/50xdXmmX/659081424-1796219941790173-7161605135861066737-n.jpg" >
+
+<img src="https://i.postimg.cc/FHB7g7BC/656101995_1795430588535775_4843150243819233095_n.jpg" >
+
+                                </div>
+
+                            </div>
+
+                            <button class="slider-btn right-btn" onclick="slideRight('slider-trai-nghiem')">&#10095;</button>
+
                         </div>
+
                     </div>
+
                 </section>
+
+
 
                 <section>
+
                     <h2>Định Hướng Phát Triển</h2>
+
                     <div class="card">
+
                         <p>Bước vào giai đoạn phát triển mới, Trường THPT Lê Quý Đôn tiếp tục phát huy truyền thống 26 năm, chú trọng nâng cao chất lượng giáo dục toàn diện, đẩy mạnh chuyển đổi số, giáo dục STEM, xây dựng môi trường học đường kỷ cương – an toàn – hạnh phúc, đáp ứng yêu cầu đổi mới giáo dục và sự kỳ vọng của xã hội.</p>
+
                         
-                        <div class="static-gallery">
-                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Định hướng">
-                            <img src="https://i.postimg.cc/QCYsvm2H/643231454_1770133134398854_5674663032686192200_n.jpg" alt="Định hướng">
+
+                        <div class="carousel-wrapper">
+
+                            <button class="slider-btn left-btn" onclick="slideLeft('slider-dinh-huong')">&#10094;</button>
+
+                            
+
+                            <div class="carousel-container">
+
+                                <div class="carousel-slide" id="slider-dinh-huong">
+
+                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Định hướng 1">
+
+                                    <img src="https://i.postimg.cc/QCYsvm2H/643231454_1770133134398854_5674663032686192200_n.jpg" >
+
+                                </div>
+
+                            </div>
+
+
+
+                            <button class="slider-btn right-btn" onclick="slideRight('slider-dinh-huong')">&#10095;</button>
+
                         </div>
+
                     </div>
+
                 </section>
+
             </div>
 
-            <div class="sidebar">
+
+
+            <div class="sidebar" style="position: sticky; top: 20px; align-self: flex-start; height: max-content; z-index: 10;">
+
                 <div class="widget">
+
                     <h3>📣 Bảng Tin Nhà Trường</h3>
-                    <ul>
-                        <li><a href="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2026/03/100-KH_0001.pdf" target="_blank" class="link-blue">📢 Kế hoạch tuyển sinh năm học 2026-2027 (MỚI)</a></li>
-                        <li><a href="lich-thi-thu.png" target="_blank" class="link-pink">🌟 Lịch thi thử Tốt nghiệp THPT 2026</a></li>
-                        <li><a href="lich-giua-ki.jpg" target="_blank" class="link-red">🔥 Lịch kiểm tra giữa kì 2 (02/04 - 04/04)</a></li>
-                        <li><a href="TKB-9-3-2026.pdf" target="_blank" class="link-teal">🚀 Thời khóa biểu MỚI NHẤT (09/03/2026)</a></li>
-                        <li><a href="TKB-2-2-2026.pdf" target="_blank" class="link-gray">📅 Thời khóa biểu Cũ (02/02/2026)</a></li>
+
+                    <ul style="list-style: none; padding: 0;">
+
+                        
+
+                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
+
+                            <a href="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2026/03/100-KH_0001.pdf" target="_blank" style="text-decoration: none; color: #0984e3; font-weight: bold;">
+
+                                📢 Kế hoạch tuyển sinh năm học 2026-2027 (MỚI)
+
+                            </a>
+
+                        </li>
+
+
+
+                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
+
+                            <a href="lich-thi-thu.png" target="_blank" style="text-decoration: none; color: #e84393; font-weight: bold;">
+
+                                🌟 Lịch thi thử Tốt nghiệp THPT 2026
+
+                            </a>
+
+                        </li>
+
+
+
+                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
+
+                            <a href="lich-giua-ki.jpg" target="_blank" style="text-decoration: none; color: #d81b60; font-weight: bold;">
+
+                                🔥 Lịch kiểm tra giữa kì 2 (02/04 - 04/04)
+
+                            </a>
+
+                        </li>
+
+                        
+
+                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
+
+                            <a href="TKB-9-3-2026.pdf" target="_blank" style="text-decoration: none; color: var(--primary-dark); font-weight: bold;">
+
+                                🚀 Thời khóa biểu MỚI NHẤT (09/03/2026)
+
+                            </a>
+
+                        </li>
+
+                        
+
+                        <li style="padding: 12px 0;">
+
+                            <a href="TKB-2-2-2026.pdf" target="_blank" style="text-decoration: none; color: #666;">
+
+                                📅 Thời khóa biểu Cũ (02/02/2026)
+
+                            </a>
+
+                        </li>
+
+                        
+
                     </ul>
+
                 </div>
+
                 <div class="widget">
+
                     <h3>🔗 Liên Kết Nhanh</h3>
+
                     <ul>
-                        <li><a href="https://gddt.daklak.gov.vn/" target="_blank" class="link-gray">Cổng thông tin Điện tử Sở GD&ĐT Đắk Lắk</a></li>
-                        <li><a href="https://www.facebook.com/profile.php?id=100042065540522" target="_blank" class="link-gray">Fanpage Chính thức Trường THPT Lê Quý Đôn</a></li>
-                        <li><a href="https://www.facebook.com/doantruonglequydonbmt" target="_blank" class="link-gray">Fanpage Đoàn Trường THPT Lê Quý Đôn</a></li>
+
+                        <li><a href="https://gddt.daklak.gov.vn/" target="_blank">Cổng thông tin Điện tử Sở GD&ĐT Đắk Lắk</a></li>
+
+                        <li><a href="https://www.facebook.com/profile.php?id=100042065540522" target="_blank">Fanpage Chính thức Trường THPT Lê Quý Đôn</a></li>
+
+                        <li><a href="https://www.facebook.com/doantruonglequydonbmt" target="_blank">Fanpage Đoàn Trường THPT Lê Quý Đôn</a></li>
+
                     </ul>
+
                 </div>
+
             </div>
+
             
+
         </div>
+
     </div>
 
-    <footer style="background-color: #042f2e; color: #ffffff; padding: 40px 20px 20px; margin-top: 50px; border-top: 4px solid #0d9488;">
+
+
+    <footer style="background-color: #042f2e; color: #ffffff; padding: 40px 20px 20px; margin-top: 50px; border-top: 4px solid var(--primary, #0d9488); font-family: 'Quicksand', sans-serif;">
+
         <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 25px; margin-bottom: 20px;">
+
             
+
             <div style="flex: 1; min-width: 300px;">
+
                 <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+
                     <div style="width: 60px; height: 60px; background: white; border-radius: 12px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); overflow: hidden; padding: 5px;">
+
                         <img src="https://i.postimg.cc/FFV3PLTW/image.png" alt="Logo Lê Quý Đôn" style="width: 100%; height: 100%; object-fit: contain;">
+
                     </div>
+
                     <div>
+
                         <p style="margin: 0; font-size: 0.75rem; text-transform: uppercase; color: #a1a1aa; letter-spacing: 1px; font-weight: 600;">SỞ GIÁO DỤC VÀ ĐÀO TẠO ĐẮK LẮK</p>
+
                         <h3 style="margin: 3px 0 0; font-size: 1.2rem; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; font-weight: 800;">Trường THPT Lê Quý Đôn</h3>
+
                     </div>
+
                 </div>
+
                 <div style="color: #d4d4d8; font-size: 0.9rem; line-height: 1.6;">
+
                     <p style="margin: 6px 0; display: flex; gap: 10px; align-items: start;">
+
                         <span style="color: #2dd4bf; font-size: 1rem;">📍</span> Cơ sở: 27 Trần Nhật Duật, Phường Tân Lợi, TP. Buôn Ma Thuột
+
                     </p>
+
                     <p style="margin: 6px 0; display: flex; gap: 10px; align-items: center;">
+
                         <span style="color: #2dd4bf; font-size: 1rem;">📞</span> Điện thoại: 0262 3953 354
+
                     </p>
+
                 </div>
+
             </div>
+
+
 
             <div style="flex: 1; min-width: 250px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <h3 style="margin: 0 0 5px; font-size: 1.8rem; color: #ffffff; letter-spacing: 2px; font-weight: 800;">TẬP THỂ 12A1</h3>
+
+                <h3 style="margin: 0 0 5px; font-size: 1.8rem; color: #ffffff; letter-spacing: 2px; font-weight: 800; font-family: 'Quicksand', sans-serif;">TẬP THỂ 12A1</h3>
+
                 <p style="margin: 0; color: #a1a1aa; font-style: italic; font-size: 0.95rem; max-width: 350px;">"Nơi lưu giữ những thanh xuân rực rỡ nhất..." ✨</p>
+
             </div>
+
         </div>
+
+
 
         <div style="text-align: center; color: #71717a; font-size: 0.8rem;">
+
             <p style="margin: 0 0 5px;">© 2026 - Bản quyền nội dung thuộc Tập thể Lớp 12A1 - THPT Lê Quý Đôn.</p>
+
             <p style="margin: 0;">Phát triển và thiết kế bởi <strong style="color: #FF416C;">Chung Chí Thiện</strong> & <strong style="color: #FF416C;">Kiều Tuấn Kiệt Anh</strong></p>
+
         </div>
+
     </footer>
 
+
+
     <script>
+
+        // Hàm bấm nút lướt ảnh
+
+        function slideLeft(sliderId) {
+
+            const slider = document.getElementById(sliderId);
+
+            slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
+
+        }
+
+        function slideRight(sliderId) {
+
+            const slider = document.getElementById(sliderId);
+
+            slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
+
+        }
+
+
+
+        // Cập nhật trạng thái ẩn/hiện của 2 nút mũi tên
+
+        function updateSliderButtons(slider) {
+
+            const wrapper = slider.closest('.carousel-wrapper');
+
+            if (!wrapper) return;
+
+            
+
+            const leftBtn = wrapper.querySelector('.left-btn');
+
+            const rightBtn = wrapper.querySelector('.right-btn');
+
+            
+
+            const isAtStart = slider.scrollLeft <= 2;
+
+            const isAtEnd = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 2;
+
+
+
+            if (leftBtn) leftBtn.style.display = isAtStart ? 'none' : 'flex';
+
+            if (rightBtn) rightBtn.style.display = isAtEnd ? 'none' : 'flex';
+
+        }
+
+
+
+        document.querySelectorAll('.carousel-slide').forEach(slider => {
+
+            updateSliderButtons(slider);
+
+            slider.addEventListener('scroll', () => {
+
+                updateSliderButtons(slider);
+
+            });
+
+            window.addEventListener('resize', () => {
+
+                updateSliderButtons(slider);
+
+            });
+
+        });
+
+
+
+        // Camera quan sát tạo hiệu ứng
+
+        const observer = new IntersectionObserver((entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add('active');
+
+                } else {
+
+                    entry.target.classList.remove('active');
+
+                }
+
+            });
+
+        }, {
+
+            threshold: 0.6 
+
+        });
+
+
+
+        document.querySelectorAll('.carousel-slide img').forEach(img => {
+
+            observer.observe(img);
+
+        });
+
+
+
         // --- SCRIPT MENU TRƯỢT ---
+
         document.addEventListener("DOMContentLoaded", function() {
+
             const nav = document.querySelector('nav');
+
             if (!nav) return;
 
+
+
             let oldIndicator = nav.querySelector('.nav-indicator');
+
             if (oldIndicator) oldIndicator.remove();
 
+
+
             const indicator = document.createElement('div');
+
             indicator.className = 'nav-indicator';
+
             nav.appendChild(indicator);
 
+
+
             const links = nav.querySelectorAll('a');
+
             let activeLink = null;
+
             
+
+            // Tìm mục đang active
+
             links.forEach(link => {
+
                 if (link.classList.contains('active') || link.getAttribute('style')) activeLink = link;
+
             });
+
+
+
+            // Gắn vị trí ban đầu (không có hiệu ứng trượt)
 
             if (activeLink) {
+
                 indicator.style.transition = 'none';
+
                 indicator.style.width = `${activeLink.offsetWidth}px`;
+
                 indicator.style.transform = `translateX(${activeLink.offsetLeft}px)`;
+
                 activeLink.style.setProperty('color', '#ffffff', 'important');
+
                 void indicator.offsetWidth;
+
                 indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+
             }
+
+
+
+            // Hàm trượt cục nền xanh
 
             function slideTo(element) {
+
                 if (!element) return;
+
                 indicator.style.width = `${element.offsetWidth}px`;
+
                 indicator.style.transform = `translateX(${element.offsetLeft}px)`;
+
                 links.forEach(link => {
+
                     link.style.setProperty('color', '#64748b', 'important');
+
                     link.style.setProperty('background', 'transparent', 'important');
+
                 });
+
                 element.style.setProperty('color', '#ffffff', 'important');
+
             }
 
+
+
+            // Sự kiện rê chuột
+
             links.forEach(link => link.addEventListener('mouseenter', (e) => slideTo(e.target)));
+
             nav.addEventListener('mouseleave', () => { if (activeLink) slideTo(activeLink); });
+
+            
+
+            // Căn chỉnh lại khi xoay/đổi kích thước màn hình
+
             window.addEventListener('resize', () => {
+
                 if (activeLink) {
+
                     indicator.style.transition = 'none';
+
                     slideTo(activeLink);
+
                     void indicator.offsetWidth;
+
                     indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
+
                 }
+
             });
+
         });
+
     </script>
+
 </body>
+
 </html>
