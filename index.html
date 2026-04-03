@@ -20,43 +20,14 @@
             color: #334155;
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Chống cuộn ngang toàn trang */
+            overflow-x: hidden; 
         }
         button, input, select, textarea, a, p, h1, h2, h3, h4, h5, h6, span, div { 
             font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; 
         }
 
         /* =========================================
-           2. HEADER (CÓ HÌNH NỀN)
-           ========================================= */
-        header {
-            position: relative;
-            text-align: center;
-            padding: 80px 20px;
-            color: white;
-            /* Thay thế link ảnh dưới đây bằng ảnh trường của bạn nếu cần */
-            background-image: url('https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707263644_a8daf5a35c7de0bb8a97532170283399.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Hiệu ứng Parallax nhẹ */
-        }
-        /* Lớp phủ đen mờ để chữ dễ đọc */
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 47, 46, 0.75); /* Màu xanh đen mờ */
-            z-index: 1;
-        }
-        header h1, header p {
-            position: relative;
-            z-index: 2; /* Đẩy chữ lên trên lớp phủ */
-        }
-        header h1 { margin: 0 0 10px 0; font-weight: 900; letter-spacing: 1px; font-size: 2.5rem; }
-        header p { margin: 0; color: #ccfbf1; font-size: 1.2rem; font-style: italic; font-weight: 600; }
-
-        /* =========================================
-           3. THANH MENU TRƯỢT
+           2. THANH MENU TRƯỢT
            ========================================= */
         nav { 
             position: relative; 
@@ -99,7 +70,7 @@
         }
 
         /* =========================================
-           4. BỐ CỤC CHUNG & HỘP (CARD)
+           3. BỐ CỤC CHUNG & HỘP (CARD)
            ========================================= */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
@@ -147,6 +118,7 @@
             margin-bottom: 20px; 
             border-left: 5px solid #0d9488; 
             padding-left: 15px; 
+            margin-top: 0; /* Reset lề trên cho đồng bộ */
         }
 
         .btn-link { 
@@ -172,7 +144,7 @@
         }
 
         /* =========================================
-           5. LƯỚI ẢNH TĨNH (THAY THẾ CAROUSEL ĐỂ CHỐNG LỖI CUỘN)
+           4. LƯỚI ẢNH TĨNH (CHỐNG LỖI CUỘN CAROUSEL)
            ========================================= */
         .static-gallery {
             display: grid;
@@ -188,21 +160,20 @@
             object-fit: cover; 
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             transition: transform 0.3s ease;
-            cursor: pointer; /* Gợi ý cho người dùng biết có thể tương tác (ví dụ: mở to ảnh sau này nếu cần) */
+            cursor: pointer; 
         }
+        .school-image { height: auto; max-height: 400px; margin-top: 15px;}
         
         .static-gallery img:hover, .school-image:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        /* Ẩn các ảnh thừa nếu quá nhiều (chỉ hiển thị tối đa 6 ảnh đầu tiên cho gọn) */
-        .static-gallery img:nth-child(n+7) {
-            display: none;
-        }
+        /* Chỉ hiển thị tối đa 6 ảnh cho gọn layout tĩnh */
+        .static-gallery img:nth-child(n+7) { display: none; }
 
         /* =========================================
-           6. TIỆN ÍCH CỘT PHẢI (WIDGETS)
+           5. TIỆN ÍCH CỘT PHẢI (WIDGETS)
            ========================================= */
         .widget { 
             background: white; 
@@ -237,7 +208,6 @@
         }
         .widget ul li a:hover { transform: translateX(5px); opacity: 0.8;}
 
-        /* Màu riêng cho từng link bảng tin */
         .link-blue { color: #0984e3; }
         .link-pink { color: #e84393; }
         .link-red { color: #d81b60; }
@@ -245,7 +215,7 @@
         .link-gray { color: #64748b; font-weight: 500 !important; }
 
         /* =========================================
-           7. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
+           6. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
            ========================================= */
         @media (max-width: 900px) {
             .main-layout { flex-direction: column; }
@@ -256,16 +226,14 @@
         @media (max-width: 480px) {
             .static-gallery { grid-template-columns: 1fr; }
             .static-gallery img { height: 200px; }
-            header { padding: 50px 20px; }
-            header h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Trường THPT Lê Quý Đôn</h1>
-        <p>Chọn hạnh phúc - Chọn yêu thương</p>
+    <header style="text-align: center; padding: 40px 20px; background: #042f2e; color: white;">
+        <h1 style="margin: 0 0 10px 0; font-weight: 900; letter-spacing: 1px; font-size: 2.2rem;">Trường THPT Lê Quý Đôn</h1>
+        <p style="margin: 0; color: #ccfbf1; font-size: 1.1rem; font-style: italic;">Chọn hạnh phúc - Chọn yêu thương</p>
     </header>
 
     <nav>
@@ -287,11 +255,11 @@
             <div class="content">
                 
                 <section>
-                    <h2 style="margin-top: 0;">Lịch Sử Hình Thành</h2>
+                    <h2>Lịch Sử Hình Thành</h2>
                     <div class="card">
                         <p>Tọa lạc tại phường Buôn Ma Thuột, tỉnh Đắk Lắk, là trường trung học phổ thông công lập được thành lập năm 2000. Trải qua 26 năm xây dựng và phát triển (2000 – 2026), nhà trường đã từng bước khẳng định vị thế là một cơ sở giáo dục ổn định, uy tín, được phụ huynh tin tưởng và học sinh lựa chọn.</p>
                         <p>Từ những ngày đầu còn nhiều khó khăn về cơ sở vật chất và quy mô đào tạo, đến nay Trường THPT Lê Quý Đôn đã không ngừng nỗ lực đổi mới, nâng cao chất lượng giáo dục, hướng đến mục tiêu phát triển toàn diện học sinh cả về tri thức, kỹ năng và nhân cách.</p>
-                        <img src="https://i.postimg.cc/QxTqFwHB/166d3dda-316a-4ff6-8b25-dff9bae28292.jpg" alt="Toàn cảnh trường" class="school-image" style="height: auto;">
+                        <img src="https://i.postimg.cc/QxTqFwHB/166d3dda-316a-4ff6-8b25-dff9bae28292.jpg" alt="Toàn cảnh trường" class="school-image">
                     </div>
                 </section>
 
@@ -299,7 +267,7 @@
                     <h2>Quy Mô Và Đội Ngũ</h2>
                     <div class="card">
                         <p>Hiện nay, nhà trường có 40 lớp với 1.738 học sinh, đội ngũ 103 cán bộ, giáo viên, nhân viên có trình độ chuyên môn vững vàng, tâm huyết với nghề, luôn chủ động đổi mới phương pháp giảng dạy, đáp ứng yêu cầu của Chương trình Giáo dục phổ thông 2018.</p>
-                        <img src="https://i.postimg.cc/J4k9RT8n/c8d6d417-4dbb-47a9-9c56-a9279ddeaa4c.jpg" alt="Đội ngũ giáo viên" class="school-image" style="height: auto;">
+                        <img src="https://i.postimg.cc/J4k9RT8n/c8d6d417-4dbb-47a9-9c56-a9279ddeaa4c.jpg" alt="Đội ngũ giáo viên" class="school-image">
                     </div>
                 </section>
 
