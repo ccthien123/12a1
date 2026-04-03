@@ -27,7 +27,34 @@
         }
 
         /* =========================================
-           2. THANH MENU TRƯỢT
+           2. HEADER (CÓ HÌNH NỀN LÀM MỜ)
+           ========================================= */
+        header {
+            position: relative;
+            text-align: center;
+            padding: 80px 20px;
+            color: white;
+            background-image: url('https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707263644_a8daf5a35c7de0bb8a97532170283399.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(4, 47, 46, 0.75); /* Lớp phủ xanh đen mờ */
+            z-index: 1;
+        }
+        header h1, header p {
+            position: relative;
+            z-index: 2; 
+        }
+        header h1 { margin: 0 0 10px 0; font-weight: 900; letter-spacing: 1px; font-size: 2.5rem; }
+        header p { margin: 0; color: #ccfbf1; font-size: 1.2rem; font-style: italic; font-weight: 600; }
+
+        /* =========================================
+           3. THANH MENU TRƯỢT BO GÓC
            ========================================= */
         nav { 
             position: relative; 
@@ -70,7 +97,7 @@
         }
 
         /* =========================================
-           3. BỐ CỤC CHUNG & HỘP (CARD)
+           4. BỐ CỤC CHUNG & HỘP (CARD)
            ========================================= */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
@@ -118,7 +145,7 @@
             margin-bottom: 20px; 
             border-left: 5px solid #0d9488; 
             padding-left: 15px; 
-            margin-top: 0; /* Reset lề trên cho đồng bộ */
+            margin-top: 0; 
         }
 
         .btn-link { 
@@ -144,7 +171,7 @@
         }
 
         /* =========================================
-           4. LƯỚI ẢNH TĨNH (CHỐNG LỖI CUỘN CAROUSEL)
+           5. LƯỚI ẢNH TĨNH (CHỐNG LỖI CUỘN KHỰNG)
            ========================================= */
         .static-gallery {
             display: grid;
@@ -169,11 +196,11 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
-        /* Chỉ hiển thị tối đa 6 ảnh cho gọn layout tĩnh */
+        /* Chỉ hiển thị tối đa 6 ảnh trên lưới cho gọn */
         .static-gallery img:nth-child(n+7) { display: none; }
 
         /* =========================================
-           5. TIỆN ÍCH CỘT PHẢI (WIDGETS)
+           6. TIỆN ÍCH CỘT PHẢI (WIDGETS)
            ========================================= */
         .widget { 
             background: white; 
@@ -215,7 +242,7 @@
         .link-gray { color: #64748b; font-weight: 500 !important; }
 
         /* =========================================
-           6. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
+           7. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
            ========================================= */
         @media (max-width: 900px) {
             .main-layout { flex-direction: column; }
@@ -226,14 +253,16 @@
         @media (max-width: 480px) {
             .static-gallery { grid-template-columns: 1fr; }
             .static-gallery img { height: 200px; }
+            header { padding: 50px 20px; }
+            header h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
 
-    <header style="text-align: center; padding: 40px 20px; background: #042f2e; color: white;">
-        <h1 style="margin: 0 0 10px 0; font-weight: 900; letter-spacing: 1px; font-size: 2.2rem;">Trường THPT Lê Quý Đôn</h1>
-        <p style="margin: 0; color: #ccfbf1; font-size: 1.1rem; font-style: italic;">Chọn hạnh phúc - Chọn yêu thương</p>
+    <header>
+        <h1>Trường THPT Lê Quý Đôn</h1>
+        <p>Chọn hạnh phúc - Chọn yêu thương</p>
     </header>
 
     <nav>
@@ -386,7 +415,7 @@
 
         <div style="text-align: center; color: #71717a; font-size: 0.8rem;">
             <p style="margin: 0 0 5px;">© 2026 - Bản quyền nội dung thuộc Tập thể Lớp 12A1 - THPT Lê Quý Đôn.</p>
-            <p style="margin: 0;">Phát triển và thiết kế bởi <strong style="color: #f43f5e;">Chung Chí Thiện</strong> & <strong style="color: #f43f5e;">Kiều Tuấn Kiệt Anh</strong></p>
+            <p style="margin: 0;">Phát triển và thiết kế bởi <strong style="color: #FF416C;">Chung Chí Thiện</strong> & <strong style="color: #FF416C;">Kiều Tuấn Kiệt Anh</strong></p>
         </div>
     </footer>
 
