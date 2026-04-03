@@ -4,7 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Chủ - THPT Lê Quý Đôn</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* CSS Cơ bản cho toàn trang */
+        * { box-sizing: border-box; }
+        body, html { 
+            font-family: 'Quicksand', sans-serif !important;
+            background-color: #f4f8f9; 
+            color: #334155;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- CSS CHO THANH MENU TRƯỢT --- */
+        nav { 
+            position: relative; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 5px; 
+            padding: 15px 20px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-indicator {
+            position: absolute;
+            height: 42px; 
+            background: #0d9488; /* Màu xanh ngọc chủ đạo */
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 0;
+            top: 50%;
+            margin-top: -21px; 
+            left: 0;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+        nav a { 
+            position: relative; 
+            z-index: 1; 
+            text-decoration: none; 
+            padding: 10px 25px; 
+            display: inline-block; 
+            color: #64748b; 
+            font-weight: 700; 
+            transition: 0.3s;
+            border-radius: 50px;
+        }
+        nav a.active {
+            color: #ffffff !important;
+        }
+
+        /* VIẾT THÊM CÁC ĐOẠN CSS KHÁC CỦA TRANG INDEX VÀO DƯỚI NÀY... */
+
+    </style>
 </head>
 <body>
 
@@ -291,7 +350,7 @@
             observer.observe(img);
         });
 
-        // Menu trượt
+        // --- SCRIPT MENU TRƯỢT ---
         document.addEventListener("DOMContentLoaded", function() {
             const nav = document.querySelector('nav');
             if (!nav) return;
@@ -304,14 +363,14 @@
             nav.appendChild(indicator);
 
             const links = nav.querySelectorAll('a');
-            
             let activeLink = null;
+            
+            // Tìm mục đang active
             links.forEach(link => {
-                if (link.classList.contains('active') || link.getAttribute('style')) {
-                    activeLink = link;
-                }
+                if (link.classList.contains('active') || link.getAttribute('style')) activeLink = link;
             });
 
+            // Gắn vị trí ban đầu (không có hiệu ứng trượt)
             if (activeLink) {
                 indicator.style.transition = 'none';
                 indicator.style.width = `${activeLink.offsetWidth}px`;
@@ -321,6 +380,7 @@
                 indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
             }
 
+            // Hàm trượt cục nền xanh
             function slideTo(element) {
                 if (!element) return;
                 indicator.style.width = `${element.offsetWidth}px`;
@@ -332,16 +392,11 @@
                 element.style.setProperty('color', '#ffffff', 'important');
             }
 
-            links.forEach(link => {
-                link.addEventListener('mouseenter', (e) => {
-                    slideTo(e.target);
-                });
-            });
-
-            nav.addEventListener('mouseleave', () => {
-                if (activeLink) slideTo(activeLink);
-            });
-
+            // Sự kiện rê chuột
+            links.forEach(link => link.addEventListener('mouseenter', (e) => slideTo(e.target)));
+            nav.addEventListener('mouseleave', () => { if (activeLink) slideTo(activeLink); });
+            
+            // Căn chỉnh lại khi xoay/đổi kích thước màn hình
             window.addEventListener('resize', () => {
                 if (activeLink) {
                     indicator.style.transition = 'none';
