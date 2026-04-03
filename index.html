@@ -10,17 +10,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* CSS Cơ bản cho toàn trang */
+        /* =========================================
+           1. CSS CƠ BẢN VÀ FONT CHỮ
+           ========================================= */
         * { box-sizing: border-box; }
         body, html { 
-            font-family: 'Quicksand', sans-serif !important;
+            font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
             background-color: #f4f8f9; 
             color: #334155;
             margin: 0;
             padding: 0;
         }
+        button, input, select, textarea, a, p, h1, h2, h3, h4, h5, h6, span, div { 
+            font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; 
+        }
 
-        /* --- CSS CHO THANH MENU TRƯỢT --- */
+        /* =========================================
+           2. THANH MENU TRƯỢT
+           ========================================= */
         nav { 
             position: relative; 
             display: flex; 
@@ -37,7 +44,7 @@
         .nav-indicator {
             position: absolute;
             height: 42px; 
-            background: #0d9488; /* Màu xanh ngọc chủ đạo */
+            background: #0d9488; 
             border-radius: 50px;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             z-index: 0;
@@ -61,15 +68,178 @@
             color: #ffffff !important;
         }
 
-        /* VIẾT THÊM CÁC ĐOẠN CSS KHÁC CỦA TRANG INDEX VÀO DƯỚI NÀY... */
+        /* =========================================
+           3. BỐ CỤC CHUNG & HỘP (CARD)
+           ========================================= */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .main-layout { 
+            display: flex; 
+            gap: 30px; 
+            align-items: flex-start; /* Giúp sidebar không bị kéo dài theo content */
+        }
+        
+        .content { 
+            flex: 1; /* Chiếm phần không gian còn lại */
+            min-width: 0; /* Tránh vỡ khung flexbox */
+        }
+        
+        .sidebar { 
+            width: 320px; /* Cố định chiều rộng cột phải */
+            flex-shrink: 0; 
+        }
 
+        .card { 
+            background: white; 
+            padding: 35px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+            border: 1px solid #f1f5f9; 
+            margin-bottom: 40px; 
+        }
+        .card p { 
+            line-height: 1.8; 
+            color: #475569; 
+            font-size: 1.05rem; 
+            text-align: justify; 
+            margin-bottom: 15px; 
+        }
+        
+        h2 { 
+            color: #0f172a; 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            border-left: 5px solid #0d9488; 
+            padding-left: 15px; 
+        }
+
+        .school-image { 
+            width: 100%; 
+            border-radius: 16px; 
+            margin-top: 15px; 
+            object-fit: cover; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .btn-link { 
+            display: inline-block; 
+            padding: 12px 30px; 
+            background: linear-gradient(135deg, #0d9488, #0f766e); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            transition: 0.3s; 
+            box-shadow: 0 5px 15px rgba(13, 148, 136, 0.25); 
+        }
+        .btn-link:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 8px 20px rgba(13, 148, 136, 0.35); 
+            color: white;
+        }
+
+        /* =========================================
+           4. TIỆN ÍCH CỘT PHẢI (WIDGETS)
+           ========================================= */
+        .widget { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+            margin-bottom: 30px; 
+            border: 1px solid #f1f5f9; 
+        }
+        .widget h3 { 
+            margin-top: 0; 
+            color: #0f172a; 
+            font-size: 1.3rem; 
+            margin-bottom: 15px; 
+            padding-bottom: 15px; 
+            border-bottom: 2px dashed #e2e8f0; 
+            font-weight: 800;
+        }
+        .widget ul { list-style: none; padding: 0; margin: 0; }
+        .widget ul li { padding: 12px 0; border-bottom: 1px dashed #f1f5f9; }
+        .widget ul li:last-child { border-bottom: none; padding-bottom: 0;}
+        .widget ul li a { 
+            transition: 0.2s; 
+            display: block; 
+            text-decoration: none; 
+            color: #0984e3; 
+            font-weight: 700; 
+            line-height: 1.5;
+        }
+        .widget ul li a:hover { transform: translateX(5px); opacity: 0.8;}
+
+        /* =========================================
+           5. TRÌNH PHÁT ẢNH (CAROUSEL)
+           ========================================= */
+        .carousel-wrapper { position: relative; margin-top: 25px; }
+        .carousel-container { 
+            overflow-x: auto; 
+            scroll-behavior: smooth; 
+            scrollbar-width: none; /* Ẩn thanh cuộn Firefox */
+            border-radius: 16px; 
+        }
+        .carousel-container::-webkit-scrollbar { display: none; } /* Ẩn thanh cuộn Chrome/Safari */
+        
+        .carousel-slide { display: flex; gap: 15px; }
+        .carousel-slide img { 
+            width: 320px; 
+            height: 220px; 
+            object-fit: cover; 
+            border-radius: 16px; 
+            flex-shrink: 0; 
+            transition: 0.3s ease; 
+            opacity: 0.85; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .carousel-slide img.active, .carousel-slide img:hover { 
+            opacity: 1; 
+            transform: scale(1.03); 
+        }
+        
+        .slider-btn { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: rgba(255,255,255,0.9); 
+            border: none; 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
+            font-size: 18px; 
+            color: #0d9488; 
+            z-index: 2; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            transition: 0.3s; 
+        }
+        .slider-btn:hover { background: #0d9488; color: white; }
+        .left-btn { left: -15px; }
+        .right-btn { right: -15px; }
+
+        /* =========================================
+           6. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
+           ========================================= */
+        @media (max-width: 900px) {
+            .main-layout { flex-direction: column; }
+            .sidebar { width: 100%; position: static !important; }
+            .left-btn { left: 5px; }
+            .right-btn { right: 5px; }
+            .carousel-slide img { width: 260px; height: 180px; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Trường THPT Lê Quý Đôn</h1>
-        <p>Chọn hạnh phúc - Chọn yêu thương</p>
+    <header style="text-align: center; padding: 40px 20px; background: #042f2e; color: white;">
+        <h1 style="margin: 0 0 10px 0; font-weight: 900; letter-spacing: 1px;">Trường THPT Lê Quý Đôn</h1>
+        <p style="margin: 0; color: #ccfbf1; font-size: 1.1rem; font-style: italic;">Chọn hạnh phúc - Chọn yêu thương</p>
     </header>
 
     <nav>
@@ -80,8 +250,8 @@
         <a href="dinh-huong.html">Định Hướng</a> 
     </nav>
 
-    <div class="container">
-        <div style="text-align: center; margin-bottom: 30px;">
+    <div class="container" style="padding-top: 40px;">
+        <div style="text-align: center; margin-bottom: 40px;">
             <a href="https://c3lequydon.daklak.edu.vn/" target="_blank" class="btn-link">
                 🌐 Truy cập Website chính thức của Trường
             </a>
@@ -179,11 +349,11 @@
                                     <img src="https://i.postimg.cc/Bb2ZPHk9/2a868b29_6b6a_455e_b6b9_efd1650eb976.jpg" >
                                     <img src="https://i.postimg.cc/Gtv3TGVn/8bd7aef8_82a7_4a11_b999_0518441116ee.jpg" >
                                     <img src="https://i.postimg.cc/SN7NyLcv/be54c7ad_d294_4ea6_a403_26efc1b96382.jpg" >
-									<img src="https://i.postimg.cc/nhPCYCPP/659807948_1796211341791033_352258757976839125_n.jpg" >
-									<img src="https://i.postimg.cc/HkhV4VhN/660913886_1796219698456864_8237463727540544328_n.jpg" >
-									<img src="https://i.postimg.cc/6pmyLymj/659154079_1796219551790212_5110881103081609275_n.jpg" >
-									<img src="https://i.postimg.cc/50xdXmmX/659081424-1796219941790173-7161605135861066737-n.jpg" >
-									<img src="https://i.postimg.cc/FHB7g7BC/656101995_1795430588535775_4843150243819233095_n.jpg" >
+                                    <img src="https://i.postimg.cc/nhPCYCPP/659807948_1796211341791033_352258757976839125_n.jpg" >
+                                    <img src="https://i.postimg.cc/HkhV4VhN/660913886_1796219698456864_8237463727540544328_n.jpg" >
+                                    <img src="https://i.postimg.cc/6pmyLymj/659154079_1796219551790212_5110881103081609275_n.jpg" >
+                                    <img src="https://i.postimg.cc/50xdXmmX/659081424-1796219941790173-7161605135861066737-n.jpg" >
+                                    <img src="https://i.postimg.cc/FHB7g7BC/656101995_1795430588535775_4843150243819233095_n.jpg" >
                                 </div>
                             </div>
                             <button class="slider-btn right-btn" onclick="slideRight('slider-trai-nghiem')">&#10095;</button>
@@ -212,49 +382,43 @@
                 </section>
             </div>
 
-            <div class="sidebar" style="position: sticky; top: 20px; align-self: flex-start; height: max-content; z-index: 10;">
+            <div class="sidebar" style="position: sticky; top: 90px; align-self: flex-start; height: max-content; z-index: 10;">
                 <div class="widget">
                     <h3>📣 Bảng Tin Nhà Trường</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        
-                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
-                            <a href="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2026/03/100-KH_0001.pdf" target="_blank" style="text-decoration: none; color: #0984e3; font-weight: bold;">
+                    <ul>
+                        <li>
+                            <a href="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2026/03/100-KH_0001.pdf" target="_blank" style="color: #0984e3;">
                                 📢 Kế hoạch tuyển sinh năm học 2026-2027 (MỚI)
                             </a>
                         </li>
-
-                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
-                            <a href="lich-thi-thu.png" target="_blank" style="text-decoration: none; color: #e84393; font-weight: bold;">
+                        <li>
+                            <a href="lich-thi-thu.png" target="_blank" style="color: #e84393;">
                                 🌟 Lịch thi thử Tốt nghiệp THPT 2026
                             </a>
                         </li>
-
-                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
-                            <a href="lich-giua-ki.jpg" target="_blank" style="text-decoration: none; color: #d81b60; font-weight: bold;">
+                        <li>
+                            <a href="lich-giua-ki.jpg" target="_blank" style="color: #d81b60;">
                                 🔥 Lịch kiểm tra giữa kì 2 (02/04 - 04/04)
                             </a>
                         </li>
-                        
-                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
-                            <a href="TKB-9-3-2026.pdf" target="_blank" style="text-decoration: none; color: var(--primary-dark); font-weight: bold;">
+                        <li>
+                            <a href="TKB-9-3-2026.pdf" target="_blank" style="color: #0d9488;">
                                 🚀 Thời khóa biểu MỚI NHẤT (09/03/2026)
                             </a>
                         </li>
-                        
-                        <li style="padding: 12px 0;">
-                            <a href="TKB-2-2-2026.pdf" target="_blank" style="text-decoration: none; color: #666;">
+                        <li>
+                            <a href="TKB-2-2-2026.pdf" target="_blank" style="color: #64748b;">
                                 📅 Thời khóa biểu Cũ (02/02/2026)
                             </a>
                         </li>
-                        
                     </ul>
                 </div>
                 <div class="widget">
                     <h3>🔗 Liên Kết Nhanh</h3>
                     <ul>
-                        <li><a href="https://gddt.daklak.gov.vn/" target="_blank">Cổng thông tin Điện tử Sở GD&ĐT Đắk Lắk</a></li>
-                        <li><a href="https://www.facebook.com/profile.php?id=100042065540522" target="_blank">Fanpage Chính thức Trường THPT Lê Quý Đôn</a></li>
-                        <li><a href="https://www.facebook.com/doantruonglequydonbmt" target="_blank">Fanpage Đoàn Trường THPT Lê Quý Đôn</a></li>
+                        <li><a href="https://gddt.daklak.gov.vn/" target="_blank" style="color: #475569;">Cổng thông tin Điện tử Sở GD&ĐT Đắk Lắk</a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=100042065540522" target="_blank" style="color: #475569;">Fanpage Chính thức Trường THPT Lê Quý Đôn</a></li>
+                        <li><a href="https://www.facebook.com/doantruonglequydonbmt" target="_blank" style="color: #475569;">Fanpage Đoàn Trường THPT Lê Quý Đôn</a></li>
                     </ul>
                 </div>
             </div>
@@ -262,7 +426,7 @@
         </div>
     </div>
 
-    <footer style="background-color: #042f2e; color: #ffffff; padding: 40px 20px 20px; margin-top: 50px; border-top: 4px solid var(--primary, #0d9488); font-family: 'Quicksand', sans-serif;">
+    <footer style="background-color: #042f2e; color: #ffffff; padding: 40px 20px 20px; margin-top: 50px; border-top: 4px solid #0d9488;">
         <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 25px; margin-bottom: 20px;">
             
             <div style="flex: 1; min-width: 300px;">
@@ -286,7 +450,7 @@
             </div>
 
             <div style="flex: 1; min-width: 250px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <h3 style="margin: 0 0 5px; font-size: 1.8rem; color: #ffffff; letter-spacing: 2px; font-weight: 800; font-family: 'Quicksand', sans-serif;">TẬP THỂ 12A1</h3>
+                <h3 style="margin: 0 0 5px; font-size: 1.8rem; color: #ffffff; letter-spacing: 2px; font-weight: 800;">TẬP THỂ 12A1</h3>
                 <p style="margin: 0; color: #a1a1aa; font-style: italic; font-size: 0.95rem; max-width: 350px;">"Nơi lưu giữ những thanh xuân rực rỡ nhất..." ✨</p>
             </div>
         </div>
@@ -298,7 +462,7 @@
     </footer>
 
     <script>
-        // Hàm bấm nút lướt ảnh
+        // --- Hàm bấm nút lướt ảnh ---
         function slideLeft(sliderId) {
             const slider = document.getElementById(sliderId);
             slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
@@ -308,7 +472,7 @@
             slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
         }
 
-        // Cập nhật trạng thái ẩn/hiện của 2 nút mũi tên
+        // --- Cập nhật trạng thái ẩn/hiện mũi tên ---
         function updateSliderButtons(slider) {
             const wrapper = slider.closest('.carousel-wrapper');
             if (!wrapper) return;
@@ -333,7 +497,7 @@
             });
         });
 
-        // Camera quan sát tạo hiệu ứng
+        // --- Camera quan sát tạo hiệu ứng mờ/sáng cho ảnh ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -365,12 +529,10 @@
             const links = nav.querySelectorAll('a');
             let activeLink = null;
             
-            // Tìm mục đang active
             links.forEach(link => {
                 if (link.classList.contains('active') || link.getAttribute('style')) activeLink = link;
             });
 
-            // Gắn vị trí ban đầu (không có hiệu ứng trượt)
             if (activeLink) {
                 indicator.style.transition = 'none';
                 indicator.style.width = `${activeLink.offsetWidth}px`;
@@ -380,7 +542,6 @@
                 indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
             }
 
-            // Hàm trượt cục nền xanh
             function slideTo(element) {
                 if (!element) return;
                 indicator.style.width = `${element.offsetWidth}px`;
@@ -392,11 +553,9 @@
                 element.style.setProperty('color', '#ffffff', 'important');
             }
 
-            // Sự kiện rê chuột
             links.forEach(link => link.addEventListener('mouseenter', (e) => slideTo(e.target)));
             nav.addEventListener('mouseleave', () => { if (activeLink) slideTo(activeLink); });
             
-            // Căn chỉnh lại khi xoay/đổi kích thước màn hình
             window.addEventListener('resize', () => {
                 if (activeLink) {
                     indicator.style.transition = 'none';
