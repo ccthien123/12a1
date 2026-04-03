@@ -22,7 +22,7 @@
         }
         
         /* KHẮC PHỤC TRIỆT ĐỂ CHO NÚT BẤM VÀ FORM */
-        button, input, select, textarea, .btn-link, .btn-exam, .btn-calc { 
+        button, input, select, textarea, .btn-link, .btn-exam, .btn-calc, .option-btn { 
             font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; 
         }
 
@@ -129,6 +129,24 @@
         }
         .input-group input:focus, .input-group select:focus { border-color: #0d9488; background: white; box-shadow: 0 0 0 4px rgba(13,148,136,0.1); }
         
+        /* CSS Riêng cho ô nhập IELTS để to và chuẩn form */
+        .ielts-input {
+            width: 280px; 
+            padding: 16px 20px; 
+            border: 2px solid #cbd5e1; 
+            border-radius: 12px; 
+            outline: none; 
+            font-size: 1.05rem; 
+            font-weight: 600; 
+            color: #0f172a; 
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .ielts-input:focus {
+            border-color: #0d9488; 
+            box-shadow: 0 0 0 4px rgba(13,148,136,0.15);
+        }
+
         .result-box { margin-top: 25px; padding: 30px; background: #f0fdfa; border: 2px dashed #14b8a6; border-radius: 16px; text-align: center; display: none; animation: fadeIn 0.4s ease; }
         .result-score { font-size: 3.5rem; font-weight: 900; color: #e11d48; margin: 15px 0; line-height: 1; }
         
@@ -156,29 +174,15 @@
         
         /* Box Kết quả chuẩn đẹp */
         .result-item { 
-            background: white; 
-            border: 2px solid #e2e8f0; 
-            padding: 35px 30px 25px; 
-            border-radius: 20px; 
-            margin-top: 40px; 
-            margin-bottom: 25px; 
-            position: relative; 
-            transition: 0.3s;
+            background: white; border: 2px solid #e2e8f0; padding: 35px 30px 25px; 
+            border-radius: 20px; margin-top: 40px; margin-bottom: 25px; 
+            position: relative; transition: 0.3s;
         }
         .result-item:hover { border-color: #5eead4; box-shadow: 0 10px 30px rgba(13,148,136,0.1); transform: translateY(-3px);}
         .result-rank { 
-            position: absolute; 
-            top: -18px; 
-            left: 25px; 
-            background: #0f766e; 
-            color: white; 
-            padding: 8px 25px; 
-            border-radius: 30px; 
-            font-size: 0.95rem; 
-            font-weight: 800; 
-            box-shadow: 0 4px 10px rgba(15,118,110,0.3);
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            position: absolute; top: -18px; left: 25px; background: #0f766e; 
+            color: white; padding: 8px 25px; border-radius: 30px; font-size: 0.95rem; 
+            font-weight: 800; box-shadow: 0 4px 10px rgba(15,118,110,0.3); letter-spacing: 1px; text-transform: uppercase;
         }
         .result-item-title { font-size: 1.3rem; color: #0f172a; font-weight: 800; margin: 0 0 15px 0; }
         .result-item-desc { font-size: 1.05rem; color: #475569; line-height: 1.7; margin: 0; }
@@ -305,19 +309,19 @@
             <div class="card">
                 <h3 style="color: #0f172a; text-align: center; margin-top: 0; margin-bottom: 30px; font-size: 1.8rem; font-weight: 800;">🎓 Tính Điểm Xét Tốt Nghiệp</h3>
                 <div class="input-row">
-                    <div class="input-group"><label>Điểm Toán</label><input type="number" id="t-toan" placeholder="Ví dụ: 8.5"></div>
-                    <div class="input-group"><label>Điểm Ngữ Văn</label><input type="number" id="t-van" placeholder="Ví dụ: 7.25"></div>
-                    <div class="input-group"><label>Tự chọn 1</label><input type="number" id="t-tc1" placeholder="Ví dụ: 9.0"></div>
-                    <div class="input-group"><label>Tự chọn 2</label><input type="number" id="t-tc2" placeholder="Ví dụ: 8.0"></div>
+                    <div class="input-group"><label>Điểm Toán</label><input type="number" id="t-toan" placeholder="Ví dụ: 8.5" min="0"></div>
+                    <div class="input-group"><label>Điểm Ngữ Văn</label><input type="number" id="t-van" placeholder="Ví dụ: 7.25" min="0"></div>
+                    <div class="input-group"><label>Tự chọn 1</label><input type="number" id="t-tc1" placeholder="Ví dụ: 9.0" min="0"></div>
+                    <div class="input-group"><label>Tự chọn 2</label><input type="number" id="t-tc2" placeholder="Ví dụ: 8.0" min="0"></div>
                 </div>
                 <div class="input-row">
-                    <div class="input-group"><label>ĐTB Lớp 10</label><input type="number" id="t-l10" placeholder="Thang 10"></div>
-                    <div class="input-group"><label>ĐTB Lớp 11</label><input type="number" id="t-l11" placeholder="Thang 10"></div>
-                    <div class="input-group"><label>ĐTB Lớp 12</label><input type="number" id="t-l12" placeholder="Thang 10"></div>
+                    <div class="input-group"><label>ĐTB Lớp 10</label><input type="number" id="t-l10" placeholder="Thang 10" min="0"></div>
+                    <div class="input-group"><label>ĐTB Lớp 11</label><input type="number" id="t-l11" placeholder="Thang 10" min="0"></div>
+                    <div class="input-group"><label>ĐTB Lớp 12</label><input type="number" id="t-l12" placeholder="Thang 10" min="0"></div>
                 </div>
                 <div class="input-row">
-                    <div class="input-group"><label>Khuyến khích (Max 2.0)</label><input type="number" id="t-kk" value="0"></div>
-                    <div class="input-group"><label>Ưu tiên (Max 0.5)</label><input type="number" id="t-ut" value="0"></div>
+                    <div class="input-group"><label>Khuyến khích (Max 2.0)</label><input type="number" id="t-kk" value="0" min="0"></div>
+                    <div class="input-group"><label>Ưu tiên (Max 0.5)</label><input type="number" id="t-ut" value="0" min="0"></div>
                 </div>
                 <button class="btn-calc" onclick="tinhDiemTHPT()"><i class="fas fa-calculator" style="margin-right: 8px;"></i> Xem Kết Quả Tốt Nghiệp</button>
                 
@@ -332,13 +336,13 @@
                 <h3 style="color: #0f172a; text-align: center; margin-top: 0; margin-bottom: 30px; font-size: 1.8rem; font-weight: 800;">⚙️ Tính Điểm Xét Tuyển Tổng Hợp HCMUT</h3>
                 
                 <div style="background: #f8fafc; padding: 25px; border-radius: 16px; border: 1px solid #e2e8f0; margin-bottom: 35px;">
-                    <label style="display: block; font-weight: 800; margin-bottom: 12px; color: #0d9488; font-size: 1.1rem;"><i class="fas fa-language" style="margin-right: 8px;"></i> Quy đổi chứng chỉ IELTS ➝ Điểm THPT</label>
+                    <label style="display: block; font-weight: 800; margin-bottom: 15px; color: #0d9488; font-size: 1.1rem;"><i class="fas fa-language" style="margin-right: 8px;"></i> Quy đổi chứng chỉ IELTS ➝ Điểm THPT</label>
                     <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
-                        <input type="number" id="cert-score" placeholder="Nhập điểm IELTS (VD: 6.5)" step="0.5" style="width: 250px;">
-                        <button class="btn-link" style="padding: 14px 25px; border-radius: 12px;" onclick="quyDoiTiengAnh()">Quy đổi ngay</button>
+                        <input type="number" id="cert-score" class="ielts-input" placeholder="Nhập điểm IELTS (VD: 6.5)" step="0.5" min="0">
+                        <button class="btn-link" style="padding: 16px 28px; border-radius: 12px; margin: 0; cursor: pointer;" onclick="quyDoiTiengAnh()">Quy đổi ngay</button>
                         <span id="cert-result-text" style="font-weight: 800; color: #e11d48; margin-left: 5px; font-size: 1.1rem;"></span>
                     </div>
-                    <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 0; margin-top: 12px; font-style: italic;">*Hệ thống sẽ tự động điền điểm quy đổi vào ô Môn 2 (THPT) bên dưới.</p>
+                    <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 0; margin-top: 15px; font-style: italic;">*Hệ thống sẽ tự động điền điểm quy đổi vào ô Môn 2 (THPT) bên dưới.</p>
                 </div>
 
                 <div class="input-row">
@@ -349,21 +353,21 @@
                             <option value="no">Không thi ĐGNL</option>
                         </select>
                     </div>
-                    <div class="input-group"><label>ĐGNL Ngôn ngữ (Max 600)</label><input type="number" id="d-nn" placeholder="0 - 600"></div>
-                    <div class="input-group"><label>ĐGNL Toán (Max 300)</label><input type="number" id="d-toan" placeholder="0 - 300"></div>
-                    <div class="input-group"><label>ĐGNL Tư duy KH (Max 300)</label><input type="number" id="d-kh" placeholder="0 - 300"></div>
+                    <div class="input-group"><label>ĐGNL Ngôn ngữ (Max 600)</label><input type="number" id="d-nn" placeholder="0 - 600" min="0"></div>
+                    <div class="input-group"><label>ĐGNL Toán (Max 300)</label><input type="number" id="d-toan" placeholder="0 - 300" min="0"></div>
+                    <div class="input-group"><label>ĐGNL Tư duy KH (Max 300)</label><input type="number" id="d-kh" placeholder="0 - 300" min="0"></div>
                 </div>
                 
                 <h4 style="border-bottom: 2px dashed #e2e8f0; padding-bottom: 10px; margin-top: 35px; margin-bottom: 20px; color: #0f766e; font-size: 1.2rem;"><i class="fas fa-book-open" style="margin-right: 8px;"></i> Điểm Học Bạ (Thang 10)</h4>
                 <div class="input-row">
-                    <div class="input-group"><label>Lớp 10 (Toán | M1 | M2)</label><div style="display:flex;gap:10px"><input type="number" id="h10-t" placeholder="Toán"><input type="number" id="h10-1" placeholder="M1"><input type="number" id="h10-2" placeholder="M2"></div></div>
-                    <div class="input-group"><label>Lớp 11 (Toán | M1 | M2)</label><div style="display:flex;gap:10px"><input type="number" id="h11-t" placeholder="Toán"><input type="number" id="h11-1" placeholder="M1"><input type="number" id="h11-2" placeholder="M2"></div></div>
-                    <div class="input-group"><label>Lớp 12 (Toán | M1 | M2)</label><div style="display:flex;gap:10px"><input type="number" id="h12-t" placeholder="Toán"><input type="number" id="h12-1" placeholder="M1"><input type="number" id="h12-2" placeholder="M2"></div></div>
+                    <div class="input-group"><label>Lớp 10 (Toán | M1 | M2)</label><div style="display:flex;gap:10px"><input type="number" id="h10-t" placeholder="Toán" min="0"><input type="number" id="h10-1" placeholder="M1" min="0"><input type="number" id="h10-2" placeholder="M2" min="0"></div></div>
+                    <div class="input-group"><label>Lớp 11 (Toán | M1 | M2)</label><div style="display:flex;gap:10px"><input type="number" id="h11-t" placeholder="Toán" min="0"><input type="number" id="h11-1" placeholder="M1" min="0"><input type="number" id="h11-2" placeholder="M2" min="0"></div></div>
+                    <div class="input-group"><label>Lớp 12 (Toán | M1 | M2)</label><div style="display:flex;gap:10px"><input type="number" id="h12-t" placeholder="Toán" min="0"><input type="number" id="h12-1" placeholder="M1" min="0"><input type="number" id="h12-2" placeholder="M2" min="0"></div></div>
                 </div>
                 
                 <h4 style="border-bottom: 2px dashed #e2e8f0; padding-bottom: 10px; margin-top: 35px; margin-bottom: 20px; color: #0f766e; font-size: 1.2rem;"><i class="fas fa-pen-nib" style="margin-right: 8px;"></i> Điểm Thi THPT & Ưu Tiên</h4>
                 <div class="input-row">
-                    <div class="input-group"><label>Điểm Thi THPT (Toán | M1 | M2)</label><div style="display:flex;gap:10px"><input type="number" id="thpt-t" placeholder="Toán"><input type="number" id="thpt-1" placeholder="M1"><input type="number" id="thpt-2" placeholder="M2"></div></div>
+                    <div class="input-group"><label>Điểm Thi THPT (Toán | M1 | M2)</label><div style="display:flex;gap:10px"><input type="number" id="thpt-t" placeholder="Toán" min="0"><input type="number" id="thpt-1" placeholder="M1" min="0"><input type="number" id="thpt-2" placeholder="M2" min="0"></div></div>
                     <div class="input-group">
                         <label>Khu Vực & Đối Tượng UT</label>
                         <div style="display:flex;gap:10px">
@@ -490,7 +494,12 @@
         startCountdown("2026-04-05T07:30:00", "vact");
 
         // --- 3. TÍNH ĐIỂM TỐT NGHIỆP ---
-        function getV(id) { let v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; }
+        // Đã cập nhật hàm getV: Ép số âm về 0 và trống về 0
+        function getV(id) { 
+            let v = parseFloat(document.getElementById(id).value); 
+            return (isNaN(v) || v < 0) ? 0 : v; 
+        }
+
         function tinhDiemTHPT() {
             let toan = getV('t-toan'), van = getV('t-van'), tc1 = getV('t-tc1'), tc2 = getV('t-tc2');
             let dtb = (getV('t-l10') + getV('t-l11')*2 + getV('t-l12')*3) / 6;
