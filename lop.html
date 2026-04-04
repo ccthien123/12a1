@@ -7,42 +7,50 @@
     <title>Lớp 12A1 - THPT Lê Quý Đôn</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* --- MENU TRƯỢT ĐỒNG BỘ --- */
         nav { 
             position: relative; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             gap: 5px; 
-            padding: 15px 20px;
-            background: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             position: sticky;
-            top: 0;
-            z-index: 100;
+            top: 15px;
+            z-index: 1000;
+            width: max-content; 
+            max-width: 95%;
+            margin: -30px auto 40px; 
+            border-radius: 50px; /* Bo góc thanh menu */
         }
         .nav-indicator {
             position: absolute;
-            height: 42px; 
-            background: #0d9488;
-            border-radius: 50px;
+            height: calc(100% - 20px); 
+            background: #0d9488; 
+            border-radius: 50px; /* Bo góc cục chạy highlight */
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             z-index: 0;
-            top: 50%;
-            margin-top: -21px; 
+            top: 10px;
             left: 0;
             box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+            pointer-events: none;
         }
         nav a { 
             position: relative; 
             z-index: 1; 
             text-decoration: none; 
-            padding: 10px 25px; 
+            padding: 10px 24px; 
             display: inline-block; 
             color: #64748b; 
             font-weight: 700; 
-            transition: 0.3s;
+            transition: color 0.3s ease;
             border-radius: 50px;
+            white-space: nowrap;
+        }
+        nav a.active {
+            color: #ffffff !important;
         }
         /* --- CSS CƠ BẢN --- */
         .table-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 15px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
