@@ -83,6 +83,87 @@
         .widget ul li a:hover { transform: translateX(5px); opacity: 0.8;}
 
         /* =========================================
+           8. LIGHTBOX (TRÌNH XEM ẢNH MỞ RỘNG)
+           ========================================= */
+        .lightbox {
+            display: none; 
+            position: fixed; 
+            z-index: 9999; 
+            padding-top: 40px; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background-color: rgba(15, 23, 42, 0.92); /* Nền xanh đen mờ */
+            backdrop-filter: blur(8px);
+        }
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 75vh;
+            border-radius: 12px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            object-fit: contain;
+        }
+        .lightbox-caption {
+            margin: 20px auto 0;
+            display: block;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+            color: #ccfbf1;
+            font-size: 1.2rem;
+            font-weight: 700;
+            animation: zoomIn 0.3s ease;
+        }
+        @keyframes zoomIn {
+            from {transform:scale(0.95); opacity:0;}
+            to {transform:scale(1); opacity:1;}
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #94a3b8;
+            font-size: 45px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 10000;
+        }
+        .lightbox-close:hover { color: #f43f5e; }
+        
+        .lightbox-btn {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 20px;
+            margin-top: -30px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            transition: 0.3s ease;
+            user-select: none;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            z-index: 10000;
+        }
+        .lightbox-prev { left: 30px; }
+        .lightbox-next { right: 30px; }
+        .lightbox-btn:hover { background-color: #0d9488; transform: scale(1.1); }
+
+        /* Làm con trỏ thành nút Click cho các ảnh trên web */
+        .static-gallery img, .school-image { cursor: zoom-in; }
+
+        /* =========================================
            7. FIX LỖI RESPONSIVE (ĐIỆN THOẠI)
            ========================================= */
         @media (max-width: 900px) {
@@ -101,6 +182,12 @@
             nav::-webkit-scrollbar { display: none; }
             nav a { padding: 10px 20px; font-size: 0.9rem; }
             .nav-indicator { top: 8px; height: calc(100% - 16px); }
+
+            .lightbox-btn { padding: 15px; font-size: 20px; width: 45px; height: 45px;}
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
+            .lightbox-content { max-width: 95%; max-height: 70vh; margin-top: 20px;}
+            .lightbox-close { top: 10px; right: 20px; font-size: 35px; }
         }
     </style>
 </head>
@@ -151,21 +238,13 @@
                     <div class="card">
                         <p>Cơ sở vật chất của nhà trường ngày càng được đầu tư, hoàn thiện, đáp ứng tốt nhu cầu dạy và học. Trường có 43 phòng học kiên cố được trang bị tivi phục vụ giảng dạy; hệ thống phòng bộ môn Tin học, Vật lý, Hóa học, Sinh học, Ngoại ngữ; khu giáo dục thể chất hiện đại, thư viện từng bước áp dụng học liệu điện tử được khai thác hiệu quả, tạo môi trường học tập an toàn, thân thiện và hiện đại.</p>
                         
-                        <div class="carousel-wrapper">
-                            <button class="slider-btn left-btn" onclick="slideLeft('slider-csvc')">&#10094;</button>
-                            
-                            <div class="carousel-container">
-                                <div class="carousel-slide" id="slider-csvc">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707292828_aeb39043b974418fcc3a4936e6cd69d9.jpg" alt="Phòng học hiện đại">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707251765_ad4e3253b3285c5e73edd8f9a459f465.jpg" alt="2">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707297633_b4deb119cb4437e8d9b5bf1c63dc4852.jpg" alt="3">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Thư viện trường">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707263644_a8daf5a35c7de0bb8a97532170283399.jpg" alt="Toàn cảnh">
-                                    <img src="https://i.postimg.cc/rFkvF1wP/648474636-10224786469967498-5948464086240339413-n.jpg" alt="1">
-                                </div>
-                            </div>
-
-                            <button class="slider-btn right-btn" onclick="slideRight('slider-csvc')">&#10095;</button>
+                        <div class="static-gallery">
+                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707292828_aeb39043b974418fcc3a4936e6cd69d9.jpg" alt="Phòng học hiện đại">
+                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707251765_ad4e3253b3285c5e73edd8f9a459f465.jpg" alt="Phòng học, khuôn viên lớp">
+                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707297633_b4deb119cb4437e8d9b5bf1c63dc4852.jpg" alt="Khu vực hành lang lớp học">
+                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Thư viện trường">
+                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707263644_a8daf5a35c7de0bb8a97532170283399.jpg" alt="Toàn cảnh sân trường">
+                            <img src="https://i.postimg.cc/rFkvF1wP/648474636-10224786469967498-5948464086240339413-n.jpg" alt="Hoạt động trong khuôn viên">
                         </div>
                     </div>
                 </section>
@@ -176,17 +255,11 @@
                         <p>Nhà trường chú trọng nâng cao chất lượng giáo dục đại trà gắn với phát triển mũi nhọn. Trong những năm học gần đây, học sinh Trường THPT Lê Quý Đôn đạt nhiều kết quả tích cực trong các kỳ thi học sinh giỏi, khoa học kỹ thuật, các sân chơi trí tuệ, thể thao và phong trào học đường. Riêng học kỳ I năm học 2025 – 2026, nhà trường có 07 học sinh tham gia đội tuyển chọn HSG cấp quốc gia, 01 học sinh tham gia thi HSG cấp quốc gia, 155 học sinh đạt giải học sinh giỏi cấp trường, 23 sản phẩm khoa học kỹ thuật tham gia vòng ý tưởng.</p>
                         <p>Công tác dạy học được đổi mới theo hướng phát huy năng lực học sinh, tăng cường ứng dụng công nghệ thông tin và trí tuệ nhân tạo, tổ chức học 2 buổi/ngày với các lớp bồi dưỡng học sinh giỏi, câu lạc bộ học thuật và năng khiếu.</p>
                         
-                        <div class="carousel-wrapper">
-                            <button class="slider-btn left-btn" onclick="slideLeft('slider-thanh-tich')">&#10094;</button>
-                            <div class="carousel-container">
-                                <div class="carousel-slide" id="slider-thanh-tich">
-                                    <img src="https://i.postimg.cc/d0sskMQn/c5709646-0179-49d1-900b-41e33052330c.jpg" alt="Thành tích 1">
-                                    <img src="https://i.postimg.cc/nLSXnVK1/4c5e0449-b645-4fe2-890e-ef22f862fcc4.jpg" alt="Thành tích 2">
-                                    <img src="https://i.postimg.cc/wvJgn9wt/649169267_1779965720082262_7412901498933026871_n.jpg" alt="Thành tích 3">
-                                    <img src="https://i.postimg.cc/NMTBZQdM/649621949_1779965050082329_612656541181257158_n.jpg" alt="Thành tích 4">
-                                </div>
-                            </div>
-                            <button class="slider-btn right-btn" onclick="slideRight('slider-thanh-tich')">&#10095;</button>
+                        <div class="static-gallery">
+                            <img src="https://i.postimg.cc/d0sskMQn/c5709646-0179-49d1-900b-41e33052330c.jpg" alt="Lễ trao thưởng học sinh giỏi">
+                            <img src="https://i.postimg.cc/nLSXnVK1/4c5e0449-b645-4fe2-890e-ef22f862fcc4.jpg" alt="Lễ trao thưởng học sinh xuất sắc">
+                            <img src="https://i.postimg.cc/wvJgn9wt/649169267_1779965720082262_7412901498933026871_n.jpg" alt="Vinh danh thành tích học tập">
+                            <img src="https://i.postimg.cc/NMTBZQdM/649621949_1779965050082329_612656541181257158_n.jpg" alt="Hoạt động tổng kết khen thưởng">
                         </div>
                     </div>
                 </section>
@@ -196,36 +269,30 @@
                     <div class="card">
                         <p>Bên cạnh học tập, nhà trường quan tâm tổ chức nhiều hoạt động giáo dục kỹ năng sống và trải nghiệm sáng tạo như: trải nghiệm – hướng nghiệp dưới cờ, giờ ra chơi thân thiện, các câu lạc bộ âm nhạc, nhảy, truyền thông, thể thao, hoạt động thiện nguyện và phong trào Đoàn – Hội. Những hoạt động này góp phần hình thành lối sống tích cực, tinh thần trách nhiệm và ý thức công dân cho học sinh.</p>
                         
-                        <div class="carousel-wrapper">
-                            <button class="slider-btn left-btn" onclick="slideLeft('slider-trai-nghiem')">&#10094;</button>
-                            <div class="carousel-container">
-                                <div class="carousel-slide" id="slider-trai-nghiem">
-                                    <img src="https://i.postimg.cc/8PBP1dLy/a1a9ad84_48a5_49c4_829f_1558bcc8e246.jpg" >
-                                    <img src="https://i.postimg.cc/QN7dzZCZ/90296a9b_25d7_45df_a631_cd5bc4f70486.jpg" >
-                                    <img src="https://i.postimg.cc/3N2r0mVv/35fc3d0e_de30_46ec_94c1_abe281f415d9.jpg" >
-                                    <img src="https://i.postimg.cc/D03JNvKc/645216532-1773482660730568-569831196013737485-n.jpg" >
-                                    <img src="https://i.postimg.cc/C5bMnkXy/3a097dde_d25f_4a4d_9106_da8df96b39ba.jpg" >
-                                    <img src="https://i.postimg.cc/Wz0pqgCP/9eecce90_946b_4078_804c_c4f4691500de.jpg" >
-                                    <img src="https://i.postimg.cc/sDRgdHGg/9789058d_a9b0_4a70_a639_5f046e37ff5d.jpg" >
-                                    <img src="https://i.postimg.cc/zX1GZ2Hz/25509495_bd0c_470d_8428_6dc69a937c18.jpg" >
-                                    <img src="https://i.postimg.cc/B6MB9PMv/97b82381-03ca-4da4-829a-65a8f83c980b.jpg" >
-                                    <img src="https://i.postimg.cc/Xv2kty24/644292794-1770695761009258-4695764314334671109-n.jpg" >
-                                    <img src="https://i.postimg.cc/8PVzQXfw/627961557_1755180529227448_2280733054855332234_n.jpg" >
-                                    <img src="https://i.postimg.cc/8cLkfM9f/51c355e4_2689_4f85_b1f9_28c31f2f9b85.jpg" >
-                                    <img src="https://i.postimg.cc/hPqtWZQP/6156687f_5fd8_4e08_a244_64dcd9b2ab9f.jpg" >
-                                    <img src="https://i.postimg.cc/HnbW8XRc/9fadb9db_1b16_4207_a979_9bfb15305cab.jpg" >
-                                    <img src="https://i.postimg.cc/VLBLY9X4/632480967_1755190432559791_4862574392429148443_n.jpg" >
-                                    <img src="https://i.postimg.cc/Bb2ZPHk9/2a868b29_6b6a_455e_b6b9_efd1650eb976.jpg" >
-                                    <img src="https://i.postimg.cc/Gtv3TGVn/8bd7aef8_82a7_4a11_b999_0518441116ee.jpg" >
-                                    <img src="https://i.postimg.cc/SN7NyLcv/be54c7ad_d294_4ea6_a403_26efc1b96382.jpg" >
-									<img src="https://i.postimg.cc/nhPCYCPP/659807948_1796211341791033_352258757976839125_n.jpg" >
-									<img src="https://i.postimg.cc/HkhV4VhN/660913886_1796219698456864_8237463727540544328_n.jpg" >
-									<img src="https://i.postimg.cc/6pmyLymj/659154079_1796219551790212_5110881103081609275_n.jpg" >
-									<img src="https://i.postimg.cc/50xdXmmX/659081424-1796219941790173-7161605135861066737-n.jpg" >
-									<img src="https://i.postimg.cc/FHB7g7BC/656101995_1795430588535775_4843150243819233095_n.jpg" >
-                                </div>
-                            </div>
-                            <button class="slider-btn right-btn" onclick="slideRight('slider-trai-nghiem')">&#10095;</button>
+                        <div class="static-gallery">
+                            <img src="https://i.postimg.cc/8PBP1dLy/a1a9ad84_48a5_49c4_829f_1558bcc8e246.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/QN7dzZCZ/90296a9b_25d7_45df_a631_cd5bc4f70486.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/3N2r0mVv/35fc3d0e_de30_46ec_94c1_abe281f415d9.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/D03JNvKc/645216532-1773482660730568-569831196013737485-n.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/C5bMnkXy/3a097dde_d25f_4a4d_9106_da8df96b39ba.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/Wz0pqgCP/9eecce90_946b_4078_804c_c4f4691500de.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/sDRgdHGg/9789058d_a9b0_4a70_a639_5f046e37ff5d.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/zX1GZ2Hz/25509495_bd0c_470d_8428_6dc69a937c18.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/B6MB9PMv/97b82381-03ca-4da4-829a-65a8f83c980b.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/Xv2kty24/644292794-1770695761009258-4695764314334671109-n.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/8PVzQXfw/627961557_1755180529227448_2280733054855332234_n.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/8cLkfM9f/51c355e4_2689_4f85_b1f9_28c31f2f9b85.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/hPqtWZQP/6156687f_5fd8_4e08_a244_64dcd9b2ab9f.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/HnbW8XRc/9fadb9db_1b16_4207_a979_9bfb15305cab.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/VLBLY9X4/632480967_1755190432559791_4862574392429148443_n.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/Bb2ZPHk9/2a868b29_6b6a_455e_b6b9_efd1650eb976.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/Gtv3TGVn/8bd7aef8_82a7_4a11_b999_0518441116ee.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/SN7NyLcv/be54c7ad_d294_4ea6_a403_26efc1b96382.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/nhPCYCPP/659807948_1796211341791033_352258757976839125_n.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/HkhV4VhN/660913886_1796219698456864_8237463727540544328_n.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/6pmyLymj/659154079_1796219551790212_5110881103081609275_n.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/50xdXmmX/659081424-1796219941790173-7161605135861066737-n.jpg" alt="Hoạt động trải nghiệm">
+                            <img src="https://i.postimg.cc/FHB7g7BC/656101995_1795430588535775_4843150243819233095_n.jpg" alt="Hoạt động trải nghiệm">
                         </div>
                     </div>
                 </section>
@@ -235,17 +302,9 @@
                     <div class="card">
                         <p>Bước vào giai đoạn phát triển mới, Trường THPT Lê Quý Đôn tiếp tục phát huy truyền thống 26 năm, chú trọng nâng cao chất lượng giáo dục toàn diện, đẩy mạnh chuyển đổi số, giáo dục STEM, xây dựng môi trường học đường kỷ cương – an toàn – hạnh phúc, đáp ứng yêu cầu đổi mới giáo dục và sự kỳ vọng của xã hội.</p>
                         
-                        <div class="carousel-wrapper">
-                            <button class="slider-btn left-btn" onclick="slideLeft('slider-dinh-huong')">&#10094;</button>
-                            
-                            <div class="carousel-container">
-                                <div class="carousel-slide" id="slider-dinh-huong">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Định hướng 1">
-                                    <img src="https://i.postimg.cc/QCYsvm2H/643231454_1770133134398854_5674663032686192200_n.jpg" >
-                                </div>
-                            </div>
-
-                            <button class="slider-btn right-btn" onclick="slideRight('slider-dinh-huong')">&#10095;</button>
+                        <div class="static-gallery">
+                            <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Định hướng phát triển 1">
+                            <img src="https://i.postimg.cc/QCYsvm2H/643231454_1770133134398854_5674663032686192200_n.jpg" alt="Định hướng phát triển 2">
                         </div>
                     </div>
                 </section>
@@ -319,7 +378,7 @@
             </div>
 
             <div style="flex: 1; min-width: 250px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <h3 style="margin: 0 0 5px; font-size: 1.8rem; color: #ffffff; letter-spacing: 2px; font-weight: 800; font-family: 'Quicksand', sans-serif;">TẬP THỂ 12A1</h3>
+                <h3 style="margin: 0 0 5px; font-size: 1.8rem; color: #ffffff; letter-spacing: 2px; font-weight: 800;">TẬP THỂ 12A1</h3>
                 <p style="margin: 0; color: #a1a1aa; font-style: italic; font-size: 0.95rem; max-width: 350px;">"Nơi lưu giữ những thanh xuân rực rỡ nhất..." ✨</p>
             </div>
         </div>
@@ -330,39 +389,16 @@
         </div>
     </footer>
 
+    <div id="imageLightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <a class="lightbox-btn lightbox-prev" onclick="changeLightboxImg(-1)">&#10094;</a>
+        <img class="lightbox-content" id="lightboxImg">
+        <a class="lightbox-btn lightbox-next" onclick="changeLightboxImg(1)">&#10095;</a>
+        <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+
     <script>
-        // --- Hàm bấm nút lướt ảnh Carousel ---
-        function slideLeft(sliderId) {
-            const slider = document.getElementById(sliderId);
-            if (slider) slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
-        }
-        function slideRight(sliderId) {
-            const slider = document.getElementById(sliderId);
-            if (slider) slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
-        }
-
-        // --- Cập nhật trạng thái ẩn/hiện nút mũi tên ---
-        function updateSliderButtons(slider) {
-            const wrapper = slider.closest('.carousel-wrapper');
-            if (!wrapper) return;
-            
-            const leftBtn = wrapper.querySelector('.left-btn');
-            const rightBtn = wrapper.querySelector('.right-btn');
-            
-            const isAtStart = slider.scrollLeft <= 2;
-            const isAtEnd = slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 2;
-
-            if (leftBtn) leftBtn.style.display = isAtStart ? 'none' : 'flex';
-            if (rightBtn) rightBtn.style.display = isAtEnd ? 'none' : 'flex';
-        }
-
-        document.querySelectorAll('.carousel-container').forEach(slider => {
-            updateSliderButtons(slider);
-            slider.addEventListener('scroll', () => { updateSliderButtons(slider); });
-            window.addEventListener('resize', () => { updateSliderButtons(slider); });
-        });
-
-        // --- SCRIPT MENU TRƯỢT ---
+        // --- SCRIPT 1: MENU TRƯỢT ---
         document.addEventListener("DOMContentLoaded", function() {
             const nav = document.querySelector('nav');
             if (!nav) return;
@@ -411,6 +447,97 @@
                     indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
                 }
             });
+        });
+
+        // --- SCRIPT 2: LIGHTBOX TRÌNH XEM ẢNH ---
+        const lightbox = document.getElementById("imageLightbox");
+        const lightboxImg = document.getElementById("lightboxImg");
+        const lightboxCaption = document.getElementById("lightboxCaption");
+        let currentImgIndex = 0;
+        let clickableImages = [];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Gom tất cả ảnh trong phần lưới và ảnh mô tả trường để làm mảng hiển thị
+            clickableImages = Array.from(document.querySelectorAll('.static-gallery img, .school-image'));
+            
+            clickableImages.forEach((img, index) => {
+                img.addEventListener('click', function() {
+                    openLightbox(index);
+                });
+            });
+
+            // Đóng khi click nút X
+            const closeBtn = document.querySelector(".lightbox-close");
+            if(closeBtn) closeBtn.addEventListener('click', closeLightbox);
+            
+            // Đóng khi click ra vùng đen bên ngoài ảnh
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+        });
+
+        function openLightbox(index) {
+            currentImgIndex = index;
+            const img = clickableImages[currentImgIndex];
+            
+            lightbox.style.display = "block";
+            lightboxImg.src = img.src;
+            
+            // Lấy mô tả: Nếu có alt thì dùng alt. Nếu không có, thông minh tự dò tên Section
+            let captionText = img.alt;
+            if (!captionText || captionText.trim() === "") {
+                let section = img.closest('section');
+                if (section && section.querySelector('h2')) {
+                    captionText = "Mục: " + section.querySelector('h2').innerText;
+                } else {
+                    captionText = "Hình ảnh hoạt động";
+                }
+            }
+            lightboxCaption.innerHTML = captionText + " (" + (currentImgIndex + 1) + "/" + clickableImages.length + ")";
+            
+            // Ngăn người dùng lỡ tay cuộn trang bên dưới khi đang xem ảnh
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = "none";
+            // Cho phép cuộn trang trở lại
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeLightboxImg(step) {
+            currentImgIndex += step;
+            // Quay vòng vô tận
+            if (currentImgIndex >= clickableImages.length) {
+                currentImgIndex = 0;
+            } else if (currentImgIndex < 0) {
+                currentImgIndex = clickableImages.length - 1;
+            }
+            const img = clickableImages[currentImgIndex];
+            lightboxImg.src = img.src;
+            
+            // Cập nhật lại Text cho ảnh mới
+            let captionText = img.alt;
+            if (!captionText || captionText.trim() === "") {
+                let section = img.closest('section');
+                if (section && section.querySelector('h2')) {
+                    captionText = "Mục: " + section.querySelector('h2').innerText;
+                } else {
+                    captionText = "Hình ảnh hoạt động";
+                }
+            }
+            lightboxCaption.innerHTML = captionText + " (" + (currentImgIndex + 1) + "/" + clickableImages.length + ")";
+        }
+        
+        // Hỗ trợ bấm phím Mũi tên và phím Esc để trải nghiệm như đang dùng App
+        document.addEventListener('keydown', function(e) {
+            if (lightbox.style.display === "block") {
+                if (e.key === "ArrowLeft") changeLightboxImg(-1);
+                if (e.key === "ArrowRight") changeLightboxImg(1);
+                if (e.key === "Escape") closeLightbox();
+            }
         });
     </script>
 </body>
