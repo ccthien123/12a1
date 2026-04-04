@@ -14,224 +14,173 @@
 
     <style>
         /* =========================================
-           1. CSS CƠ BẢN VÀ FONT CHỮ
+           1. CSS CƠ BẢN VÀ CHỐNG VỠ GIAO DIỆN
            ========================================= */
         * { box-sizing: border-box; }
         body, html { 
-            font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+            font-family: 'Quicksand', sans-serif !important;
             background-color: #f4f8f9; 
             color: #334155;
             margin: 0;
             padding: 0;
-            overflow-x: hidden; 
+            width: 100%;
+            overflow-x: hidden !important; 
         }
+        
         button, input, select, textarea, a, p, h1, h2, h3, h4, h5, h6, span, div, li { 
-            font-family: 'Quicksand', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important; 
+            font-family: 'Quicksand', sans-serif !important; 
         }
 
         /* =========================================
-           2. HEADER (ẢNH NỀN TRƯỜNG LÀM MỜ)
+           2. HEADER (HIỆU ỨNG ẢNH NỀN LÀM MỜ)
            ========================================= */
-        header {
+        header { 
             position: relative;
-            text-align: center;
-            padding: 80px 20px;
-            color: white;
-            background-image: url('https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707263644_a8daf5a35c7de0bb8a97532170283399.jpg');
+            color: white; 
+            padding: 80px 20px; 
+            text-align: center; 
+            overflow: hidden; 
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px; 
+            background-image: url('https://i.postimg.cc/QxTqFwHB/166d3dda-316a-4ff6-8b25-dff9bae28292.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            filter: blur(8px) brightness(0.65); 
+            z-index: -1;
         }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 47, 46, 0.75); /* Lớp phủ xanh đen mờ */
-            z-index: 1;
+        header h1 { 
+            margin: 0; font-size: 3rem; font-weight: 900; 
+            letter-spacing: 1px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+            text-transform: uppercase;
         }
-        header h1, header p {
-            position: relative;
-            z-index: 2; 
+        header p { 
+            margin-top: 10px; font-size: 1.2rem; font-weight: 600; 
+            color: #ccfbf1; text-shadow: 0 2px 10px rgba(0,0,0,0.5); font-style: italic;
         }
-        header h1 { margin: 0 0 10px 0; font-weight: 900; letter-spacing: 1px; font-size: 2.5rem; text-transform: uppercase;}
-        header p { margin: 0; color: #ccfbf1; font-size: 1.2rem; font-style: italic; font-weight: 600; }
 
         /* =========================================
-           3. THANH MENU TRƯỢT BO GÓC
+           3. THANH MENU TRƯỢT BO GÓC MƯỢT MÀ
            ========================================= */
         nav { 
-            position: relative; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 5px; 
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            position: sticky;
-            top: 15px;
-            z-index: 1000;
-            width: max-content; 
-            max-width: 95%;
-            margin: -30px auto 40px; 
-            border-radius: 50px;
+            position: relative; display: flex; justify-content: center; align-items: center; 
+            gap: 5px; padding: 12px 15px; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: sticky; top: 15px; z-index: 1000; width: max-content; max-width: 95%;
+            margin: -30px auto 40px; border-radius: 50px; 
         }
         .nav-indicator {
-            position: absolute;
-            height: calc(100% - 20px); 
-            background: #0d9488; 
-            border-radius: 50px; 
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            z-index: 0;
-            top: 10px;
-            left: 0;
-            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
-            pointer-events: none;
+            position: absolute; height: calc(100% - 20px); background: #0d9488; 
+            border-radius: 50px; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 0; top: 10px; left: 0; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3); pointer-events: none;
         }
         nav a { 
-            position: relative; 
-            z-index: 1; 
-            text-decoration: none; 
-            padding: 10px 24px; 
-            display: inline-block; 
-            color: #64748b; 
-            font-weight: 700; 
-            transition: color 0.3s ease;
-            border-radius: 50px;
-            white-space: nowrap;
+            position: relative; z-index: 1; text-decoration: none; padding: 10px 24px; 
+            display: inline-block; color: #64748b; font-weight: 700; transition: color 0.3s ease;
+            border-radius: 50px; white-space: nowrap;
         }
         nav a.active { color: #ffffff !important; }
 
         /* =========================================
-           4. BỐ CỤC CHUNG & HỘP (CARD)
+           4. BỐ CỤC: THU NHỎ WIDGET - LÀM TO NỘI DUNG CHÍNH
            ========================================= */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         
-        .main-layout { display: flex; gap: 30px; align-items: flex-start; }
+        .main-layout { display: flex; gap: 40px; align-items: flex-start; }
+        
+        /* Cột nội dung nới rộng ra */
         .content { flex: 1; min-width: 0; }
-        .sidebar { width: 320px; flex-shrink: 0; position: sticky; top: 90px; align-self: flex-start; height: max-content; z-index: 10; }
+        
+        /* Cột Sidebar thu nhỏ lại chỉ còn 260px */
+        .sidebar { width: 260px; flex-shrink: 0; position: sticky; top: 100px; z-index: 10; }
 
         .card { 
-            background: white; 
-            padding: 35px; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
-            border: 1px solid #f1f5f9; 
-            margin-bottom: 40px; 
+            background: white; padding: 35px; border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; 
+            margin-bottom: 40px; transition: transform 0.3s;
         }
-        .card p { line-height: 1.8; color: #475569; font-size: 1.05rem; text-align: justify; margin-bottom: 15px; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.06); }
+        .card p { line-height: 1.8; color: #475569; font-size: 1.1rem; text-align: justify; margin-bottom: 15px; }
         
         h2 { 
-            color: #0f172a; 
-            font-size: 1.8rem; 
-            font-weight: 800; 
-            margin-bottom: 20px; 
-            border-left: 5px solid #0d9488; 
-            padding-left: 15px; 
-            margin-top: 0; 
-            text-transform: uppercase;
+            color: #0f172a; font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; 
+            border-left: 5px solid #0d9488; padding-left: 15px; margin-top: 0; 
         }
 
         .btn-link { 
-            display: inline-flex; 
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 14px 30px; 
-            background: linear-gradient(135deg, #0d9488, #0f766e); 
-            color: white !important; 
-            text-decoration: none; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            transition: 0.3s; 
-            box-shadow: 0 5px 15px rgba(13, 148, 136, 0.25); 
-            font-size: 1.05rem;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 14px 30px; background: linear-gradient(135deg, #0d9488, #0f766e); 
+            color: white !important; text-decoration: none; border-radius: 50px; font-weight: bold; 
+            transition: 0.3s; box-shadow: 0 5px 15px rgba(13, 148, 136, 0.25); font-size: 1.05rem;
         }
-        .btn-link:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(13, 148, 136, 0.35); }
+        .btn-link:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(13, 148, 136, 0.35); }
 
-        .school-image { width: 100%; height: 400px; object-fit: cover; border-radius: 12px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: zoom-in; }
+        .school-image { width: 100%; height: 450px; object-fit: cover; border-radius: 16px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: zoom-in; }
 
         /* =========================================
-           5. CAROUSEL TRƯỢT ẢNH MƯỢT MÀ (1 ẢNH / LẦN)
+           5. TRÌNH LƯỚT ẢNH TRANG CHỦ (CHỈ HIỆN 1 ẢNH/LẦN)
            ========================================= */
         .carousel-wrapper { 
-            position: relative; 
-            margin-top: 25px; 
-            width: 100%; 
-            border-radius: 12px; 
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative; margin-top: 20px; width: 100%; 
+            border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
         }
         
-        /* Dùng CSS Snap để cuộn mượt bằng tay trên mobile, không bị kẹt scroll dọc */
+        /* Khung cuộn mượt mà dùng CSS Scroll Snap */
         .carousel-container { 
-            width: 100%; 
-            display: flex;
-            overflow-x: auto; 
-            scroll-snap-type: x mandatory; 
-            scrollbar-width: none; /* Ẩn thanh cuộn Firefox */
-            -webkit-overflow-scrolling: touch; 
-            scroll-behavior: smooth;
+            width: 100%; display: flex; overflow-x: auto; 
+            scroll-snap-type: x mandatory; scrollbar-width: none; 
+            -webkit-overflow-scrolling: touch; scroll-behavior: smooth;
         }
-        .carousel-container::-webkit-scrollbar { display: none; } /* Ẩn thanh cuộn Chrome/Safari */
+        .carousel-container::-webkit-scrollbar { display: none; }
         
-        .carousel-slide { 
-            display: flex; 
-            width: 100%; 
-        }
+        .carousel-slide { display: flex; width: 100%; }
         
-        /* Ép mỗi ảnh chiếm 100% khung, chỉ hiện 1 ảnh 1 lần */
+        /* Ép chuẩn 100% để hiển thị đúng 1 ảnh mỗi lần trượt */
         .carousel-slide img { 
             flex: 0 0 100%; 
             width: 100%; 
-            height: 400px; 
+            height: 450px; /* Làm ảnh cao và to ra */
             object-fit: cover; 
-            scroll-snap-align: start; /* Bắt điểm dừng chuẩn xác */
+            scroll-snap-align: center; 
             cursor: zoom-in; 
         }
 
+        /* Nút mũi tên đè lên ảnh ở ngoài màn hình */
         .slider-btn { 
-            position: absolute; 
-            top: 50%; 
-            transform: translateY(-50%); 
-            background: rgba(255,255,255,0.9); 
-            border: none; 
-            width: 45px; 
-            height: 45px; 
-            border-radius: 50%; 
-            cursor: pointer; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
-            font-size: 18px; 
-            color: #0d9488; 
-            z-index: 10; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            transition: 0.3s; 
+            position: absolute; top: 50%; transform: translateY(-50%); 
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(4px);
+            border: none; width: 50px; height: 50px; border-radius: 50%; 
+            font-size: 22px; font-weight: bold; cursor: pointer; color: #0d9488; 
+            z-index: 10; display: flex; justify-content: center; align-items: center; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: 0.3s; 
         }
-        .slider-btn:hover { background: #0d9488; color: white; transform: translateY(-50%) scale(1.1);}
+        .slider-btn:hover { background: #0d9488; color: white; transform: translateY(-50%) scale(1.1); }
         .left-btn { left: 15px; }
         .right-btn { right: 15px; }
 
         /* =========================================
-           6. WIDGETS (CỘT PHẢI)
+           6. WIDGETS (CỘT BẢNG TIN BÊN PHẢI)
            ========================================= */
         .widget { 
-            background: white; padding: 25px; border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 30px; 
+            background: white; padding: 20px; border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 25px; 
             border-top: 5px solid #0d9488; 
         }
         .widget h3 { 
-            margin-top: 0; color: #0f172a; font-size: 1.3rem; margin-bottom: 15px; 
-            padding-bottom: 15px; border-bottom: 2px dashed #e2e8f0; font-weight: 800;
+            margin-top: 0; color: #0f172a; font-size: 1.2rem; margin-bottom: 12px; 
+            padding-bottom: 12px; border-bottom: 2px dashed #e2e8f0; font-weight: 800;
         }
         .widget ul { list-style: none; padding: 0; margin: 0; }
-        .widget ul li { padding: 15px 0; border-bottom: 1px dashed #f1f5f9; }
+        .widget ul li { padding: 12px 0; border-bottom: 1px dashed #f1f5f9; }
         .widget ul li:last-child { border-bottom: none; padding-bottom: 0;}
         .widget ul li a { 
             transition: 0.2s; display: block; text-decoration: none; 
-            font-weight: 700; line-height: 1.5; color: #475569;
+            font-weight: 700; line-height: 1.5; color: #475569; font-size: 0.95rem;
         }
         .widget ul li a:hover { transform: translateX(5px); opacity: 0.8;}
         
@@ -241,33 +190,21 @@
         .link-teal { color: #0d9488 !important; }
 
         /* =========================================
-           7. LIGHTBOX (TRÌNH XEM ẢNH ĐỘC LẬP TỪNG PHẦN)
+           7. LIGHTBOX (TRÌNH XEM ẢNH FULL MÀN HÌNH)
            ========================================= */
         .lightbox {
-            display: none; 
-            position: fixed; 
-            z-index: 9999; 
-            padding-top: 40px; 
-            left: 0; 
-            top: 0; 
-            width: 100%; 
-            height: 100%; 
-            background-color: rgba(15, 23, 42, 0.95); 
-            backdrop-filter: blur(8px);
+            display: none; position: fixed; z-index: 9999; padding-top: 20px; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px);
         }
         .lightbox-content {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 75vh;
-            border-radius: 12px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
-            animation: zoomIn 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            object-fit: contain;
+            margin: auto; display: block; max-width: 90%; max-height: 80vh;
+            border-radius: 12px; box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            animation: zoomIn 0.3s cubic-bezier(0.25, 1, 0.5, 1); object-fit: contain;
         }
         .lightbox-caption {
-            margin: 20px auto 0; display: block; width: 80%; max-width: 800px;
-            text-align: center; color: #ccfbf1; font-size: 1.2rem; font-weight: 700;
+            margin: 15px auto 0; display: block; width: 80%; text-align: center; 
+            color: #ccfbf1; font-size: 1.1rem; font-weight: 700;
         }
         @keyframes zoomIn { from {transform:scale(0.9); opacity:0;} to {transform:scale(1); opacity:1;} }
         
@@ -278,11 +215,11 @@
         .lightbox-close:hover { color: #f43f5e; }
         
         .lightbox-btn {
-            cursor: pointer; position: absolute; top: 50%;
-            transform: translateY(-50%); color: white; font-weight: bold; font-size: 24px;
-            transition: 0.3s ease; user-select: none; background-color: rgba(255,255,255,0.1);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            width: 60px; height: 60px; z-index: 10000; border: none; outline: none;
+            cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); 
+            color: white; font-weight: bold; font-size: 24px; transition: 0.3s ease; 
+            background-color: rgba(255,255,255,0.1); border-radius: 50%; display: flex; 
+            align-items: center; justify-content: center; width: 60px; height: 60px; 
+            z-index: 10000; border: none; outline: none;
         }
         .lightbox-prev { left: 30px; }
         .lightbox-next { right: 30px; }
@@ -294,7 +231,7 @@
         @media (max-width: 900px) {
             header { padding: 60px 15px 40px; }
             header h1 { font-size: 2rem; }
-            .main-layout { flex-direction: column; }
+            .main-layout { flex-direction: column; gap: 20px;}
             .sidebar { width: 100%; position: static !important; }
             
             nav {
@@ -305,12 +242,12 @@
             nav a { padding: 10px 20px; font-size: 0.9rem; }
             .nav-indicator { top: 8px; height: calc(100% - 16px); }
 
-            .carousel-slide img, .school-image { height: 250px; }
+            .carousel-slide img, .school-image { height: 280px; }
 
             .lightbox-btn { padding: 15px; font-size: 20px; width: 45px; height: 45px;}
             .lightbox-prev { left: 10px; }
             .lightbox-next { right: 10px; }
-            .lightbox-content { max-height: 65vh; margin-top: 30px;}
+            .lightbox-content { max-height: 70vh; margin-top: 30px;}
             .lightbox-close { top: 10px; right: 20px; font-size: 35px; }
         }
     </style>
@@ -574,7 +511,7 @@
             });
         });
 
-        // --- 2. SCRIPT CAROUSEL (TRƯỢT MƯỢT KHÔNG KẸT) ---
+        // --- 2. SCRIPT CAROUSEL (HIỆN 1 ẢNH, CUỘN MƯỢT CÓ NÚT NGOÀI) ---
         function slideLeft(btn) {
             const container = btn.parentElement.querySelector('.carousel-container');
             if (container) container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
@@ -590,15 +527,17 @@
             const leftBtn = wrapper.querySelector('.left-btn');
             const rightBtn = wrapper.querySelector('.right-btn');
             
-            const isAtStart = container.scrollLeft <= 2;
-            const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 2;
+            const isAtStart = container.scrollLeft <= 5;
+            const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 5;
 
             if (leftBtn) leftBtn.style.display = isAtStart ? 'none' : 'flex';
             if (rightBtn) rightBtn.style.display = isAtEnd ? 'none' : 'flex';
         }
 
         document.querySelectorAll('.carousel-container').forEach(container => {
-            updateSliderButtons(container);
+            // Load thử 1 lần
+            setTimeout(() => updateSliderButtons(container), 100);
+            
             container.addEventListener('scroll', () => { updateSliderButtons(container); });
             window.addEventListener('resize', () => { updateSliderButtons(container); });
         });
@@ -608,41 +547,37 @@
         const lightboxImg = document.getElementById("lightboxImg");
         const lightboxCaption = document.getElementById("lightboxCaption");
         
-        let currentLightboxGroup = []; // Lưu trữ các ảnh của phần hiện tại đang xem
+        let currentLightboxGroup = []; 
         let currentImgIndex = 0;
 
         function openLightbox(imgElement) {
-            // Tìm khung Card chứa bức ảnh vừa click
             const parentCard = imgElement.closest('.card');
             
-            // Nếu ảnh nằm trong Card, gộp tất cả ảnh trong Card đó thành 1 nhóm. 
-            // Nếu không (như ảnh đơn), chỉ cho 1 ảnh đó vào nhóm.
             if (parentCard) {
+                // Chỉ lấy các ảnh trong cùng 1 mục (card) đó
                 currentLightboxGroup = Array.from(parentCard.querySelectorAll('img:not(.school-image), img.school-image'));
             } else {
                 currentLightboxGroup = [imgElement];
             }
 
-            // Tìm vị trí của ảnh vừa click trong nhóm
             currentImgIndex = currentLightboxGroup.indexOf(imgElement);
             if (currentImgIndex === -1) currentImgIndex = 0;
 
             updateLightboxView();
             lightbox.style.display = "block";
-            document.body.style.overflow = 'hidden'; // Chặn cuộn trang nền
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeLightbox() {
             lightbox.style.display = "none";
-            document.body.style.overflow = 'auto'; // Mở lại cuộn trang
-            currentLightboxGroup = []; // Xóa nhóm ảnh hiện tại
+            document.body.style.overflow = 'auto'; 
+            currentLightboxGroup = []; 
         }
 
         function changeLightboxImg(step) {
             if (currentLightboxGroup.length === 0) return;
             
             currentImgIndex += step;
-            // Xoay vòng ảnh
             if (currentImgIndex >= currentLightboxGroup.length) {
                 currentImgIndex = 0;
             } else if (currentImgIndex < 0) {
@@ -655,7 +590,6 @@
             const img = currentLightboxGroup[currentImgIndex];
             lightboxImg.src = img.src;
             
-            // Cập nhật Caption (Lấy từ alt của ảnh, nếu không có tự lấy tên mục)
             let captionText = img.alt;
             if (!captionText || captionText.trim() === "") {
                 let section = img.closest('section');
@@ -666,14 +600,12 @@
                 }
             }
             
-            // Nếu chỉ có 1 ảnh thì không hiện số 1/1
             if (currentLightboxGroup.length > 1) {
                 lightboxCaption.innerHTML = captionText + " (" + (currentImgIndex + 1) + " / " + currentLightboxGroup.length + ")";
             } else {
                 lightboxCaption.innerHTML = captionText;
             }
 
-            // Ẩn nút mũi tên nếu chỉ có 1 ảnh trong phần đó
             const prevBtn = document.querySelector(".lightbox-prev");
             const nextBtn = document.querySelector(".lightbox-next");
             if (currentLightboxGroup.length <= 1) {
@@ -685,14 +617,12 @@
             }
         }
 
-        // Đóng khi click nền đen
         lightbox.addEventListener('click', function(e) {
             if (e.target === lightbox) {
                 closeLightbox();
             }
         });
 
-        // Điều khiển bằng bàn phím
         document.addEventListener('keydown', function(e) {
             if (lightbox.style.display === "block") {
                 if (e.key === "ArrowLeft") changeLightboxImg(-1);
