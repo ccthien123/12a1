@@ -4,7 +4,266 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Chủ - THPT Lê Quý Đôn</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =========================================
+           1. CSS CƠ BẢN VÀ CHỐNG VỠ GIAO DIỆN
+           ========================================= */
+        * { box-sizing: border-box; }
+        body, html { 
+            font-family: 'Quicksand', sans-serif !important;
+            background-color: #f4f8f9; 
+            color: #334155;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden !important; /* Lệnh thép chống tràn viền ngang */
+        }
+        
+        button, input, select, textarea, a, p, h1, h2, h3, h4, h5, h6, span, div, li { 
+            font-family: 'Quicksand', sans-serif !important; 
+        }
+
+        /* =========================================
+           2. HEADER (HIỆU ỨNG ẢNH NỀN LÀM MỜ)
+           ========================================= */
+        header { 
+            position: relative;
+            color: white; 
+            padding: 80px 20px; 
+            text-align: center; 
+            overflow: hidden; 
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px; /* Bù trừ viền mờ */
+            /* Ảnh nền trường Lê Quý Đôn */
+            background-image: url('https://i.postimg.cc/QxTqFwHB/166d3dda-316a-4ff6-8b25-dff9bae28292.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: blur(8px) brightness(0.65); /* Làm mờ và tối ảnh đi 35% */
+            z-index: -1;
+        }
+
+        header h1 { 
+            margin: 0; 
+            font-size: 3rem; 
+            font-weight: 900; 
+            letter-spacing: 1px; 
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+            text-transform: uppercase;
+        }
+        header p { 
+            margin-top: 10px; 
+            font-size: 1.2rem; 
+            font-weight: 600; 
+            color: #ccfbf1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            font-style: italic;
+        }
+
+        /* =========================================
+           3. THANH MENU TRƯỢT BO GÓC MƯỢT MÀ
+           ========================================= */
+        nav { 
+            position: relative; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 5px; 
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 15px;
+            z-index: 1000;
+            width: max-content; 
+            max-width: 95%;
+            margin: -30px auto 40px; 
+            border-radius: 50px; /* Bo góc thanh menu */
+        }
+        .nav-indicator {
+            position: absolute;
+            height: calc(100% - 20px); 
+            background: #0d9488; 
+            border-radius: 50px; /* Bo góc cục chạy highlight */
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 0;
+            top: 10px;
+            left: 0;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+            pointer-events: none;
+        }
+        nav a { 
+            position: relative; 
+            z-index: 1; 
+            text-decoration: none; 
+            padding: 10px 24px; 
+            display: inline-block; 
+            color: #64748b; 
+            font-weight: 700; 
+            transition: color 0.3s ease;
+            border-radius: 50px;
+            white-space: nowrap;
+        }
+        nav a.active {
+            color: #ffffff !important;
+        }
+
+        /* =========================================
+           4. BỐ CỤC CHIA 2 CỘT & THẺ CARD
+           ========================================= */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        .main-layout { 
+            display: flex; 
+            gap: 40px; 
+            align-items: flex-start; 
+        }
+        .content { flex: 3; min-width: 0; }
+        .sidebar { flex: 1; min-width: 280px; position: sticky; top: 100px; z-index: 10; }
+
+        .card { 
+            background: white; 
+            padding: 35px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); 
+            border: 1px solid #f1f5f9; 
+            margin-bottom: 40px; 
+            transition: transform 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.06); }
+        .card p { line-height: 1.8; color: #475569; font-size: 1.05rem; text-align: justify; margin-bottom: 15px; }
+        
+        h2 { 
+            color: #0f172a; 
+            font-size: 1.8rem; 
+            font-weight: 800; 
+            margin-bottom: 20px; 
+            border-left: 5px solid #0d9488; 
+            padding-left: 15px; 
+            margin-top: 0; 
+        }
+
+        .btn-link { 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 30px; 
+            background: linear-gradient(135deg, #0d9488, #0f766e); 
+            color: white !important; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            transition: 0.3s; 
+            box-shadow: 0 5px 15px rgba(13, 148, 136, 0.25); 
+            font-size: 1.05rem;
+        }
+        .btn-link:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(13, 148, 136, 0.35); }
+
+        .school-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 16px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+        /* =========================================
+           5. CAROUSEL TRƯỢT ẢNH
+           ========================================= */
+        .carousel-wrapper { position: relative; margin-top: 25px; width: 100%; border-radius: 16px; overflow: hidden;}
+        .carousel-container { width: 100%; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;}
+        .carousel-container::-webkit-scrollbar { display: none; }
+        
+        .carousel-slide { display: flex; gap: 15px; padding-bottom: 10px; }
+        .carousel-slide img { 
+            flex: 0 0 calc(100% - 10px); /* 1 ảnh chiếm gần hết màn hình */
+            width: 100%; 
+            height: 350px; 
+            object-fit: cover; 
+            border-radius: 16px; 
+            scroll-snap-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        @media (min-width: 768px) {
+            .carousel-slide img { flex: 0 0 calc(50% - 10px); height: 250px;} /* 2 ảnh trên Desktop */
+        }
+
+        .slider-btn { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: rgba(255,255,255,0.9); 
+            border: none; 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
+            font-size: 18px; 
+            color: #0d9488; 
+            z-index: 10; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            transition: 0.3s; 
+        }
+        .slider-btn:hover { background: #0d9488; color: white; }
+        .left-btn { left: 10px; }
+        .right-btn { right: 10px; }
+
+        /* =========================================
+           6. WIDGETS (CỘT PHẢI)
+           ========================================= */
+        .widget { 
+            background: white; padding: 25px; border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 30px; 
+            border-top: 5px solid #0d9488; 
+        }
+        .widget h3 { 
+            margin-top: 0; color: #0f172a; font-size: 1.3rem; margin-bottom: 15px; 
+            padding-bottom: 15px; border-bottom: 2px dashed #e2e8f0; font-weight: 800;
+        }
+        .widget ul { list-style: none; padding: 0; margin: 0; }
+        .widget ul li { padding: 15px 0; border-bottom: 1px dashed #f1f5f9; }
+        .widget ul li:last-child { border-bottom: none; padding-bottom: 0;}
+        .widget ul li a { 
+            transition: 0.2s; display: block; text-decoration: none; 
+            font-weight: 700; line-height: 1.5;
+        }
+        .widget ul li a:hover { transform: translateX(5px); opacity: 0.8;}
+
+        /* =========================================
+           7. FIX LỖI RESPONSIVE (ĐIỆN THOẠI)
+           ========================================= */
+        @media (max-width: 900px) {
+            header { padding: 60px 15px 40px; }
+            header h1 { font-size: 2rem; }
+            .main-layout { flex-direction: column; }
+            .sidebar { width: 100%; position: static !important; }
+            
+            nav {
+                flex-wrap: nowrap !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                justify-content: flex-start;
+                padding: 10px;
+            }
+            nav::-webkit-scrollbar { display: none; }
+            nav a { padding: 10px 20px; font-size: 0.9rem; }
+            .nav-indicator { top: 8px; height: calc(100% - 16px); }
+        }
+    </style>
 </head>
 <body>
 
@@ -22,7 +281,7 @@
     </nav>
 
     <div class="container">
-        <div style="text-align: center; margin-bottom: 30px;">
+        <div style="text-align: center; margin-bottom: 40px;">
             <a href="https://c3lequydon.daklak.edu.vn/" target="_blank" class="btn-link">
                 🌐 Truy cập Website chính thức của Trường
             </a>
@@ -56,8 +315,8 @@
                         <div class="carousel-wrapper">
                             <button class="slider-btn left-btn" onclick="slideLeft('slider-csvc')">&#10094;</button>
                             
-                            <div class="carousel-container">
-                                <div class="carousel-slide" id="slider-csvc">
+                            <div class="carousel-container" id="slider-csvc">
+                                <div class="carousel-slide">
                                     <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707292828_aeb39043b974418fcc3a4936e6cd69d9.jpg" alt="Phòng học hiện đại">
                                     <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707251765_ad4e3253b3285c5e73edd8f9a459f465.jpg" alt="2">
                                     <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707297633_b4deb119cb4437e8d9b5bf1c63dc4852.jpg" alt="3">
@@ -80,14 +339,16 @@
                         
                         <div class="carousel-wrapper">
                             <button class="slider-btn left-btn" onclick="slideLeft('slider-thanh-tich')">&#10094;</button>
-                            <div class="carousel-container">
-                                <div class="carousel-slide" id="slider-thanh-tich">
+                            
+                            <div class="carousel-container" id="slider-thanh-tich">
+                                <div class="carousel-slide">
                                     <img src="https://i.postimg.cc/d0sskMQn/c5709646-0179-49d1-900b-41e33052330c.jpg" alt="Thành tích 1">
                                     <img src="https://i.postimg.cc/nLSXnVK1/4c5e0449-b645-4fe2-890e-ef22f862fcc4.jpg" alt="Thành tích 2">
                                     <img src="https://i.postimg.cc/wvJgn9wt/649169267_1779965720082262_7412901498933026871_n.jpg" alt="Thành tích 3">
                                     <img src="https://i.postimg.cc/NMTBZQdM/649621949_1779965050082329_612656541181257158_n.jpg" alt="Thành tích 4">
                                 </div>
                             </div>
+                            
                             <button class="slider-btn right-btn" onclick="slideRight('slider-thanh-tich')">&#10095;</button>
                         </div>
                     </div>
@@ -100,8 +361,9 @@
                         
                         <div class="carousel-wrapper">
                             <button class="slider-btn left-btn" onclick="slideLeft('slider-trai-nghiem')">&#10094;</button>
-                            <div class="carousel-container">
-                                <div class="carousel-slide" id="slider-trai-nghiem">
+                            
+                            <div class="carousel-container" id="slider-trai-nghiem">
+                                <div class="carousel-slide">
                                     <img src="https://i.postimg.cc/8PBP1dLy/a1a9ad84_48a5_49c4_829f_1558bcc8e246.jpg" >
                                     <img src="https://i.postimg.cc/QN7dzZCZ/90296a9b_25d7_45df_a631_cd5bc4f70486.jpg" >
                                     <img src="https://i.postimg.cc/3N2r0mVv/35fc3d0e_de30_46ec_94c1_abe281f415d9.jpg" >
@@ -120,11 +382,11 @@
                                     <img src="https://i.postimg.cc/Bb2ZPHk9/2a868b29_6b6a_455e_b6b9_efd1650eb976.jpg" >
                                     <img src="https://i.postimg.cc/Gtv3TGVn/8bd7aef8_82a7_4a11_b999_0518441116ee.jpg" >
                                     <img src="https://i.postimg.cc/SN7NyLcv/be54c7ad_d294_4ea6_a403_26efc1b96382.jpg" >
-									<img src="https://i.postimg.cc/nhPCYCPP/659807948_1796211341791033_352258757976839125_n.jpg" >
-									<img src="https://i.postimg.cc/HkhV4VhN/660913886_1796219698456864_8237463727540544328_n.jpg" >
-									<img src="https://i.postimg.cc/6pmyLymj/659154079_1796219551790212_5110881103081609275_n.jpg" >
-									<img src="https://i.postimg.cc/50xdXmmX/659081424-1796219941790173-7161605135861066737-n.jpg" >
-									<img src="https://i.postimg.cc/FHB7g7BC/656101995_1795430588535775_4843150243819233095_n.jpg" >
+                                    <img src="https://i.postimg.cc/nhPCYCPP/659807948_1796211341791033_352258757976839125_n.jpg" >
+                                    <img src="https://i.postimg.cc/HkhV4VhN/660913886_1796219698456864_8237463727540544328_n.jpg" >
+                                    <img src="https://i.postimg.cc/6pmyLymj/659154079_1796219551790212_5110881103081609275_n.jpg" >
+                                    <img src="https://i.postimg.cc/50xdXmmX/659081424-1796219941790173-7161605135861066737-n.jpg" >
+                                    <img src="https://i.postimg.cc/FHB7g7BC/656101995_1795430588535775_4843150243819233095_n.jpg" >
                                 </div>
                             </div>
                             <button class="slider-btn right-btn" onclick="slideRight('slider-trai-nghiem')">&#10095;</button>
@@ -140,8 +402,8 @@
                         <div class="carousel-wrapper">
                             <button class="slider-btn left-btn" onclick="slideLeft('slider-dinh-huong')">&#10094;</button>
                             
-                            <div class="carousel-container">
-                                <div class="carousel-slide" id="slider-dinh-huong">
+                            <div class="carousel-container" id="slider-dinh-huong">
+                                <div class="carousel-slide">
                                     <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Định hướng 1">
                                     <img src="https://i.postimg.cc/QCYsvm2H/643231454_1770133134398854_5674663032686192200_n.jpg" >
                                 </div>
@@ -153,41 +415,35 @@
                 </section>
             </div>
 
-            <div class="sidebar" style="position: sticky; top: 20px; align-self: flex-start; height: max-content; z-index: 10;">
+            <div class="sidebar">
                 <div class="widget">
                     <h3>📣 Bảng Tin Nhà Trường</h3>
-                    <ul style="list-style: none; padding: 0;">
-                        
-                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
-                            <a href="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2026/03/100-KH_0001.pdf" target="_blank" style="text-decoration: none; color: #0984e3; font-weight: bold;">
+                    <ul>
+                        <li>
+                            <a href="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2026/03/100-KH_0001.pdf" target="_blank" style="color: #0984e3;">
                                 📢 Kế hoạch tuyển sinh năm học 2026-2027 (MỚI)
                             </a>
                         </li>
-
-                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
-                            <a href="lich-thi-thu.png" target="_blank" style="text-decoration: none; color: #e84393; font-weight: bold;">
+                        <li>
+                            <a href="lich-thi-thu.png" target="_blank" style="color: #e84393;">
                                 🌟 Lịch thi thử Tốt nghiệp THPT 2026
                             </a>
                         </li>
-
-                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
-                            <a href="lich-giua-ki.jpeg" target="_blank" style="text-decoration: none; color: #d81b60; font-weight: bold;">
+                        <li>
+                            <a href="lich-giua-ki.jpg" target="_blank" style="color: #d81b60;">
                                 🔥 Lịch kiểm tra giữa kì 2 (02/04 - 04/04)
                             </a>
                         </li>
-                        
-                        <li style="padding: 12px 0; border-bottom: 1px dashed #eee;">
-                            <a href="TKB-9-3-2026.pdf" target="_blank" style="text-decoration: none; color: var(--primary-dark); font-weight: bold;">
+                        <li>
+                            <a href="TKB-9-3-2026.pdf" target="_blank" style="color: #0d9488;">
                                 🚀 Thời khóa biểu MỚI NHẤT (09/03/2026)
                             </a>
                         </li>
-                        
-                        <li style="padding: 12px 0;">
-                            <a href="TKB-2-2-2026.pdf" target="_blank" style="text-decoration: none; color: #666;">
+                        <li>
+                            <a href="TKB-2-2-2026.pdf" target="_blank" style="color: #64748b;">
                                 📅 Thời khóa biểu Cũ (02/02/2026)
                             </a>
                         </li>
-                        
                     </ul>
                 </div>
                 <div class="widget">
@@ -203,7 +459,7 @@
         </div>
     </div>
 
-    <footer style="background-color: #042f2e; color: #ffffff; padding: 40px 20px 20px; margin-top: 50px; border-top: 4px solid var(--primary, #0d9488); font-family: 'Quicksand', sans-serif;">
+    <footer style="background-color: #042f2e; color: #ffffff; padding: 40px 20px 20px; margin-top: 50px; border-top: 4px solid var(--primary, #0d9488);">
         <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 25px; margin-bottom: 20px;">
             
             <div style="flex: 1; min-width: 300px;">
@@ -227,7 +483,7 @@
             </div>
 
             <div style="flex: 1; min-width: 250px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <h3 style="margin: 0 0 5px; font-size: 1.8rem; color: #ffffff; letter-spacing: 2px; font-weight: 800; font-family: 'Quicksand', sans-serif;">TẬP THỂ 12A1</h3>
+                <h3 style="margin: 0 0 5px; font-size: 1.8rem; color: #ffffff; letter-spacing: 2px; font-weight: 800;">TẬP THỂ 12A1</h3>
                 <p style="margin: 0; color: #a1a1aa; font-style: italic; font-size: 0.95rem; max-width: 350px;">"Nơi lưu giữ những thanh xuân rực rỡ nhất..." ✨</p>
             </div>
         </div>
@@ -239,17 +495,17 @@
     </footer>
 
     <script>
-        // Hàm bấm nút lướt ảnh
+        // --- Hàm bám nút lướt ảnh Carousel ---
         function slideLeft(sliderId) {
             const slider = document.getElementById(sliderId);
-            slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
+            if (slider) slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
         }
         function slideRight(sliderId) {
             const slider = document.getElementById(sliderId);
-            slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
+            if (slider) slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
         }
 
-        // Cập nhật trạng thái ẩn/hiện của 2 nút mũi tên
+        // --- Cập nhật trạng thái ẩn/hiện nút mũi tên ---
         function updateSliderButtons(slider) {
             const wrapper = slider.closest('.carousel-wrapper');
             if (!wrapper) return;
@@ -264,34 +520,13 @@
             if (rightBtn) rightBtn.style.display = isAtEnd ? 'none' : 'flex';
         }
 
-        document.querySelectorAll('.carousel-slide').forEach(slider => {
+        document.querySelectorAll('.carousel-container').forEach(slider => {
             updateSliderButtons(slider);
-            slider.addEventListener('scroll', () => {
-                updateSliderButtons(slider);
-            });
-            window.addEventListener('resize', () => {
-                updateSliderButtons(slider);
-            });
+            slider.addEventListener('scroll', () => { updateSliderButtons(slider); });
+            window.addEventListener('resize', () => { updateSliderButtons(slider); });
         });
 
-        // Camera quan sát tạo hiệu ứng
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                } else {
-                    entry.target.classList.remove('active');
-                }
-            });
-        }, {
-            threshold: 0.6 
-        });
-
-        document.querySelectorAll('.carousel-slide img').forEach(img => {
-            observer.observe(img);
-        });
-
-        // Menu trượt
+        // --- SCRIPT MENU TRƯỢT ---
         document.addEventListener("DOMContentLoaded", function() {
             const nav = document.querySelector('nav');
             if (!nav) return;
@@ -304,12 +539,10 @@
             nav.appendChild(indicator);
 
             const links = nav.querySelectorAll('a');
-            
             let activeLink = null;
+            
             links.forEach(link => {
-                if (link.classList.contains('active') || link.getAttribute('style')) {
-                    activeLink = link;
-                }
+                if (link.classList.contains('active') || link.getAttribute('style')) activeLink = link;
             });
 
             if (activeLink) {
@@ -332,16 +565,8 @@
                 element.style.setProperty('color', '#ffffff', 'important');
             }
 
-            links.forEach(link => {
-                link.addEventListener('mouseenter', (e) => {
-                    slideTo(e.target);
-                });
-            });
-
-            nav.addEventListener('mouseleave', () => {
-                if (activeLink) slideTo(activeLink);
-            });
-
+            links.forEach(link => link.addEventListener('mouseenter', (e) => slideTo(e.target)));
+            nav.addEventListener('mouseleave', () => { if (activeLink) slideTo(activeLink); });
             window.addEventListener('resize', () => {
                 if (activeLink) {
                     indicator.style.transition = 'none';
