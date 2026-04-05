@@ -92,11 +92,7 @@
         .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         
         .main-layout { display: flex; gap: 40px; align-items: flex-start; }
-        
-        /* Cột nội dung nới rộng ra */
         .content { flex: 1; min-width: 0; }
-        
-        /* Cột Sidebar thu nhỏ lại chỉ còn 260px */
         .sidebar { width: 260px; flex-shrink: 0; position: sticky; top: 100px; z-index: 10; }
 
         .card { 
@@ -123,14 +119,14 @@
         .school-image { width: 100%; height: 450px; object-fit: cover; border-radius: 16px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: zoom-in; }
 
         /* =========================================
-           5. TRÌNH LƯỚT ẢNH TRANG CHỦ (CHỈ HIỆN 1 ẢNH/LẦN)
+           5. CAROUSEL TRƯỢT ẢNH MƯỢT MÀ (1 ẢNH / LẦN)
            ========================================= */
         .carousel-wrapper { 
             position: relative; margin-top: 20px; width: 100%; 
             border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
         }
         
-        /* Khung cuộn mượt mà dùng CSS Scroll Snap */
+        /* Khung cuộn đã được dọn sạch lớp thẻ dư thừa, ảnh nằm trực tiếp bên trong */
         .carousel-container { 
             width: 100%; display: flex; overflow-x: auto; 
             scroll-snap-type: x mandatory; scrollbar-width: none; 
@@ -138,19 +134,16 @@
         }
         .carousel-container::-webkit-scrollbar { display: none; }
         
-        .carousel-slide { display: flex; width: 100%; }
-        
-        /* Ép chuẩn 100% để hiển thị đúng 1 ảnh mỗi lần trượt */
-        .carousel-slide img { 
+        /* Ép chuẩn 100% để hiển thị đúng 1 ảnh mỗi lần trượt trên cả máy tính lẫn điện thoại */
+        .carousel-container img { 
             flex: 0 0 100%; 
             width: 100%; 
-            height: 450px; /* Làm ảnh cao và to ra */
+            height: 450px; 
             object-fit: cover; 
             scroll-snap-align: center; 
             cursor: zoom-in; 
         }
 
-        /* Nút mũi tên đè lên ảnh ở ngoài màn hình */
         .slider-btn { 
             position: absolute; top: 50%; transform: translateY(-50%); 
             background: rgba(255,255,255,0.85); backdrop-filter: blur(4px);
@@ -242,7 +235,7 @@
             nav a { padding: 10px 20px; font-size: 0.9rem; }
             .nav-indicator { top: 8px; height: calc(100% - 16px); }
 
-            .carousel-slide img, .school-image { height: 280px; }
+            .carousel-container img, .school-image { height: 280px; }
 
             .lightbox-btn { padding: 15px; font-size: 20px; width: 45px; height: 45px;}
             .lightbox-prev { left: 10px; }
@@ -302,14 +295,12 @@
                         <div class="carousel-wrapper">
                             <button class="slider-btn left-btn" onclick="slideLeft(this)">&#10094;</button>
                             <div class="carousel-container">
-                                <div class="carousel-slide">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707292828_aeb39043b974418fcc3a4936e6cd69d9.jpg" alt="Phòng học hiện đại" onclick="openLightbox(this)">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707251765_ad4e3253b3285c5e73edd8f9a459f465.jpg" alt="Khu vực hành lang" onclick="openLightbox(this)">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707297633_b4deb119cb4437e8d9b5bf1c63dc4852.jpg" alt="Lớp học" onclick="openLightbox(this)">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Thư viện trường" onclick="openLightbox(this)">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707263644_a8daf5a35c7de0bb8a97532170283399.jpg" alt="Toàn cảnh sân trường" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/rFkvF1wP/648474636-10224786469967498-5948464086240339413-n.jpg" alt="Hoạt động ngoài trời" onclick="openLightbox(this)">
-                                </div>
+                                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707292828_aeb39043b974418fcc3a4936e6cd69d9.jpg" alt="Phòng học hiện đại" onclick="openLightbox(this)">
+                                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707251765_ad4e3253b3285c5e73edd8f9a459f465.jpg" alt="Khu vực hành lang" onclick="openLightbox(this)">
+                                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707297633_b4deb119cb4437e8d9b5bf1c63dc4852.jpg" alt="Lớp học" onclick="openLightbox(this)">
+                                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Thư viện trường" onclick="openLightbox(this)">
+                                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707263644_a8daf5a35c7de0bb8a97532170283399.jpg" alt="Toàn cảnh sân trường" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/rFkvF1wP/648474636-10224786469967498-5948464086240339413-n.jpg" alt="Hoạt động ngoài trời" onclick="openLightbox(this)">
                             </div>
                             <button class="slider-btn right-btn" onclick="slideRight(this)">&#10095;</button>
                         </div>
@@ -325,12 +316,10 @@
                         <div class="carousel-wrapper">
                             <button class="slider-btn left-btn" onclick="slideLeft(this)">&#10094;</button>
                             <div class="carousel-container">
-                                <div class="carousel-slide">
-                                    <img src="https://i.postimg.cc/d0sskMQn/c5709646-0179-49d1-900b-41e33052330c.jpg" alt="Lễ khen thưởng thành tích xuất sắc" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/nLSXnVK1/4c5e0449-b645-4fe2-890e-ef22f862fcc4.jpg" alt="Vinh danh học sinh giỏi" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/wvJgn9wt/649169267_1779965720082262_7412901498933026871_n.jpg" alt="Thành tích học tập" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/NMTBZQdM/649621949_1779965050082329_612656541181257158_n.jpg" alt="Lễ trao giải thưởng" onclick="openLightbox(this)">
-                                </div>
+                                <img src="https://i.postimg.cc/d0sskMQn/c5709646-0179-49d1-900b-41e33052330c.jpg" alt="Lễ khen thưởng thành tích xuất sắc" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/nLSXnVK1/4c5e0449-b645-4fe2-890e-ef22f862fcc4.jpg" alt="Vinh danh học sinh giỏi" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/wvJgn9wt/649169267_1779965720082262_7412901498933026871_n.jpg" alt="Thành tích học tập" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/NMTBZQdM/649621949_1779965050082329_612656541181257158_n.jpg" alt="Lễ trao giải thưởng" onclick="openLightbox(this)">
                             </div>
                             <button class="slider-btn right-btn" onclick="slideRight(this)">&#10095;</button>
                         </div>
@@ -345,31 +334,29 @@
                         <div class="carousel-wrapper">
                             <button class="slider-btn left-btn" onclick="slideLeft(this)">&#10094;</button>
                             <div class="carousel-container">
-                                <div class="carousel-slide">
-                                    <img src="https://i.postimg.cc/8PBP1dLy/a1a9ad84_48a5_49c4_829f_1558bcc8e246.jpg" alt="Hoạt động ngoại khóa" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/QN7dzZCZ/90296a9b_25d7_45df_a631_cd5bc4f70486.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/3N2r0mVv/35fc3d0e_de30_46ec_94c1_abe281f415d9.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/D03JNvKc/645216532-1773482660730568-569831196013737485-n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/C5bMnkXy/3a097dde_d25f_4a4d_9106_da8df96b39ba.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/Wz0pqgCP/9eecce90_946b_4078_804c_c4f4691500de.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/sDRgdHGg/9789058d_a9b0_4a70_a639_5f046e37ff5d.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/zX1GZ2Hz/25509495_bd0c_470d_8428_6dc69a937c18.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/B6MB9PMv/97b82381-03ca-4da4-829a-65a8f83c980b.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/Xv2kty24/644292794-1770695761009258-4695764314334671109-n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/8PVzQXfw/627961557_1755180529227448_2280733054855332234_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/8cLkfM9f/51c355e4_2689_4f85_b1f9_28c31f2f9b85.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/hPqtWZQP/6156687f_5fd8_4e08_a244_64dcd9b2ab9f.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/HnbW8XRc/9fadb9db_1b16_4207_a979_9bfb15305cab.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/VLBLY9X4/632480967_1755190432559791_4862574392429148443_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/Bb2ZPHk9/2a868b29_6b6a_455e_b6b9_efd1650eb976.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/Gtv3TGVn/8bd7aef8_82a7_4a11_b999_0518441116ee.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/SN7NyLcv/be54c7ad_d294_4ea6_a403_26efc1b96382.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/nhPCYCPP/659807948_1796211341791033_352258757976839125_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/HkhV4VhN/660913886_1796219698456864_8237463727540544328_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/6pmyLymj/659154079_1796219551790212_5110881103081609275_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/50xdXmmX/659081424-1796219941790173-7161605135861066737-n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/FHB7g7BC/656101995_1795430588535775_4843150243819233095_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
-                                </div>
+                                <img src="https://i.postimg.cc/8PBP1dLy/a1a9ad84_48a5_49c4_829f_1558bcc8e246.jpg" alt="Hoạt động ngoại khóa" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/QN7dzZCZ/90296a9b_25d7_45df_a631_cd5bc4f70486.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/3N2r0mVv/35fc3d0e_de30_46ec_94c1_abe281f415d9.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/D03JNvKc/645216532-1773482660730568-569831196013737485-n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/C5bMnkXy/3a097dde_d25f_4a4d_9106_da8df96b39ba.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/Wz0pqgCP/9eecce90_946b_4078_804c_c4f4691500de.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/sDRgdHGg/9789058d_a9b0_4a70_a639_5f046e37ff5d.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/zX1GZ2Hz/25509495_bd0c_470d_8428_6dc69a937c18.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/B6MB9PMv/97b82381-03ca-4da4-829a-65a8f83c980b.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/Xv2kty24/644292794-1770695761009258-4695764314334671109-n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/8PVzQXfw/627961557_1755180529227448_2280733054855332234_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/8cLkfM9f/51c355e4_2689_4f85_b1f9_28c31f2f9b85.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/hPqtWZQP/6156687f_5fd8_4e08_a244_64dcd9b2ab9f.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/HnbW8XRc/9fadb9db_1b16_4207_a979_9bfb15305cab.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/VLBLY9X4/632480967_1755190432559791_4862574392429148443_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/Bb2ZPHk9/2a868b29_6b6a_455e_b6b9_efd1650eb976.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/Gtv3TGVn/8bd7aef8_82a7_4a11_b999_0518441116ee.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/SN7NyLcv/be54c7ad_d294_4ea6_a403_26efc1b96382.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/nhPCYCPP/659807948_1796211341791033_352258757976839125_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/HkhV4VhN/660913886_1796219698456864_8237463727540544328_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/6pmyLymj/659154079_1796219551790212_5110881103081609275_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/50xdXmmX/659081424-1796219941790173-7161605135861066737-n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/FHB7g7BC/656101995_1795430588535775_4843150243819233095_n.jpg" alt="Hoạt động trải nghiệm sáng tạo" onclick="openLightbox(this)">
                             </div>
                             <button class="slider-btn right-btn" onclick="slideRight(this)">&#10095;</button>
                         </div>
@@ -384,10 +371,8 @@
                         <div class="carousel-wrapper">
                             <button class="slider-btn left-btn" onclick="slideLeft(this)">&#10094;</button>
                             <div class="carousel-container">
-                                <div class="carousel-slide">
-                                    <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Định hướng phát triển trường" onclick="openLightbox(this)">
-                                    <img src="https://i.postimg.cc/QCYsvm2H/643231454_1770133134398854_5674663032686192200_n.jpg" alt="Phát triển giáo dục toàn diện" onclick="openLightbox(this)">
-                                </div>
+                                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Định hướng phát triển trường" onclick="openLightbox(this)">
+                                <img src="https://i.postimg.cc/QCYsvm2H/643231454_1770133134398854_5674663032686192200_n.jpg" alt="Phát triển giáo dục toàn diện" onclick="openLightbox(this)">
                             </div>
                             <button class="slider-btn right-btn" onclick="slideRight(this)">&#10095;</button>
                         </div>
@@ -460,7 +445,7 @@
     </div>
 
     <script>
-        // --- 1. SCRIPT MENU TRƯỢT SẠCH SẼ ---
+        // --- 1. SCRIPT MENU TRƯỢT MƯỢT MÀ ---
         document.addEventListener("DOMContentLoaded", function() {
             const nav = document.querySelector('nav');
             if (!nav) return;
@@ -511,7 +496,7 @@
             });
         });
 
-        // --- 2. SCRIPT CAROUSEL (HIỆN 1 ẢNH, CUỘN MƯỢT CÓ NÚT NGOÀI) ---
+        // --- 2. SCRIPT CAROUSEL (MŨI TÊN TRƯỢT ẢNH) ---
         function slideLeft(btn) {
             const container = btn.parentElement.querySelector('.carousel-container');
             if (container) container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
@@ -521,6 +506,7 @@
             if (container) container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
         }
 
+        // Tự động kiểm tra và ẩn/hiện nút mũi tên
         function updateSliderButtons(container) {
             const wrapper = container.closest('.carousel-wrapper');
             if (!wrapper) return;
@@ -530,16 +516,23 @@
             const isAtStart = container.scrollLeft <= 5;
             const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 5;
 
-            if (leftBtn) leftBtn.style.display = isAtStart ? 'none' : 'flex';
-            if (rightBtn) rightBtn.style.display = isAtEnd ? 'none' : 'flex';
+            // Nếu không có đủ ảnh để trượt thì giấu cả 2 nút
+            if (container.scrollWidth <= container.clientWidth + 5) {
+                if (leftBtn) leftBtn.style.display = 'none';
+                if (rightBtn) rightBtn.style.display = 'none';
+            } else {
+                if (leftBtn) leftBtn.style.display = isAtStart ? 'none' : 'flex';
+                if (rightBtn) rightBtn.style.display = isAtEnd ? 'none' : 'flex';
+            }
         }
 
-        document.querySelectorAll('.carousel-container').forEach(container => {
-            // Load thử 1 lần
-            setTimeout(() => updateSliderButtons(container), 100);
-            
-            container.addEventListener('scroll', () => { updateSliderButtons(container); });
-            window.addEventListener('resize', () => { updateSliderButtons(container); });
+        // Chạy lệnh kiểm tra mũi tên sau khi trang load xong hoàn toàn
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.carousel-container').forEach(container => {
+                updateSliderButtons(container);
+                container.addEventListener('scroll', () => { updateSliderButtons(container); });
+                window.addEventListener('resize', () => { updateSliderButtons(container); });
+            });
         });
 
         // --- 3. SCRIPT LIGHTBOX (ĐỘC LẬP TỪNG PHẦN) ---
@@ -554,7 +547,7 @@
             const parentCard = imgElement.closest('.card');
             
             if (parentCard) {
-                // Chỉ lấy các ảnh trong cùng 1 mục (card) đó
+                // Gom tất cả ảnh TRONG CÙNG 1 MỤC đó để cho phép trượt qua lại
                 currentLightboxGroup = Array.from(parentCard.querySelectorAll('img:not(.school-image), img.school-image'));
             } else {
                 currentLightboxGroup = [imgElement];
@@ -565,12 +558,12 @@
 
             updateLightboxView();
             lightbox.style.display = "block";
-            document.body.style.overflow = 'hidden'; 
+            document.body.style.overflow = 'hidden'; // Chống cuộn trang phía sau
         }
 
         function closeLightbox() {
             lightbox.style.display = "none";
-            document.body.style.overflow = 'auto'; 
+            document.body.style.overflow = 'auto'; // Cho phép cuộn trang trở lại
             currentLightboxGroup = []; 
         }
 
