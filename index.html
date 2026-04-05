@@ -41,11 +41,12 @@
             gap: 5px; padding: 12px 15px; background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             position: sticky; top: 15px; z-index: 1000; width: max-content; max-width: 95%;
-            margin: -30px auto 40px; border-radius: 50px; 
+            margin: -30px auto 40px; border-radius: 50px; /* Bo góc thanh menu */
         }
         .nav-indicator {
             position: absolute; height: calc(100% - 20px); background: #0d9488; 
-            border-radius: 50px; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border-radius: 50px; /* Bo góc cục chạy highlight */
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             z-index: 0; top: 10px; left: 0; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3); pointer-events: none;
         }
         nav a { 
@@ -56,13 +57,18 @@
         nav a.active { color: #ffffff !important; }
 
         /* =========================================
-           3. BỐ CỤC: THU NHỎ WIDGET - LÀM TO NỘI DUNG CHÍNH
+           3. BỐ CỤC: THU NHỎ WIDGET - LÀM TO NỘI DUNG CHÍNH CĂN GIỮA
            ========================================= */
         .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         
-        .main-layout { display: flex; gap: 40px; align-items: flex-start; }
-        .content { flex: 1; min-width: 0; }
-        .sidebar { width: 260px; flex-shrink: 0; position: sticky; top: 100px; z-index: 10; }
+        /* Căn giữa toàn bộ cụm cột trái phải */
+        .main-layout { display: flex; gap: 40px; align-items: flex-start; justify-content: center; }
+        
+        /* Giới hạn độ rộng khối nội dung để nhìn gọn gàng ở giữa */
+        .content { width: 100%; max-width: 880px; }
+        
+        /* Thu nhỏ Widget lại còn 230px đẩy về bên phải */
+        .sidebar { width: 230px; flex-shrink: 0; position: sticky; top: 100px; z-index: 10; }
 
         .card { 
             background: white; padding: 35px; border-radius: 20px; 
@@ -189,7 +195,10 @@
            7. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
            ========================================= */
         @media (max-width: 900px) {
+            header { padding: 60px 15px 40px; }
+            header h1 { font-size: 2rem; }
             .main-layout { flex-direction: column; gap: 20px;}
+            .content { max-width: 100%; }
             .sidebar { width: 100%; position: static !important; }
             
             nav {
@@ -471,7 +480,6 @@
             if (container) container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
         }
 
-        // Tự động kiểm tra và ẩn/hiện nút mũi tên
         function updateSliderButtons(container) {
             const wrapper = container.closest('.carousel-wrapper');
             if (!wrapper) return;
@@ -481,7 +489,6 @@
             const isAtStart = container.scrollLeft <= 5;
             const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 5;
 
-            // Nếu không có đủ ảnh để trượt thì giấu cả 2 nút
             if (container.scrollWidth <= container.clientWidth + 5) {
                 if (leftBtn) leftBtn.style.display = 'none';
                 if (rightBtn) rightBtn.style.display = 'none';
@@ -491,10 +498,9 @@
             }
         }
 
-        // Chạy lệnh kiểm tra mũi tên sau khi trang load xong hoàn toàn
         window.addEventListener('load', () => {
             document.querySelectorAll('.carousel-container').forEach(container => {
-                updateSliderButtons(container);
+                setTimeout(() => updateSliderButtons(container), 200);
                 container.addEventListener('scroll', () => { updateSliderButtons(container); });
                 window.addEventListener('resize', () => { updateSliderButtons(container); });
             });
@@ -512,7 +518,6 @@
             const parentCard = imgElement.closest('.card');
             
             if (parentCard) {
-                // Gom tất cả ảnh TRONG CÙNG 1 MỤC đó để cho phép trượt qua lại
                 currentLightboxGroup = Array.from(parentCard.querySelectorAll('img:not(.school-image), img.school-image'));
             } else {
                 currentLightboxGroup = [imgElement];
@@ -523,12 +528,12 @@
 
             updateLightboxView();
             lightbox.style.display = "block";
-            document.body.style.overflow = 'hidden'; // Chống cuộn trang phía sau
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeLightbox() {
             lightbox.style.display = "none";
-            document.body.style.overflow = 'auto'; // Cho phép cuộn trang trở lại
+            document.body.style.overflow = 'auto'; 
             currentLightboxGroup = []; 
         }
 
