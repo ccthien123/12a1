@@ -31,10 +31,41 @@
             font-family: 'Quicksand', sans-serif !important; 
         }
 
-        /* (Phần Header đã được xóa CSS nội bộ để kế thừa hoàn toàn thiết kế nền mờ từ file style.css gốc của bạn) */
+        /* =========================================
+           2. HEADER (HIỆU ỨNG ẢNH NỀN LÀM MỜ)
+           ========================================= */
+        header { 
+            position: relative;
+            color: white; 
+            padding: 80px 20px; 
+            text-align: center; 
+            overflow: hidden; 
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px; 
+            background-image: url('https://i.postimg.cc/QxTqFwHB/166d3dda-316a-4ff6-8b25-dff9bae28292.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: blur(8px) brightness(0.65); 
+            z-index: -1;
+        }
+        header h1 { 
+            margin: 0; font-size: 3rem; font-weight: 900; 
+            letter-spacing: 1px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+            text-transform: uppercase;
+        }
+        header p { 
+            margin-top: 10px; font-size: 1.2rem; font-weight: 600; 
+            color: #ccfbf1; text-shadow: 0 2px 10px rgba(0,0,0,0.5); font-style: italic;
+        }
 
         /* =========================================
-           2. THANH MENU TRƯỢT BO GÓC MƯỢT MÀ
+           3. THANH MENU TRƯỢT BO GÓC MƯỢT MÀ
            ========================================= */
         nav { 
             position: relative; display: flex; justify-content: center; align-items: center; 
@@ -56,30 +87,42 @@
         nav a.active { color: #ffffff !important; }
 
         /* =========================================
-           3. BỐ CỤC: THU NHỎ WIDGET - LÀM TO NỘI DUNG CHÍNH
+           4. BỐ CỤC: THU NHỎ WIDGET - LÀM TO VÀ CĂN GIỮA NỘI DUNG CHÍNH
            ========================================= */
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
-        .main-layout { display: flex; gap: 40px; align-items: flex-start; }
-        .content { flex: 1; min-width: 0; }
-        .sidebar { width: 260px; flex-shrink: 0; position: sticky; top: 100px; z-index: 10; }
+        .main-layout { display: flex; gap: 40px; align-items: flex-start; justify-content: center;}
+        
+        /* Cột nội dung chính */
+        .content { flex: 1; min-width: 0; max-width: 820px; }
+        
+        /* Cột Sidebar (Widget) thu gọn nhẹ nhàng bên phải */
+        .sidebar { width: 280px; flex-shrink: 0; position: sticky; top: 100px; z-index: 10; }
 
         .card { 
             background: white; padding: 35px; border-radius: 20px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid #f1f5f9; 
-            margin-bottom: 40px; transition: transform 0.3s;
+            margin-bottom: 50px; transition: transform 0.3s;
         }
         .card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.06); }
-        .card p { line-height: 1.8; color: #475569; font-size: 1.1rem; text-align: justify; margin-bottom: 15px; }
+        .card p { line-height: 1.8; color: #475569; font-size: 1.05rem; text-align: justify; margin-bottom: 15px; }
         
+        /* Tiêu đề căn giữa tuyệt đối, không vạch kẻ theo đúng yêu cầu */
         h2 { 
-            color: #0f172a; font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; 
-            border-left: 5px solid #0d9488; padding-left: 15px; margin-top: 0; 
+            color: #0f172a; 
+            font-size: 2rem; 
+            font-weight: 800; 
+            margin-bottom: 25px; 
+            margin-top: 0; 
+            text-align: center; /* Căn giữa */
+            text-transform: capitalize;
+            border: none !important; /* Bỏ gạch dọc */
+            padding: 0 !important;
         }
 
         .btn-link { 
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 14px 30px; background: linear-gradient(135deg, #0d9488, #0f766e); 
+            padding: 14px 35px; background: linear-gradient(135deg, #0d9488, #0f766e); 
             color: white !important; text-decoration: none; border-radius: 50px; font-weight: bold; 
             transition: 0.3s; box-shadow: 0 5px 15px rgba(13, 148, 136, 0.25); font-size: 1.05rem;
         }
@@ -88,7 +131,7 @@
         .school-image { width: 100%; height: 450px; object-fit: cover; border-radius: 16px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: zoom-in; }
 
         /* =========================================
-           4. CAROUSEL TRƯỢT ẢNH MƯỢT MÀ (1 ẢNH / LẦN)
+           5. CAROUSEL TRƯỢT ẢNH MƯỢT MÀ (1 ẢNH / LẦN)
            ========================================= */
         .carousel-wrapper { 
             position: relative; margin-top: 20px; width: 100%; 
@@ -124,15 +167,15 @@
         .right-btn { right: 15px; }
 
         /* =========================================
-           5. WIDGETS (CỘT BẢNG TIN BÊN PHẢI)
+           6. WIDGETS (CỘT BẢNG TIN BÊN PHẢI)
            ========================================= */
         .widget { 
-            background: white; padding: 20px; border-radius: 20px; 
+            background: white; padding: 25px; border-radius: 20px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 25px; 
             border-top: 5px solid #0d9488; 
         }
         .widget h3 { 
-            margin-top: 0; color: #0f172a; font-size: 1.2rem; margin-bottom: 12px; 
+            margin-top: 0; color: #0f172a; font-size: 1.25rem; margin-bottom: 15px; 
             padding-bottom: 12px; border-bottom: 2px dashed #e2e8f0; font-weight: 800;
         }
         .widget ul { list-style: none; padding: 0; margin: 0; }
@@ -150,7 +193,7 @@
         .link-teal { color: #0d9488 !important; }
 
         /* =========================================
-           6. LIGHTBOX (TRÌNH XEM ẢNH FULL MÀN HÌNH)
+           7. LIGHTBOX (TRÌNH XEM ẢNH FULL MÀN HÌNH)
            ========================================= */
         .lightbox {
             display: none; position: fixed; z-index: 9999; padding-top: 20px; 
@@ -186,10 +229,13 @@
         .lightbox-btn:hover { background-color: #0d9488; transform: translateY(-50%) scale(1.1); }
 
         /* =========================================
-           7. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
+           8. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
            ========================================= */
         @media (max-width: 900px) {
+            header { padding: 60px 15px 40px; }
+            header h1 { font-size: 2rem; }
             .main-layout { flex-direction: column; gap: 20px;}
+            .content { max-width: 100%; }
             .sidebar { width: 100%; position: static !important; }
             
             nav {
@@ -226,7 +272,7 @@
     </nav>
 
     <div class="container">
-        <div style="text-align: center; margin-bottom: 40px;">
+        <div style="text-align: center; margin-bottom: 50px;">
             <a href="https://c3lequydon.daklak.edu.vn/" target="_blank" class="btn-link">
                 <i class="fas fa-globe"></i> Truy cập Website chính thức của Trường
             </a>
@@ -236,7 +282,7 @@
             <div class="content">
                 
                 <section>
-                    <h2 style="margin-top: 0;">Lịch Sử Hình Thành</h2>
+                    <h2>Lịch Sử Hình Thành</h2>
                     <div class="card">
                         <p>Tọa lạc tại phường Buôn Ma Thuột, tỉnh Đắk Lắk, là trường trung học phổ thông công lập được thành lập năm 2000. Trải qua 26 năm xây dựng và phát triển (2000 – 2026), nhà trường đã từng bước khẳng định vị thế là một cơ sở giáo dục ổn định, uy tín, được phụ huynh tin tưởng và học sinh lựa chọn.</p>
                         <p>Từ những ngày đầu còn nhiều khó khăn về cơ sở vật chất và quy mô đào tạo, đến nay Trường THPT Lê Quý Đôn đã không ngừng nỗ lực đổi mới, nâng cao chất lượng giáo dục, hướng đến mục tiêu phát triển toàn diện học sinh cả về tri thức, kỹ năng và nhân cách.</p>
@@ -461,7 +507,7 @@
             });
         });
 
-        // --- 2. SCRIPT CAROUSEL (MŨI TÊN TRƯỢT ẢNH) ---
+        // --- 2. SCRIPT CAROUSEL (MŨI TÊN TRƯỢT ẢNH CÓ KIỂM TRA TẢI) ---
         function slideLeft(btn) {
             const container = btn.parentElement.querySelector('.carousel-container');
             if (container) container.scrollBy({ left: -container.clientWidth, behavior: 'smooth' });
@@ -471,7 +517,7 @@
             if (container) container.scrollBy({ left: container.clientWidth, behavior: 'smooth' });
         }
 
-        // Tự động kiểm tra và ẩn/hiện nút mũi tên
+        // Tự động kiểm tra và ẩn/hiện nút mũi tên an toàn
         function updateSliderButtons(container) {
             const wrapper = container.closest('.carousel-wrapper');
             if (!wrapper) return;
@@ -481,7 +527,7 @@
             const isAtStart = container.scrollLeft <= 5;
             const isAtEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 5;
 
-            // Nếu không có đủ ảnh để trượt thì giấu cả 2 nút
+            // Nếu danh sách ảnh không dài hơn khung hiển thị thì giấu mũi tên đi
             if (container.scrollWidth <= container.clientWidth + 5) {
                 if (leftBtn) leftBtn.style.display = 'none';
                 if (rightBtn) rightBtn.style.display = 'none';
@@ -491,10 +537,12 @@
             }
         }
 
-        // Chạy lệnh kiểm tra mũi tên sau khi trang load xong hoàn toàn
+        // Đợi trang tải xong, hình ảnh hiện hình rõ ràng thì mới tính toán độ dài
         window.addEventListener('load', () => {
             document.querySelectorAll('.carousel-container').forEach(container => {
-                updateSliderButtons(container);
+                // Cố tình delay 1 chút để trình duyệt render xong ảnh hoàn toàn
+                setTimeout(() => updateSliderButtons(container), 200);
+                
                 container.addEventListener('scroll', () => { updateSliderButtons(container); });
                 window.addEventListener('resize', () => { updateSliderButtons(container); });
             });
@@ -512,7 +560,6 @@
             const parentCard = imgElement.closest('.card');
             
             if (parentCard) {
-                // Gom tất cả ảnh TRONG CÙNG 1 MỤC đó để cho phép trượt qua lại
                 currentLightboxGroup = Array.from(parentCard.querySelectorAll('img:not(.school-image), img.school-image'));
             } else {
                 currentLightboxGroup = [imgElement];
@@ -523,12 +570,12 @@
 
             updateLightboxView();
             lightbox.style.display = "block";
-            document.body.style.overflow = 'hidden'; // Chống cuộn trang phía sau
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeLightbox() {
             lightbox.style.display = "none";
-            document.body.style.overflow = 'auto'; // Cho phép cuộn trang trở lại
+            document.body.style.overflow = 'auto'; 
             currentLightboxGroup = []; 
         }
 
