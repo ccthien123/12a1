@@ -214,28 +214,13 @@
             box-shadow: 0 15px 40px rgba(13, 148, 136, 0.15);
         }
         .admin-avatar {
-            width: 140px;
-            height: 140px;
+            width: 180px;  /* Đã tăng kích thước ảnh */
+            height: 180px; /* Đã tăng kích thước ảnh */
             border-radius: 50%;
             object-fit: cover;
             margin: 0 auto 20px;
             border: 4px solid #f1f5f9;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .admin-role {
-            display: inline-block;
-            background: #e0f2f1;
-            color: #0f766e;
-            padding: 6px 18px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            letter-spacing: 0.5px;
-        }
-        .admin-card:nth-child(2) .admin-role {
-            background: #ffe4e6;
-            color: #e11d48;
         }
         .admin-desc {
             color: #475569;
@@ -255,6 +240,7 @@
                 border-top: 8px solid white; border-bottom: none;
             }
             .student-card:hover .student-info { transform: translateX(-50%) translateY(0); }
+            .admin-avatar { width: 160px; height: 160px; } /* Nhỏ lại 1 chút trên điện thoại cho cân đối */
         }
     </style>
 </head>
@@ -553,8 +539,7 @@
             <div class="admin-grid">
                 <div class="admin-card">
                     <img src="https://i.postimg.cc/wMcgcHHB/f2e8ab16_d0cd_46a7_a581_c3b152897fb9.jpg" alt="Chung Chí Thiện" class="admin-avatar">
-                    <h3 style="margin: 0 0 10px; color: #0f172a; font-size: 1.5rem; font-weight: 800;">Chung Chí Thiện</h3>
-                    <div class="admin-role">Trưởng Ban Kỹ Thuật (Developer)</div>
+                    <h3 style="margin: 0 0 15px; color: #0f172a; font-size: 1.6rem; font-weight: 800;">Chung Chí Thiện</h3>
                     <div style="margin-bottom: 15px;">
                         <strong style="color: #0d9488; font-size: 0.9rem; text-transform: uppercase;">Nguyện vọng:</strong><br>
                         <span style="font-weight: 700; color: #334155;">HCMUT - Thiết kế vi mạch</span>
@@ -564,8 +549,7 @@
 
                 <div class="admin-card">
                     <img src="https://i.postimg.cc/fyxT2m7w/IVL3820.jpg" alt="Kiều Tuấn Kiệt Anh" class="admin-avatar">
-                    <h3 style="margin: 0 0 10px; color: #0f172a; font-size: 1.5rem; font-weight: 800;">Kiều Tuấn Kiệt Anh</h3>
-                    <div class="admin-role">Trưởng Ban Nội Dung & Thiết Kế</div>
+                    <h3 style="margin: 0 0 15px; color: #0f172a; font-size: 1.6rem; font-weight: 800;">Kiều Tuấn Kiệt Anh</h3>
                     <div style="margin-bottom: 15px;">
                         <strong style="color: #FF416C; font-size: 0.9rem; text-transform: uppercase;">Nguyện vọng:</strong><br>
                         <span style="font-weight: 700; color: #334155;">Học viện An ninh - An ninh mạng</span>
@@ -605,7 +589,7 @@
         </div>
         <div style="text-align: center; color: #71717a; font-size: 0.8rem;">
             <p style="margin: 0 0 5px;">© 2026 - Bản quyền nội dung thuộc Tập thể Lớp 12A1 - THPT Lê Quý Đôn.</p>
-            <p style="margin: 0;">Phát triển và thiết kế bởi <strong style="color: #FF416C;">Chung Chí Thiện</strong> & <strong style="color: #FF416C;">Kiều Tuấn Kiệt Anh</strong></p>
+            <p style="margin: 0;">Phát triển và thiết kế bởi <strong style="color: #f43f5e;">Chung Chí Thiện</strong> & <strong style="color: #f43f5e;">Kiều Tuấn Kiệt Anh</strong></p>
         </div>
     </footer>
 
@@ -625,10 +609,12 @@
             const links = nav.querySelectorAll('a');
             let activeLink = null;
             
+            // Tìm mục đang active
             links.forEach(link => {
                 if (link.classList.contains('active') || link.getAttribute('style')) activeLink = link;
             });
 
+            // Gắn vị trí ban đầu (không có hiệu ứng trượt)
             if (activeLink) {
                 indicator.style.transition = 'none';
                 indicator.style.width = `${activeLink.offsetWidth}px`;
@@ -638,6 +624,7 @@
                 indicator.style.transition = 'all 0.4s cubic-bezier(0.25, 1, 0.5, 1)';
             }
 
+            // Hàm trượt cục nền xanh
             function slideTo(element) {
                 if (!element) return;
                 indicator.style.width = `${element.offsetWidth}px`;
@@ -649,8 +636,11 @@
                 element.style.setProperty('color', '#ffffff', 'important');
             }
 
+            // Sự kiện rê chuột
             links.forEach(link => link.addEventListener('mouseenter', (e) => slideTo(e.target)));
             nav.addEventListener('mouseleave', () => { if (activeLink) slideTo(activeLink); });
+            
+            // Căn chỉnh lại khi xoay/đổi kích thước màn hình
             window.addEventListener('resize', () => {
                 if (activeLink) {
                     indicator.style.transition = 'none';
