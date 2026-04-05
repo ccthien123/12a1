@@ -31,22 +31,52 @@
             font-family: 'Quicksand', sans-serif !important; 
         }
 
-        /* (Phần Header đã được xóa CSS nội bộ để kế thừa hoàn toàn thiết kế nền mờ từ file style.css gốc của bạn) */
+        /* =========================================
+           2. HEADER (HIỆU ỨNG ẢNH NỀN LÀM MỜ)
+           ========================================= */
+        header { 
+            position: relative;
+            color: white; 
+            padding: 80px 20px; 
+            text-align: center; 
+            overflow: hidden; 
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        header::before {
+            content: "";
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px; 
+            background-image: url('https://i.postimg.cc/QxTqFwHB/166d3dda-316a-4ff6-8b25-dff9bae28292.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: blur(8px) brightness(0.65); 
+            z-index: -1;
+        }
+        header h1 { 
+            margin: 0; font-size: 3rem; font-weight: 900; 
+            letter-spacing: 1px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+            text-transform: uppercase;
+        }
+        header p { 
+            margin-top: 10px; font-size: 1.2rem; font-weight: 600; 
+            color: #ccfbf1; text-shadow: 0 2px 10px rgba(0,0,0,0.5); font-style: italic;
+        }
 
         /* =========================================
-           2. THANH MENU TRƯỢT BO GÓC MƯỢT MÀ
+           3. THANH MENU TRƯỢT BO GÓC MƯỢT MÀ
            ========================================= */
         nav { 
             position: relative; display: flex; justify-content: center; align-items: center; 
             gap: 5px; padding: 12px 15px; background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             position: sticky; top: 15px; z-index: 1000; width: max-content; max-width: 95%;
-            margin: -30px auto 40px; border-radius: 50px; /* Bo góc thanh menu */
+            margin: -30px auto 40px; border-radius: 50px; 
         }
         .nav-indicator {
             position: absolute; height: calc(100% - 20px); background: #0d9488; 
-            border-radius: 50px; /* Bo góc cục chạy highlight */
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border-radius: 50px; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             z-index: 0; top: 10px; left: 0; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3); pointer-events: none;
         }
         nav a { 
@@ -57,17 +87,17 @@
         nav a.active { color: #ffffff !important; }
 
         /* =========================================
-           3. BỐ CỤC: THU NHỎ WIDGET - LÀM TO NỘI DUNG CHÍNH CĂN GIỮA
+           4. BỐ CỤC: THU NHỎ WIDGET - CĂN GIỮA NỘI DUNG CHÍNH
            ========================================= */
         .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         
-        /* Căn giữa toàn bộ cụm cột trái phải */
-        .main-layout { display: flex; gap: 40px; align-items: flex-start; justify-content: center; }
+        /* Chỉnh ở đây: Cho phép toàn bộ khối chứa được đẩy vào chính giữa */
+        .main-layout { display: flex; gap: 30px; align-items: flex-start; justify-content: center; }
         
-        /* Giới hạn độ rộng khối nội dung để nhìn gọn gàng ở giữa */
-        .content { width: 100%; max-width: 880px; }
+        /* Chỉnh ở đây: Bóp giới hạn chiều rộng nội dung chính để nó không bè ra quá to */
+        .content { width: 100%; max-width: 860px; }
         
-        /* Thu nhỏ Widget lại còn 230px đẩy về bên phải */
+        /* Chỉnh ở đây: Thu nhỏ Sidebar xuống còn 230px */
         .sidebar { width: 230px; flex-shrink: 0; position: sticky; top: 100px; z-index: 10; }
 
         .card { 
@@ -78,9 +108,10 @@
         .card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.06); }
         .card p { line-height: 1.8; color: #475569; font-size: 1.1rem; text-align: justify; margin-bottom: 15px; }
         
+        /* Chỉnh tiêu đề căn giữa cho đồng bộ */
         h2 { 
             color: #0f172a; font-size: 1.8rem; font-weight: 800; margin-bottom: 20px; 
-            border-left: 5px solid #0d9488; padding-left: 15px; margin-top: 0; 
+            margin-top: 0; text-align: center; text-transform: uppercase;
         }
 
         .btn-link { 
@@ -94,7 +125,7 @@
         .school-image { width: 100%; height: 450px; object-fit: cover; border-radius: 16px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: zoom-in; }
 
         /* =========================================
-           4. CAROUSEL TRƯỢT ẢNH MƯỢT MÀ (1 ẢNH / LẦN)
+           5. CAROUSEL TRƯỢT ẢNH MƯỢT MÀ (1 ẢNH / LẦN)
            ========================================= */
         .carousel-wrapper { 
             position: relative; margin-top: 20px; width: 100%; 
@@ -130,15 +161,15 @@
         .right-btn { right: 15px; }
 
         /* =========================================
-           5. WIDGETS (CỘT BẢNG TIN BÊN PHẢI)
+           6. WIDGETS (CỘT BẢNG TIN BÊN PHẢI ĐÃ THU NHỎ)
            ========================================= */
         .widget { 
-            background: white; padding: 20px; border-radius: 20px; 
+            background: white; padding: 20px; border-radius: 16px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 25px; 
             border-top: 5px solid #0d9488; 
         }
         .widget h3 { 
-            margin-top: 0; color: #0f172a; font-size: 1.2rem; margin-bottom: 12px; 
+            margin-top: 0; color: #0f172a; font-size: 1.15rem; margin-bottom: 12px; 
             padding-bottom: 12px; border-bottom: 2px dashed #e2e8f0; font-weight: 800;
         }
         .widget ul { list-style: none; padding: 0; margin: 0; }
@@ -146,7 +177,7 @@
         .widget ul li:last-child { border-bottom: none; padding-bottom: 0;}
         .widget ul li a { 
             transition: 0.2s; display: block; text-decoration: none; 
-            font-weight: 700; line-height: 1.5; color: #475569; font-size: 0.95rem;
+            font-weight: 700; line-height: 1.4; color: #475569; font-size: 0.9rem;
         }
         .widget ul li a:hover { transform: translateX(5px); opacity: 0.8;}
         
@@ -156,7 +187,7 @@
         .link-teal { color: #0d9488 !important; }
 
         /* =========================================
-           6. LIGHTBOX (TRÌNH XEM ẢNH FULL MÀN HÌNH)
+           7. LIGHTBOX (TRÌNH XEM ẢNH FULL MÀN HÌNH)
            ========================================= */
         .lightbox {
             display: none; position: fixed; z-index: 9999; padding-top: 20px; 
@@ -192,7 +223,7 @@
         .lightbox-btn:hover { background-color: #0d9488; transform: translateY(-50%) scale(1.1); }
 
         /* =========================================
-           7. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
+           8. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
            ========================================= */
         @media (max-width: 900px) {
             header { padding: 60px 15px 40px; }
@@ -269,7 +300,7 @@
                         <div class="carousel-wrapper">
                             <button class="slider-btn left-btn" onclick="slideLeft(this)">&#10094;</button>
                             <div class="carousel-container">
-                                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707292828_aeb39043b974418fcc3a4936e6cd69d9.jpg" alt="Khu vực học thể dục" onclick="openLightbox(this)">
+                                <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707292828_aeb39043b974418fcc3a4936e6cd69d9.jpg" alt="Phòng học hiện đại" onclick="openLightbox(this)">
                                 <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707251765_ad4e3253b3285c5e73edd8f9a459f465.jpg" alt="Nhà đa năng của trường" onclick="openLightbox(this)">
                                 <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707297633_b4deb119cb4437e8d9b5bf1c63dc4852.jpg" alt="Sân bóng đá" onclick="openLightbox(this)">
                                 <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Phòng STEM" onclick="openLightbox(this)">
@@ -345,10 +376,12 @@
                         
                         <div class="carousel-wrapper">
                             <button class="slider-btn left-btn" onclick="slideLeft(this)">&#10094;</button>
+                            
                             <div class="carousel-container">
                                 <img src="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2017/02/z7455707258734_78c1bbf5b48a6ef9f3e60f75b6416929.jpg" alt="Phòng STEM" onclick="openLightbox(this)">
                                 <img src="https://i.postimg.cc/QCYsvm2H/643231454_1770133134398854_5674663032686192200_n.jpg" alt="Phòng STEM" onclick="openLightbox(this)">
                             </div>
+
                             <button class="slider-btn right-btn" onclick="slideRight(this)">&#10095;</button>
                         </div>
                     </div>
@@ -359,11 +392,31 @@
                 <div class="widget">
                     <h3>📣 Bảng Tin Nhà Trường</h3>
                     <ul>
-                        <li><a href="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2026/03/100-KH_0001.pdf" target="_blank" class="link-blue">📢 Kế hoạch tuyển sinh năm học 2026-2027 (MỚI)</a></li>
-                        <li><a href="lich-thi-thu.png" target="_blank" class="link-pink">🌟 Lịch thi thử Tốt nghiệp THPT 2026</a></li>
-                        <li><a href="lich-giua-ki.jpg" target="_blank" class="link-red">🔥 Lịch kiểm tra giữa kì 2 (02/04 - 04/04)</a></li>
-                        <li><a href="TKB-9-3-2026.pdf" target="_blank" class="link-teal">🚀 Thời khóa biểu MỚI NHẤT (09/03/2026)</a></li>
-                        <li><a href="TKB-2-2-2026.pdf" target="_blank" class="link-gray">📅 Thời khóa biểu Cũ (02/02/2026)</a></li>
+                        <li>
+                            <a href="https://c3lequydon.daklak.edu.vn/wp-content/uploads/2026/03/100-KH_0001.pdf" target="_blank" class="link-blue">
+                                📢 Kế hoạch tuyển sinh năm học 2026-2027 (MỚI)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="lich-thi-thu.png" target="_blank" class="link-pink">
+                                🌟 Lịch thi thử Tốt nghiệp THPT 2026
+                            </a>
+                        </li>
+                        <li>
+                            <a href="lich-giua-ki.jpeg" target="_blank" class="link-red">
+                                🔥 Lịch kiểm tra giữa kì 2 (02/04 - 04/04)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="TKB-9-3-2026.pdf" target="_blank" class="link-teal">
+                                🚀 Thời khóa biểu MỚI NHẤT (09/03/2026)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="TKB-2-2-2026.pdf" target="_blank" class="link-gray">
+                                📅 Thời khóa biểu Cũ (02/02/2026)
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="widget">
@@ -379,8 +432,9 @@
         </div>
     </div>
 
-    <footer style="background-color: #042f2e; color: #ffffff; padding: 40px 20px 20px; margin-top: 50px; border-top: 4px solid #0d9488;">
+    <footer style="background-color: #042f2e; color: #ffffff; padding: 40px 20px 20px; margin-top: 50px; border-top: 4px solid var(--primary, #0d9488); font-family: 'Quicksand', sans-serif;">
         <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 25px; margin-bottom: 20px;">
+            
             <div style="flex: 1; min-width: 300px;">
                 <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
                     <div style="width: 60px; height: 60px; background: white; border-radius: 12px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); overflow: hidden; padding: 5px;">
