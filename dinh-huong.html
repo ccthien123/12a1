@@ -30,50 +30,42 @@
             font-family: 'Quicksand', sans-serif !important; 
         }
 
+        /* --- MENU TRƯỢT --- */
         nav { 
             position: relative; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             gap: 5px; 
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 15px 20px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             position: sticky;
-            top: 15px;
-            z-index: 1000;
-            width: max-content; 
-            max-width: 95%;
-            margin: -30px auto 40px; 
-            border-radius: 50px; /* Bo góc thanh menu */
+            top: 0;
+            z-index: 100;
         }
         .nav-indicator {
             position: absolute;
-            height: calc(100% - 20px); 
-            background: #0d9488; 
-            border-radius: 50px; /* Bo góc cục chạy highlight */
+            height: 42px; 
+            background: #0d9488;
+            border-radius: 50px;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             z-index: 0;
-            top: 10px;
+            top: 50%;
+            margin-top: -21px; 
             left: 0;
             box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
-            pointer-events: none;
         }
         nav a { 
             position: relative; 
             z-index: 1; 
             text-decoration: none; 
-            padding: 10px 24px; 
+            padding: 10px 25px; 
             display: inline-block; 
             color: #64748b; 
             font-weight: 700; 
-            transition: color 0.3s ease;
+            transition: 0.3s;
             border-radius: 50px;
-            white-space: nowrap;
-        }
-        nav a.active {
-            color: #ffffff !important;
         }
 
         /* --- CSS BỐ CỤC CHUNG --- */
@@ -266,7 +258,7 @@
                 </div>
             </div>
             <div class="countdown-card">
-                <h3 style="color: #0f172a; margin-top: 0; font-size: 1.4rem;">ĐGNL V-ACT Đợt I</h3>
+                <h3 style="color: #0f172a; margin-top: 0; font-size: 1.4rem;">ĐGNL V-ACT Đợt 2</h3>
                 <div class="timer-horizontal" id="timer-vact">
                     <div class="time-box-square"><span id="vact-days">00</span><p>Ngày</p></div>
                     <div class="time-box-square"><span id="vact-hours">00</span><p>Giờ</p></div>
@@ -478,13 +470,13 @@
                 </div>
             </div>
             <div style="flex: 1; min-width: 250px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <h3 style="margin: 0 0 5px; font-size: 1.8rem; color: #ffffff; letter-spacing: 2px; font-weight: 800; font-family: 'Quicksand', sans-serif;">TẬP THỂ 12A1</h3>
+                <h3 style="margin: 0 0 5px; font-size: 1.8rem; color: #ffffff; letter-spacing: 2px; font-weight: 800;">TẬP THỂ 12A1</h3>
                 <p style="margin: 0; color: #a1a1aa; font-style: italic; font-size: 0.95rem; max-width: 350px;">"Nơi lưu giữ những thanh xuân rực rỡ nhất..." ✨</p>
             </div>
         </div>
         <div style="text-align: center; color: #71717a; font-size: 0.8rem;">
             <p style="margin: 0 0 5px;">© 2026 - Bản quyền nội dung thuộc Tập thể Lớp 12A1 - THPT Lê Quý Đôn.</p>
-            <p style="margin: 0;">Phát triển và thiết kế bởi <strong style="color: #FF416C;">Chung Chí Thiện</strong> & <strong style="color: #FF416C;">Kiều Tuấn Kiệt Anh</strong></p>
+            <p style="margin: 0;">Phát triển và thiết kế bởi <strong style="color: #f43f5e;">Chung Chí Thiện</strong> & <strong style="color: #f43f5e;">Kiều Tuấn Kiệt Anh</strong></p>
         </div>
     </footer>
 
@@ -553,7 +545,7 @@
             }, 1000);
         }
         startCountdown("2026-06-11T07:30:00", "thpt"); 
-        startCountdown("2026-04-05T07:30:00", "vact");
+        startCountdown("2026-05-24T07:30:00", "vact");
 
         // --- 3. TÍNH ĐIỂM TỐT NGHIỆP ---
         function getV(id) { 
