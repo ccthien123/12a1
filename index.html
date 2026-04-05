@@ -31,78 +31,32 @@
             font-family: 'Quicksand', sans-serif !important; 
         }
 
-        /* =========================================
-           2. HEADER (HIỆU ỨNG ẢNH NỀN LÀM MỜ)
-           ========================================= */
-        header { 
-            position: relative;
-            color: white; 
-            padding: 80px 20px; 
-            text-align: center; 
-            overflow: hidden; 
-            z-index: 1;
-            margin-bottom: 20px;
-        }
-        header::before {
-            content: "";
-            position: absolute;
-            top: -10px; left: -10px; right: -10px; bottom: -10px; 
-            background-image: url('https://i.postimg.cc/QxTqFwHB/166d3dda-316a-4ff6-8b25-dff9bae28292.jpg'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            filter: blur(8px) brightness(0.65); 
-            z-index: -1;
-        
-       
+        /* (Phần Header đã được xóa CSS nội bộ để kế thừa hoàn toàn thiết kế nền mờ từ file style.css gốc của bạn) */
 
-       nav { 
-            position: relative; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 5px; 
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            position: sticky;
-            top: 15px;
-            z-index: 1000;
-            width: max-content; 
-            max-width: 95%;
-            margin: -30px auto 40px; 
-            border-radius: 50px; /* Bo góc thanh menu */
+        /* =========================================
+           2. THANH MENU TRƯỢT BO GÓC MƯỢT MÀ
+           ========================================= */
+        nav { 
+            position: relative; display: flex; justify-content: center; align-items: center; 
+            gap: 5px; padding: 12px 15px; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: sticky; top: 15px; z-index: 1000; width: max-content; max-width: 95%;
+            margin: -30px auto 40px; border-radius: 50px; 
         }
         .nav-indicator {
-            position: absolute;
-            height: calc(100% - 20px); 
-            background: #0d9488; 
-            border-radius: 50px; /* Bo góc cục chạy highlight */
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-            z-index: 0;
-            top: 10px;
-            left: 0;
-            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
-            pointer-events: none;
+            position: absolute; height: calc(100% - 20px); background: #0d9488; 
+            border-radius: 50px; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 0; top: 10px; left: 0; box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3); pointer-events: none;
         }
         nav a { 
-            position: relative; 
-            z-index: 1; 
-            text-decoration: none; 
-            padding: 10px 24px; 
-            display: inline-block; 
-            color: #64748b; 
-            font-weight: 700; 
-            transition: color 0.3s ease;
-            border-radius: 50px;
-            white-space: nowrap;
+            position: relative; z-index: 1; text-decoration: none; padding: 10px 24px; 
+            display: inline-block; color: #64748b; font-weight: 700; transition: color 0.3s ease;
+            border-radius: 50px; white-space: nowrap;
         }
-        nav a.active {
-            color: #ffffff !important;
-        }
+        nav a.active { color: #ffffff !important; }
+
         /* =========================================
-           4. BỐ CỤC: THU NHỎ WIDGET - LÀM TO NỘI DUNG CHÍNH
+           3. BỐ CỤC: THU NHỎ WIDGET - LÀM TO NỘI DUNG CHÍNH
            ========================================= */
         .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
         
@@ -134,14 +88,13 @@
         .school-image { width: 100%; height: 450px; object-fit: cover; border-radius: 16px; margin-top: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); cursor: zoom-in; }
 
         /* =========================================
-           5. CAROUSEL TRƯỢT ẢNH MƯỢT MÀ (1 ẢNH / LẦN)
+           4. CAROUSEL TRƯỢT ẢNH MƯỢT MÀ (1 ẢNH / LẦN)
            ========================================= */
         .carousel-wrapper { 
             position: relative; margin-top: 20px; width: 100%; 
             border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
         }
         
-        /* Khung cuộn đã được dọn sạch lớp thẻ dư thừa, ảnh nằm trực tiếp bên trong */
         .carousel-container { 
             width: 100%; display: flex; overflow-x: auto; 
             scroll-snap-type: x mandatory; scrollbar-width: none; 
@@ -149,7 +102,6 @@
         }
         .carousel-container::-webkit-scrollbar { display: none; }
         
-        /* Ép chuẩn 100% để hiển thị đúng 1 ảnh mỗi lần trượt trên cả máy tính lẫn điện thoại */
         .carousel-container img { 
             flex: 0 0 100%; 
             width: 100%; 
@@ -172,7 +124,7 @@
         .right-btn { right: 15px; }
 
         /* =========================================
-           6. WIDGETS (CỘT BẢNG TIN BÊN PHẢI)
+           5. WIDGETS (CỘT BẢNG TIN BÊN PHẢI)
            ========================================= */
         .widget { 
             background: white; padding: 20px; border-radius: 20px; 
@@ -198,7 +150,7 @@
         .link-teal { color: #0d9488 !important; }
 
         /* =========================================
-           7. LIGHTBOX (TRÌNH XEM ẢNH FULL MÀN HÌNH)
+           6. LIGHTBOX (TRÌNH XEM ẢNH FULL MÀN HÌNH)
            ========================================= */
         .lightbox {
             display: none; position: fixed; z-index: 9999; padding-top: 20px; 
@@ -234,11 +186,9 @@
         .lightbox-btn:hover { background-color: #0d9488; transform: translateY(-50%) scale(1.1); }
 
         /* =========================================
-           8. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
+           7. RESPONSIVE (MÀN HÌNH ĐIỆN THOẠI)
            ========================================= */
         @media (max-width: 900px) {
-            header { padding: 60px 15px 40px; }
-            header h1 { font-size: 2rem; }
             .main-layout { flex-direction: column; gap: 20px;}
             .sidebar { width: 100%; position: static !important; }
             
@@ -460,7 +410,7 @@
     </div>
 
     <script>
-        // --- 1. SCRIPT MENU TRƯỢT MƯỢT MÀ ---
+        // --- 1. SCRIPT MENU TRƯỢT SẠCH SẼ ---
         document.addEventListener("DOMContentLoaded", function() {
             const nav = document.querySelector('nav');
             if (!nav) return;
